@@ -53,6 +53,7 @@ def get_args():
             "deyo",
             "cntta",
             "tent_iabn",
+            "vida",
         ],
         type=str,
     )

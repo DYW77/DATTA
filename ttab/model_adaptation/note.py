@@ -83,7 +83,7 @@ class NOTE(BaseAdaptation):
                 )
             self.convert_iabn(model)
             load_pretrained_model(self._meta_conf, model)
-
+        self.convert_iabn(model)
         # disable grad, to (re-)enable only what specified adaptation method updates
         model.requires_grad_(False)
         for module in model.modules():

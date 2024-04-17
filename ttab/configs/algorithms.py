@@ -9,7 +9,7 @@ algorithm_defaults = {
     "no_adaptation": {"model_selection_method": "last_iterate"},
     #
     "bn_adapt": {
-        "adapt_prior": 0.6,  # the ratio of training set statistics.
+        "adapt_prior": 0,  # the ratio of training set statistics.
     },
     "cntta":{
         "optimizer": "SGD",  # use Adam in the paper
