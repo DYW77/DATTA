@@ -3,7 +3,9 @@ import functools
 import os
 import pickle
 from typing import Callable, Dict, List, Optional, Tuple, Union
-
+import random
+from torch.utils.data import Dataset
+import itertools
 import gdown
 import numpy as np
 import pandas as pd
@@ -13,7 +15,7 @@ import torchvision.transforms as transforms
 from PIL import Image
 from torch import randperm
 from torch._utils import _accumulate
-
+from torch.utils.data import DataLoader
 from ttab.api import Batch, GroupBatch, PyTorchDataset
 from ttab.configs.datasets import dataset_defaults
 from ttab.loads.datasets.dataset_shifts import (
@@ -206,6 +208,36 @@ class CIFARDataset(PyTorchDataset):
         data_raw = data_raw[(shift_degree - 1) * 10000 : shift_degree * 10000]
         return data_raw
 
+    def split_data(
+        self, sizes: List[int], seed: int = None
+    ) -> List['CIFARDataset']:
+        indices = list(range(sum(sizes)))
+
+        # If a seed is provided, shuffle the indices.
+        if seed is not None:
+            random.seed(seed)
+            random.shuffle(indices)
+
+        # Split the indices into sublists.
+        sub_indices = [
+            indices[imagenet - length : imagenet]
+            for imagenet, length in zip(_accumulate(sizes), sizes)
+        ]
+
+        # Create a new `CIFARDataset` instance for each sublist of indices.
+        return [
+            CIFARDataset(
+                root=self.root,
+                data_name=self.data_name,
+                split=self.split,
+                device=self.device,
+                data_augment=self.data_augment,
+                data_shift_class=self.data_shift_class,
+                indices=[self.dataset.indices[i] for i in sub_indices[j]],
+            )
+            for j in range(len(sub_indices))
+    ]
+
     @staticmethod
     def prepare_batch(batch, device):
         return Batch(*batch).to(device)
@@ -220,8 +252,16 @@ class ImageNetDataset(PyTorchDataset):
         device: str = "cuda",
         data_augment: bool = False,
         data_shift_class: Optional[Callable] = None,
+        indices: Optional[List[int]] = None,
     ):
         # setup data.
+        self.root = root
+        self.data_name = data_name
+        self.split = split
+        self.device = device
+        self.data_augment = data_augment
+        self.data_shift_class = data_shift_class
+
         is_train = True if split == "train" else False
         self.transform = get_transform(
             "imagenet", augment=any([is_train, data_augment]), color_process=False
@@ -251,6 +291,7 @@ class ImageNetDataset(PyTorchDataset):
                     root=validdir,
                     transform=self.transform,
                     target_transform=self.target_transform,
+                    indices=indices,
                 )
             else:
                 # TODO: how to load in-distribution imagenet test data?
@@ -259,6 +300,7 @@ class ImageNetDataset(PyTorchDataset):
                     root=validdir,
                     transform=self.transform,
                     target_transform=self.target_transform,
+                    indices=indices,
                 )
             dataset = data_shift_class(dataset=dataset)
         elif issubclass(data_shift_class.func, SyntheticShiftedData):
@@ -267,6 +309,7 @@ class ImageNetDataset(PyTorchDataset):
                 root=validdir,
                 transform=self.transform,
                 target_transform=self.target_transform,
+                indices=indices,
             )
             dataset = data_shift_class(dataset=dataset)
             dataset.apply_corruption()
@@ -277,6 +320,91 @@ class ImageNetDataset(PyTorchDataset):
             prepare_batch=ImageNetDataset.prepare_batch,
             num_classes=num_classes,
         )
+
+
+    @staticmethod
+    def prepare_batch(batch, device):
+        return Batch(*batch).to(device)
+    
+    def split_data(
+        self, sizes: List[int], seed: int = None
+    ) -> List['ImageNetDataset']:
+        indices = list(range(sum(sizes)))
+
+        # If a seed is provided, shuffle the indices.
+        if seed is not None:
+            random.seed(seed)
+            random.shuffle(indices)
+
+        # Split the indices into sublists.
+        sub_indices = [
+            indices[imagenet - length : imagenet]
+            for imagenet, length in zip(_accumulate(sizes), sizes)
+        ]
+
+        # Create a new `ImageNetDataset` instance for each sublist of indices.
+        return [
+            ImageNetDataset(
+                root=self.root,
+                data_name=self.data_name,
+                split=self.split,
+                device=self.device,
+                data_augment=self.data_augment,
+                data_shift_class=self.data_shift_class,
+                indices=[self.dataset.indices[i] for i in sub_indices[j]],
+            )
+            for j in range(len(sub_indices))
+        ]
+
+
+
+class MergedImageNetDataset(PyTorchDataset):
+    def __init__(self, datasets: List[PyTorchDataset], batch_size):
+        self.datasets = datasets
+        self.device = datasets[0]._device
+        self.batch_size = batch_size
+
+        # some basic dataset configuration
+        self.transform = datasets[0].transform
+        self.target_transform = datasets[0].target_transform
+        num_classes = datasets[0].num_classes
+        classes = datasets[0].query_dataset_attr("classes")
+        class_to_index = datasets[0].query_dataset_attr("class_to_index")
+        data_shift_class = functools.partial(NoShiftedData, data_name="MergedDataset")
+
+        (
+            merged_data,
+            merged_targets,
+            merged_indices,
+            merged_group_arrays,
+        ) = self.merge_datasets(datasets)
+
+        dataset = ImageArrayDataset(
+            data=merged_data,
+            targets=merged_targets,
+            classes=classes,
+            class_to_index=class_to_index,
+            transform=self.transform,
+            target_transform=self.target_transform,
+        )
+        dataset = data_shift_class(dataset=dataset)
+        dataset.update_indices(merged_indices)
+
+        super().__init__(
+            dataset=dataset,
+            device=self.device,
+            prepare_batch=self.prepare_batch,
+            num_classes=num_classes,
+        )
+
+    def __getitem__(self, idx):
+        batch_index = idx // self.batch_size
+        dataset_index = batch_index % len(self.datasets)
+        inner_index = idx % (self.batch_size * len(self.datasets))
+        return self.datasets[dataset_index][inner_index]
+
+    def __len__(self):
+        return len(self.datasets) * self.batch_size
 
     @staticmethod
     def prepare_batch(batch, device):
@@ -804,7 +932,6 @@ class YearBookDataset(PyTorchDataset):
             for dataset in sub_datasets
         ]
 
-
 class MergeMultiDataset(PyTorchDataset):
     """MergeMultiDataset combines a list of sub-datasets as one augmented dataset"""
 
@@ -891,12 +1018,109 @@ class MergeMultiDataset(PyTorchDataset):
                 merged_group_arrays.append(dataset.query_dataset_attr("group_array"))
             merged_indices += [i + cumulative_size for i in indices]
             cumulative_size += len(data)
-
         if type(data) == np.ndarray:
             merged_data = np.concatenate(merged_data, axis=0)
         if merged_group_arrays is not None:
             merged_group_arrays = np.concatenate(merged_group_arrays, axis=0)
+
         return merged_data, merged_targets, merged_indices, merged_group_arrays
+
+    @staticmethod
+    def prepare_batch(batch, device):
+        return Batch(*batch).to(device)
+
+class SpecialMergeMultiDataset(PyTorchDataset):
+    """Make Special Scenarios"""
+
+    def __init__(self, datasets: List[PyTorchDataset], batch_size: int, sp_order: str ):
+        self.datasetlen = len(datasets[0])
+        self.datasets = datasets
+        self.device = datasets[0]._device
+
+        # some basic dataset configuration TODO: add a warning to the log
+        self.transform = datasets[0].transform
+        self.target_transform = datasets[0].target_transform
+        num_classes = datasets[0].num_classes
+        classes = datasets[0].query_dataset_attr("classes")
+        class_to_index = datasets[0].query_dataset_attr("class_to_index")
+        data_shift_class = functools.partial(NoShiftedData, data_name="MergedDataset")
+
+        (
+            merged_data,
+            merged_targets,
+            merged_indices,
+        ) = self.merge_datasets(datasets = datasets, batch_size = batch_size, sp_order = sp_order)
+
+        dataset = ImageArrayDataset(
+            data=merged_data,
+            targets=merged_targets,
+            classes=classes,
+            class_to_index=class_to_index,
+            transform=self.transform,
+            target_transform=self.target_transform,
+        )
+        dataset = data_shift_class(dataset=dataset)
+        dataset.update_indices(merged_indices)
+
+        super().__init__(
+            dataset=dataset,
+            device=self.device,
+            prepare_batch=self.prepare_batch,
+            num_classes=num_classes,
+        )
+
+
+    @staticmethod
+    def merge_datasets(
+        datasets: List[PyTorchDataset], batch_size: int, sp_order: str,
+    ) -> Tuple[Union[List, np.ndarray], List[int], List[int], np.ndarray]:
+        """Merge a list of datasets into one dataset through concatenating data, targets, indices and group_array."""
+
+        all_has_same_type = all(
+            isinstance(dataset, type(datasets[0])) for dataset in datasets
+        )
+        if not all_has_same_type:
+            raise ValueError("All datasets to be merged should be of the same type.")
+
+        merged_indices = []
+        alldata = []
+        allindices = []
+        alltargets = []
+
+        for dataset in datasets:
+            if type(dataset.query_dataset_attr("data")) == list:
+                alldata += dataset.query_dataset_attr("data")
+            else :
+                alldata.append(dataset.query_dataset_attr("data"))
+                
+            allindices.append(dataset.query_dataset_attr("indices"))
+            alltargets += dataset.query_dataset_attr("targets")
+
+        if sp_order == "Interval_Shuffle":
+            batches = [allindices[0][i:i+batch_size] for i in range(0, len(allindices[0]), batch_size)]
+            random.shuffle(batches)
+            allindices[0] = [item for sublist in batches for item in sublist]
+   
+        idx = [ 0 for i in range(len(datasets)) ]
+        sumidx = [ 0 for i in range(len(datasets))]
+        for i in range(1,len(datasets)):
+            sumidx[i] = sumidx[i-1] + len(alldata[i-1])
+
+        if type(alldata[0]) == np.ndarray:
+            alldata = np.concatenate(alldata, axis=0)
+
+        for i in range( len(allindices[0]) // batch_size ):
+            for j in range(len(allindices)):
+                merged_indices += [ (allindices[j][now] + sumidx[j]) for now in range(idx[j],idx[j] + batch_size)]
+                idx[j] += batch_size
+
+        if sp_order == "Shuffle_Shuffle":
+            batches = [merged_indices[i:i+batch_size] for i in range(0, len(merged_indices), batch_size)]
+            random.shuffle(batches)
+            merged_indices = [item for sublist in batches for item in sublist]
+
+        return alldata, alltargets, merged_indices
+
 
     @staticmethod
     def prepare_batch(batch, device):
@@ -933,6 +1157,7 @@ class ImageFolderDataset(torch.utils.data.Dataset):
         root: str,
         transform: Optional[Callable] = None,
         target_transform: Optional[Callable] = None,
+        indices: Optional[List[int]] = None,
     ):
         # prepare info
         self.transform = transform
@@ -946,8 +1171,14 @@ class ImageFolderDataset(torch.utils.data.Dataset):
             class_to_idx=self.class_to_index,
             is_allowed_file=self._has_file_allowed_extension,
         )
+
         self.data_size = len(self.data)
         self.indices = list([x for x in range(0, self.data_size)])
+
+        if indices is not None:
+            self.data = [self.data[i] for i in indices]
+            self.data_size = len(self.data)
+            self.indices = indices
 
         self.label_statistics = self._count_label_statistics(labels=self.targets)
         # print label statistics---------------------------------------------------------
@@ -1047,7 +1278,7 @@ class ImageFolderDataset(torch.utils.data.Dataset):
         self.indices = self.indices[indices_to_keep]
         self.data_size = len(self.indices)
 
-
+    
 class ImageArrayDataset(ImageFolderDataset):
     """
     ImageArrayDataset supports dataset downloaded from torchvision library, and all other datasets

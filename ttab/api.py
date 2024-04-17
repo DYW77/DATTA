@@ -127,7 +127,6 @@ class PyTorchDataset(object):
                 self._set, lengths, torch.Generator().manual_seed(seed)
             )
         ]
-
     def iterator(
         self,
         batch_size: int,
@@ -149,6 +148,7 @@ class PyTorchDataset(object):
             shuffle = False
 
         loader = torch.utils.data.DataLoader(
+            # self._set.indices,
             self._set,
             batch_size=batch_size,
             shuffle=shuffle,
@@ -160,11 +160,87 @@ class PyTorchDataset(object):
         )
 
         step = 0
+        # for _ in itertools.count() if repeat else [0]:
+        #     for i, batch in enumerate(loader):
+        #         step += 1
+        #         epoch_fractional = float(step) / num_batches
+        #         yield step, epoch_fractional, self._prepare_batch(batch, self._device) #domain insert
+        #         print(batch.indices)## young
+        # step = 0
+        import pandas as pd
         for _ in itertools.count() if repeat else [0]:
             for i, batch in enumerate(loader):
                 step += 1
                 epoch_fractional = float(step) / num_batches
+                
+                # 获取当前批次在_set中的indices
+                indices_start = i * batch_size
+                indices_end = (i + 1) * batch_size
+                batch_indices = self._set.indices[indices_start:indices_end]
+                batch_target = [self._set.targets[i] for i in batch_indices]
+                # print(f"batch{step}",batch_indices)
+                domain = [idx // 10000 + 1 for idx in batch_indices]
+                domain = pd.Series(domain)
+                domain_count=domain.value_counts()
+                
+                
+                print('------------------------------------------------------------------------------------------\n')
+                print('\n------------------------------------batch data Preview------------------------------------')
+                print(f"batch {step}", [idx // 10000 + 1 for idx in batch_indices])
+                print(f'batch target{batch_target}')
+                # for idx, target in zip(batch_indices, batch_target):
+                #     print(f"({idx// 10000 + 1}, {target})")
+                for value, count in domain_count.items():
+                    print(f"Domain{value} got {count} pictures")
+                    # grad.DomainNum[value]=count
+                
+                batch_target = pd.Series(batch_target)
+                target_count=batch_target.value_counts()
+                for value, count in target_count.items():
+                    print(f"target{value} got {count} pictures")
+                combain = list(zip(domain,batch_target))
+                # grad.Combine = combain
+                print('\n',combain)
+                print('------------------------------------------------------------------------------------------\n')
+                print('\n-------------------------------------Runtime Preview--------------------------------------')
                 yield step, epoch_fractional, self._prepare_batch(batch, self._device)
+    # def iterator(
+    #     self,
+    #     batch_size: int,
+    #     shuffle: bool = True,
+    #     repeat: bool = False,
+    #     ref_num_data: Optional[int] = None,
+    #     num_workers: int = 1,
+    #     sampler: Optional[torch.utils.data.Sampler] = None,
+    #     generator: Optional[torch.Generator] = None,
+    #     pin_memory: bool = True,
+    #     drop_last: bool = True,
+    # ) -> Iterable[Tuple[int, float, Batch]]:
+    #     _num_batch = 1 if not drop_last else 0
+    #     if ref_num_data is None:
+    #         num_batches = int(len(self) / batch_size + _num_batch)
+    #     else:
+    #         num_batches = int(ref_num_data / batch_size + _num_batch)
+    #     if sampler is not None:
+    #         shuffle = False
+
+    #     loader = torch.utils.data.DataLoader(
+    #         self._set,
+    #         batch_size=batch_size,
+    #         shuffle=shuffle,
+    #         pin_memory=pin_memory,
+    #         drop_last=drop_last,
+    #         num_workers=num_workers,
+    #         sampler=sampler,
+    #         generator=generator,
+    #     )
+
+    #     step = 0
+    #     for _ in itertools.count() if repeat else [0]:
+    #         for i, batch in enumerate(loader):
+    #             step += 1
+    #             epoch_fractional = float(step) / num_batches
+    #             yield step, epoch_fractional, self._prepare_batch(batch, self._device)
 
     def record_class_distribution(
         self,

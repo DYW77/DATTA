@@ -7,7 +7,7 @@ from ttab.loads.datasets.dataset_shifts import (
     SyntheticShiftProperty,
 )
 
-
+    
 class TestDomain(NamedTuple):
     """
     The definition of TestDomain: shift property (i.e., P(a^{1:K})) for each domain and its sampling strategy.
@@ -81,6 +81,13 @@ class TestCase(NamedTuple):
     episodic: bool = True
     intra_domain_shuffle: bool = False
 
+class BatchMixing(NamedTuple):
+    non_iid_pattern: str = "class_wise_over_domain"
+    non_iid_ness: float = 100
+    batch_size: int = 32
+    #sp_buildtype: str = "Copy"
+    sp_order: str = "Interval_Seq"
+    sp_scenarios: str = "Homo&Cross"
 
 class Scenario(NamedTuple):
     """

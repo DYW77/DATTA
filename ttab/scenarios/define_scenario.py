@@ -12,6 +12,7 @@ from ttab.scenarios import (
     HeterogeneousNoMixture,
     HomogeneousNoMixture,
     InOutMixture,
+    BatchMixing,
     Scenario,
     TestCase,
     TestDomain,
@@ -37,6 +38,7 @@ def get_inter_domain(config):
         "HeterogeneousNoMixture": HeterogeneousNoMixture,
         "InOutMixture": InOutMixture,
         "CrossMixture": CrossMixture,
+        "BatchMixing": BatchMixing,
     }.get(inter_domain_name, HomogeneousNoMixture)
 
     if "InOutMixture" == inter_domain_name:
@@ -45,6 +47,10 @@ def get_inter_domain(config):
         return inter_domain_fn(**arg_values)
     elif "HeterogeneousNoMixture" == inter_domain_name:
         arg_names = ["non_iid_pattern", "non_iid_ness"]
+        arg_values = config_utils.build_dict_from_config(arg_names, config)
+        return inter_domain_fn(**arg_values)
+    elif "BatchMixing" == inter_domain_name:
+        arg_names = ["non_iid_pattern", "non_iid_ness", "batch_size", "sp_order"]#, "sp_buildtype"]
         arg_values = config_utils.build_dict_from_config(arg_names, config)
         return inter_domain_fn(**arg_values)
     else:
@@ -79,6 +85,7 @@ def _is_defined_name_tuple(in_object):
                 HeterogeneousNoMixture,
                 InOutMixture,
                 CrossMixture,
+                BatchMixing,
                 TestCase,
                 TestDomain,
                 SyntheticShiftProperty,

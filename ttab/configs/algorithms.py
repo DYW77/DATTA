@@ -9,7 +9,19 @@ algorithm_defaults = {
     "no_adaptation": {"model_selection_method": "last_iterate"},
     #
     "bn_adapt": {
-        "adapt_prior": 0,  # the ratio of training set statistics.
+        "adapt_prior": 0.6,  # the ratio of training set statistics.
+    },
+    "cntta":{
+        "optimizer": "SGD",  # use Adam in the paper
+        "memory_size": 64,
+        "update_every_x": 64,  # This param may change in our codebase.
+        "memory_type": "PBRS",
+        "bn_momentum": 0.01,
+        "temperature": 1.0,
+        "iabn": False,  # replace bn with iabn layer
+        "iabn_k": 4,
+        "threshold_note": 1,  # skip threshold to discard adjustment.
+        "use_learned_stats": True,
     },
     "shot": {
         "optimizer": "SGD",  # Adam for officehome
@@ -100,5 +112,48 @@ algorithm_defaults = {
         "lambda_t": 1.0,
         "lambda_u": 1.0,
         "alpha": 0.05,
-    }
+    },
+    "deyo": {
+        "optimizer": "SGD",
+        # "deyo_margin": math.log(1000) * 0.5, # entropy threshold for DeYO
+        "filter_ent": True, # whether to filter samples by entropy
+        "aug_type": "patch", # the augmentation type for prime
+        "occlusion_size": 112, # choises for occ
+        "row_start": 56, # choises for occ
+        "column_start": 56, # choises for occ
+        "patch_len": 4, # choises for patch
+        "filter_plpd": True, # whether to filter samples by plpd
+        "plpd_threshold": 0.3, # plpd threshold for DeYO
+        "reweight_ent": 1, # reweight entropy loss
+        "reweight_plpd": 1, # reweight plpd loss
+        # "margin": math.log(1000) * 0.4, # ent0 margin for DeYO
+    },
+    "tent_iabn":{
+        "optimizer": "SGD",  # use Adam in the paper
+        "memory_size": 64,
+        "update_every_x": 64,  # This param may change in our codebase.
+        "memory_type": "PBRS",
+        "bn_momentum": 0.01,
+        "temperature": 1.0,
+        "iabn": False,  # replace bn with iabn layer
+        "iabn_k": 4,
+        "threshold_note": 1,  # skip threshold to discard adjustment.
+        "use_learned_stats": True,
+    },
+    "vida":{
+        "optimizer": "SGD",
+        'ViDALR': 1e-5,
+        'WD': 0.,
+        'MT': 0.999,
+        'MT_ViDA': 0.999,
+        'beta': 0.9,
+        "vida_rank1": 1,
+        "vida_rank2": 128,
+        "unc_thr":0.2,
+        "alpha_teacher": 0.999,
+        "alpha_vida": 0.99,
+        "bn_momentum": 0.01,
+        "vida_rank1": 1,
+        "vida_rank2": 128
+        },
 }
