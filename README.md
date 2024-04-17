@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Test-Time Adaptation Benchmark (TTAB)
 
 This repository is the official implementation of
@@ -260,3 +261,6 @@ If you find this repository helpful for your project, please consider citing:
   year      = {2023},
 }
 ```
+=======
+# TTAB-test
+>>>>>>> fb6b4805a5f354f6518be958c175500102858ca2
