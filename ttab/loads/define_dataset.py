@@ -81,7 +81,7 @@ class MergeMultiTestDatasets(object):
             dirichlet_numchunks = int(dataset.num_classes)
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 5  # hyperparameter.
+            min_size_threshold = 3  # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data
@@ -203,8 +203,8 @@ class MergeMultiTestDatasets(object):
         elif isinstance(test_case.inter_domain, BatchMixing):
             #if test_case.inter_domain.sp_buildtype == "Copy":
             if test_case.inter_domain.sp_scenarios == "Homo&Cross":
-                test_dataset1 = test_datasets
-                test_dataset3 = test_datasets
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
                 processed_dataset1 = self._merge_datasets(
                     [
                         self._intra_shuffle_dataset(test_dataset, random_seed)
@@ -218,8 +218,8 @@ class MergeMultiTestDatasets(object):
                 )
                 result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset3], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
             elif test_case.inter_domain.sp_scenarios == "Homo&Heter":
-                test_dataset1 = test_datasets
-                test_dataset2 = test_datasets
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset2 = copy.deepcopy(test_datasets)
                 processed_dataset1 = self._merge_datasets(
                     [
                         self._intra_shuffle_dataset(test_dataset, random_seed)
@@ -241,8 +241,8 @@ class MergeMultiTestDatasets(object):
                 )
                 result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset2], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
             elif test_case.inter_domain.sp_scenarios == "Cross&Heter":
-                test_dataset2 = test_datasets
-                test_dataset3 = test_datasets
+                test_dataset2 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
                 processed_dataset2 = self._merge_datasets(
                     [
                         self._intra_non_iid_shift(
@@ -259,9 +259,9 @@ class MergeMultiTestDatasets(object):
                 )
                 result =  SpecialMergeMultiDataset(datasets = [processed_dataset3,processed_dataset2], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
             elif test_case.inter_domain.sp_scenarios == "Homo&Cross&Heter":
-                test_dataset1 = test_datasets
-                test_dataset2 = test_datasets
-                test_dataset3 = test_datasets
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset2 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
                 processed_dataset1 = self._merge_datasets(
                     [
                         self._intra_shuffle_dataset(test_dataset, random_seed)

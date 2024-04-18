@@ -18,7 +18,7 @@ def get_args():
     parser.add_argument("--wait_in_seconds_per_job", default=15, type=float)
     
     # define test evaluation info.
-    parser.add_argument("--root_path", default="./domain_nums_exp", type=str)
+    parser.add_argument("--root_path", default="./logs", type=str)
     parser.add_argument("--data_path", default="/home/wdy/Exp/datasets", type=str)
     parser.add_argument(
         "--ckpt_path",

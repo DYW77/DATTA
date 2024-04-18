@@ -112,7 +112,7 @@ corruption_domain = [
     # "HeterogeneousNoMixture",
     # "CrossMixture",
     # "CrossHeterMixture",
-    "BatchMixing",
+    # "BatchMixing",
 ]
 adaptation_method = [
             "no_adaptation",
