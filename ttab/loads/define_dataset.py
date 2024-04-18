@@ -81,7 +81,7 @@ class MergeMultiTestDatasets(object):
             dirichlet_numchunks = int(dataset.num_classes)
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 3  # hyperparameter.
+            min_size_threshold = 5  # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data

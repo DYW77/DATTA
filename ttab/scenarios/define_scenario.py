@@ -50,7 +50,7 @@ def get_inter_domain(config):
         arg_values = config_utils.build_dict_from_config(arg_names, config)
         return inter_domain_fn(**arg_values)
     elif "BatchMixing" == inter_domain_name:
-        arg_names = ["non_iid_pattern", "non_iid_ness", "batch_size", "sp_order"]#, "sp_buildtype"]
+        arg_names = ["non_iid_pattern", "non_iid_ness", "batch_size", "sp_order","sp_scenarios"]#, "sp_buildtype"]
         arg_values = config_utils.build_dict_from_config(arg_names, config)
         return inter_domain_fn(**arg_values)
     else:
