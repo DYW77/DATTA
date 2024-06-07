@@ -22,7 +22,7 @@ def get_args():
     parser.add_argument("--data_path", default="/home/wdy/Exp/datasets", type=str)
     parser.add_argument(
         "--ckpt_path",
-        default="/home/wdy/Exp/model/rn50_bn_cifar100.pth",
+        default="/home/wdy/Exp/model/rn50_bn_cifar10.pth",
         # default="/home/wdy/Exp/model/rn26_bn_ssh_cifar100.pth",
         type=str,
     )
@@ -35,23 +35,23 @@ def get_args():
     parser.add_argument("--group_norm_num_groups", default=None, type=int)
     parser.add_argument(
         "--model_adaptation_method",
-        default="bn_adapt",
+        default="dyn",
         choices=[
             "no_adaptation",
             "tent",
             "bn_adapt",
-            # "memo",
-            # "shot",
-            # "t3a",
-            # "ttt",
+            "memo",
+            "shot",
+            "t3a",
+            "ttt",
             "note",
             "sar",
-            # "conjugate_pl",
-            # "cotta",
+            "conjugate_pl",
+            "cotta",
             "rotta",
             "eata",
             "deyo",
-            "cntta",
+            "dyn",
             "tent_iabn",
             "vida",
         ],
@@ -70,45 +70,45 @@ def get_args():
     """
     cifar10
     """
-    parser.add_argument(
-        "--base_data_name",
-        default="cifar10",
-        choices=[
-            "cifar10",
-            "cifar100",
-            "imagenet",
-            "officehome",
-            "pacs",
-            "coloredmnist",
-            "waterbirds",
+    # parser.add_argument(
+    #     "--base_data_name",
+    #     default="cifar10",
+    #     choices=[
+    #         "cifar10",
+    #         "cifar100",
+    #         "imagenet",
+    #         "officehome",
+    #         "pacs",
+    #         "coloredmnist",
+    #         "waterbirds",
 
-        ],
-        type=str,
-    )
-    parser.add_argument("--src_data_name", default="cifar10", type=str)
-    parser.add_argument(
-        "--data_names", default=
-                                "cifar10_c_deterministic-gaussian_noise-5;"
-                                "cifar10_c_deterministic-shot_noise-5;"
-                                "cifar10_c_deterministic-impulse_noise-5;"
-                                "cifar10_c_deterministic-defocus_blur-5;"
-                                "cifar10_c_deterministic-glass_blur-5;"
-                                "cifar10_c_deterministic-motion_blur-5;"
-                                "cifar10_c_deterministic-zoom_blur-5;"
-                                "cifar10_c_deterministic-snow-5;"
-                                "cifar10_c_deterministic-frost-5;"
-                                "cifar10_c_deterministic-fog-5;"
-                                "cifar10_c_deterministic-brightness-5;"
-                                "cifar10_c_deterministic-contrast-5;"
-                                "cifar10_c_deterministic-elastic_transform-5;"
-                                "cifar10_c_deterministic-pixelate-5;"
-                                "cifar10_c_deterministic-jpeg_compression-5"
+    #     ],
+    #     type=str,
+    # )
+    # parser.add_argument("--src_data_name", default="cifar10", type=str)
+    # parser.add_argument(
+    #     "--data_names", default=
+    #                             "cifar10_c_deterministic-gaussian_noise-5;"
+    #                             "cifar10_c_deterministic-shot_noise-5;"
+    #                             "cifar10_c_deterministic-impulse_noise-5;"
+    #                             "cifar10_c_deterministic-defocus_blur-5;"
+    #                             "cifar10_c_deterministic-glass_blur-5;"
+    #                             "cifar10_c_deterministic-motion_blur-5;"
+    #                             "cifar10_c_deterministic-zoom_blur-5;"
+    #                             "cifar10_c_deterministic-snow-5;"
+    #                             "cifar10_c_deterministic-frost-5;"
+    #                             "cifar10_c_deterministic-fog-5;"
+    #                             "cifar10_c_deterministic-brightness-5;"
+    #                             "cifar10_c_deterministic-contrast-5;"
+    #                             "cifar10_c_deterministic-elastic_transform-5;"
+    #                             "cifar10_c_deterministic-pixelate-5;"
+    #                             "cifar10_c_deterministic-jpeg_compression-5"
 
 
-                                # "cifar10_c_deterministic-pixelate-5"
-                                # "cifar10_c_deterministic-gaussian_noise-5"
-        , type=str
-    )
+    #                             # "cifar10_c_deterministic-pixelate-5"
+    #                             # "cifar10_c_deterministic-gaussian_noise-5"
+    #     , type=str
+    # )
     """
     cifar100
     """
@@ -150,41 +150,41 @@ def get_args():
     """
     imagenet
     """
-    # parser.add_argument(
-    #     "--base_data_name",
-    #     default="imagenet",
-    #     choices=[
-    #         "cifar10",
-    #         "cifar100",
-    #         "imagenet",
-    #         "officehome",
-    #         "pacs",
-    #         "coloredmnist",
-    #         "waterbirds",
+    parser.add_argument(
+        "--base_data_name",
+        default="imagenet",
+        choices=[
+            "cifar10",
+            "cifar100",
+            "imagenet",
+            "officehome",
+            "pacs",
+            "coloredmnist",
+            "waterbirds",
 
-    #     ],
-    #     type=str,
-    # )
-    # parser.add_argument("--src_data_name", default="imagenet", type=str)
-    # parser.add_argument(
-    #     "--data_names", default=
-    #                             "imagenet_c_deterministic-gaussian_noise-5;"
-    #                             "imagenet_c_deterministic-shot_noise-5;"
-    #                             "imagenet_c_deterministic-impulse_noise-5;"
-    #                             "imagenet_c_deterministic-defocus_blur-5;"
-    #                             "imagenet_c_deterministic-glass_blur-5;"
-    #                             "imagenet_c_deterministic-motion_blur-5;"
-    #                             "imagenet_c_deterministic-zoom_blur-5;"
-    #                             "imagenet_c_deterministic-snow-5;"
-    #                             "imagenet_c_deterministic-frost-5;"
-    #                             "imagenet_c_deterministic-fog-5;"
-    #                             "imagenet_c_deterministic-brightness-5;"
-    #                             "imagenet_c_deterministic-contrast-5;"
-    #                             "imagenet_c_deterministic-elastic_transform-5;"
-    #                             "imagenet_c_deterministic-pixelate-5;"
-    #                             "imagenet_c_deterministic-jpeg_compression-5"
-    #     , type=str
-    # )
+        ],
+        type=str,
+    )
+    parser.add_argument("--src_data_name", default="imagenet", type=str)
+    parser.add_argument(
+        "--data_names", default=
+                                "imagenet_c_deterministic-gaussian_noise-5;"
+                                "imagenet_c_deterministic-shot_noise-5;"
+                                "imagenet_c_deterministic-impulse_noise-5;"
+                                "imagenet_c_deterministic-defocus_blur-5;"
+                                "imagenet_c_deterministic-glass_blur-5;"
+                                "imagenet_c_deterministic-motion_blur-5;"
+                                "imagenet_c_deterministic-zoom_blur-5;"
+                                "imagenet_c_deterministic-snow-5;"
+                                "imagenet_c_deterministic-frost-5;"
+                                "imagenet_c_deterministic-fog-5;"
+                                "imagenet_c_deterministic-brightness-5;"
+                                "imagenet_c_deterministic-contrast-5;"
+                                "imagenet_c_deterministic-elastic_transform-5;"
+                                "imagenet_c_deterministic-pixelate-5;"
+                                "imagenet_c_deterministic-jpeg_compression-5"
+        , type=str
+    )
     parser.add_argument(
         "--data_wise",
         default="batch_wise",
@@ -199,7 +199,7 @@ def get_args():
     parser.add_argument("--intra_domain_shuffle", default=True, type=str2bool)
     parser.add_argument(
         "--inter_domain",
-        default="BatchMixing",
+        default="HomogeneousNoMixture",
         choices=[
             "HomogeneousNoMixture",
             "HeterogeneousNoMixture",
@@ -210,7 +210,7 @@ def get_args():
         ],
         type=str,
     )
-    ##################################
+    #################Only for BatchMixing#################
     parser.add_argument("--sp_order", 
         default="Shuffle_Shuffle",
         help="Interval/Shuffle: scenarios appear on turn or not,"

@@ -24,6 +24,7 @@ class BaseLoader(object):
         generator: Optional[torch.Generator] = None,
         pin_memory: bool = True,
         drop_last: bool = True,
+        data_name: str = "",
     ) -> Iterable[Tuple[int, float, Batch]]:
         yield from self.dataset.iterator(
             batch_size,
@@ -35,6 +36,7 @@ class BaseLoader(object):
             generator,
             pin_memory,
             drop_last,
+            data_name,
         )
 
 

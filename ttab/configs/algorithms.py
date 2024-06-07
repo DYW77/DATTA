@@ -11,17 +11,8 @@ algorithm_defaults = {
     "bn_adapt": {
         "adapt_prior": 0,  # the ratio of training set statistics.
     },
-    "cntta":{
-        "optimizer": "SGD",  # use Adam in the paper
-        "memory_size": 64,
-        "update_every_x": 64,  # This param may change in our codebase.
-        "memory_type": "PBRS",
-        "bn_momentum": 0.01,
-        "temperature": 1.0,
-        "iabn": False,  # replace bn with iabn layer
-        "iabn_k": 4,
+    "dyn":{
         "threshold_note": 1,  # skip threshold to discard adjustment.
-        "use_learned_stats": True,
     },
     "shot": {
         "optimizer": "SGD",  # Adam for officehome
@@ -64,23 +55,23 @@ algorithm_defaults = {
         "aug_size": 32,
         "bn_prior_strength": 16,
     },
-    # "ttt_plus_plus": {
-    #     "optimizer": "SGD",
-    #     "entry_of_shared_layers": None,
-    #     "batch_size_align": 256,
-    #     "queue_size": 256,
-    #     "offline_nepoch": 500,
-    #     "bnepoch": 2,  # first few epochs to update bn stat.
-    #     "delayepoch": 0,  # In first few epochs after bnepoch, we dont do both ssl and align (only ssl actually).
-    #     "stopepoch": 25,
-    #     "scale_ext": 0.5,
-    #     "scale_ssh": 0.2,
-    #     "align_ext": True,
-    #     "align_ssh": True,
-    #     "fix_ssh": False,
-    #     "method": "align",  # choices = ['ssl', 'align', 'both']
-    #     "divergence": "all",  # choices = ['all', 'coral', 'mmd']
-    # },
+    "ttt_plus_plus": {
+        "optimizer": "SGD",
+        "entry_of_shared_layers": None,
+        "batch_size_align": 256,
+        "queue_size": 256,
+        "offline_nepoch": 500,
+        "bnepoch": 2,  # first few epochs to update bn stat.
+        "delayepoch": 0,  # In first few epochs after bnepoch, we dont do both ssl and align (only ssl actually).
+        "stopepoch": 25,
+        "scale_ext": 0.5,
+        "scale_ssh": 0.2,
+        "align_ext": True,
+        "align_ssh": True,
+        "fix_ssh": False,
+        "method": "align",  # choices = ['ssl', 'align', 'both']
+        "divergence": "all",  # choices = ['all', 'coral', 'mmd']
+    },
     "note": {
         "optimizer": "SGD",  # use Adam in the paper
         "memory_size": 64,
@@ -115,7 +106,6 @@ algorithm_defaults = {
     },
     "deyo": {
         "optimizer": "SGD",
-        # "deyo_margin": math.log(1000) * 0.5, # entropy threshold for DeYO
         "filter_ent": True, # whether to filter samples by entropy
         "aug_type": "patch", # the augmentation type for prime
         "occlusion_size": 112, # choises for occ
@@ -126,7 +116,6 @@ algorithm_defaults = {
         "plpd_threshold": 0.3, # plpd threshold for DeYO
         "reweight_ent": 1, # reweight entropy loss
         "reweight_plpd": 1, # reweight plpd loss
-        # "margin": math.log(1000) * 0.4, # ent0 margin for DeYO
     },
     "tent_iabn":{
         "optimizer": "SGD",  # use Adam in the paper

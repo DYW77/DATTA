@@ -26,15 +26,13 @@ from ttab.model_adaptation import utils_tent
 from ttab.loads.define_model import load_pretrained_model
 from numpy import random
 # from ttab.model_adaptation.inject_vida import inject_trainable_vida
-import torchvision.transforms as transforms
-class CNTTA(BaseAdaptation):
+# import torchvision.transforms as transforms
+class DYN(BaseAdaptation):
     """
-    Tent: Fully Test-Time Adaptation by Entropy Minimization,
-    https://arxiv.org/abs/2006.10726,
-    https://github.com/DequanWang/tent
+    
     """
     def __init__(self, meta_conf, model: nn.Module):
-        super(CNTTA, self).__init__(meta_conf, model)
+        super(DYN, self).__init__(meta_conf, model)
         # self._meta_conf.step = 0
 
     def convert_ClusterNorm2d(self, module: nn.Module, **kwargs):
@@ -317,6 +315,6 @@ class CNTTA(BaseAdaptation):
 
     @property
     def name(self):
-        return "cntta"
+        return "dyn"
 
     

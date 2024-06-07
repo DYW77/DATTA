@@ -7,6 +7,7 @@ __pycache__/
 *.so
 *_Collect.py
 *_Collect_*.py
+*iabn.py
 # Distribution / packaging
 .Python
 build/

@@ -198,6 +198,7 @@ class Benchmark(object):
                 else 2,
                 pin_memory=True,
                 drop_last=False,
+                data_name=self._meta_conf.base_data_name
             ):
                 previous_batches = self._online_adapt_step(
                     step=step,
