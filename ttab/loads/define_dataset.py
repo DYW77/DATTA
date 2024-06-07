@@ -76,7 +76,7 @@ class MergeMultiTestDatasets(object):
             dirichlet_numchunks = dataset.num_classes
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 5  # hyperparameter.
+            min_size_threshold = 1  # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data
@@ -147,7 +147,7 @@ class MergeMultiTestDatasets(object):
             dirichlet_numchunks = dataset.num_classes
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 5  # hyperparameter.
+            min_size_threshold = 1  # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data
@@ -235,7 +235,7 @@ class MergeMultiTestDatasets(object):
         elif isinstance(test_case.inter_domain, HeterogeneousNoMixture):
             return self._merge_datasets(
                 [
-                    self._intra_non_iid_shift(
+                    self._intra_non_iid_shift2(
                         dataset=dataset,
                         non_iid_pattern=test_case.inter_domain.non_iid_pattern,
                         non_iid_ness=test_case.inter_domain.non_iid_ness,
@@ -244,6 +244,7 @@ class MergeMultiTestDatasets(object):
                     for dataset in test_datasets
                 ]
             )
+
         elif isinstance(test_case.inter_domain, InOutMixture):
             if isinstance(src_dataset, WBirdsDataset):
                 raise ValueError(

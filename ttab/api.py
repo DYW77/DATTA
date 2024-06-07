@@ -162,9 +162,9 @@ class PyTorchDataset(object):
 
         step = 0
         if data_name == "cifar10" or data_name == "cifar100":
-            type_num=10000
+            type_num = 10000
         elif data_name == "imagenet":
-            type_num=50000
+            type_num = 50000
         for _ in itertools.count() if repeat else [0]:
             for i, batch in enumerate(loader):
                 step += 1
@@ -175,7 +175,6 @@ class PyTorchDataset(object):
                 indices_end = (i + 1) * batch_size
                 batch_indices = self._set.indices[indices_start:indices_end]
                 batch_target = [self._set.targets[i] for i in batch_indices]
-                # print(f"batch{step}",batch_indices)
                 domain = [idx // type_num + 1 for idx in batch_indices]
                 domain = pd.Series(domain)
                 domain_count=domain.value_counts()
@@ -185,11 +184,8 @@ class PyTorchDataset(object):
                 print('\n------------------------------------batch data Preview------------------------------------')
                 print(f"batch {step}", [idx // type_num + 1 for idx in batch_indices])
                 print(f'batch target{batch_target}')
-                # for idx, target in zip(batch_indices, batch_target):
-                #     print(f"({idx// 10000 + 1}, {target})")
                 for value, count in domain_count.items():
                     print(f"Domain{value} got {count} pictures")
-                    # grad.DomainNum[value]=count
                 
                 batch_target = pd.Series(batch_target)
                 target_count=batch_target.value_counts()
@@ -201,44 +197,7 @@ class PyTorchDataset(object):
                 print('------------------------------------------------------------------------------------------\n')
                 print('\n-------------------------------------Runtime Preview--------------------------------------')
                 yield step, epoch_fractional, self._prepare_batch(batch, self._device)
-    # def iterator(
-    #     self,
-    #     batch_size: int,
-    #     shuffle: bool = True,
-    #     repeat: bool = False,
-    #     ref_num_data: Optional[int] = None,
-    #     num_workers: int = 1,
-    #     sampler: Optional[torch.utils.data.Sampler] = None,
-    #     generator: Optional[torch.Generator] = None,
-    #     pin_memory: bool = True,
-    #     drop_last: bool = True,
-    # ) -> Iterable[Tuple[int, float, Batch]]:
-    #     _num_batch = 1 if not drop_last else 0
-    #     if ref_num_data is None:
-    #         num_batches = int(len(self) / batch_size + _num_batch)
-    #     else:
-    #         num_batches = int(ref_num_data / batch_size + _num_batch)
-    #     if sampler is not None:
-    #         shuffle = False
-
-    #     loader = torch.utils.data.DataLoader(
-    #         self._set,
-    #         batch_size=batch_size,
-    #         shuffle=shuffle,
-    #         pin_memory=pin_memory,
-    #         drop_last=drop_last,
-    #         num_workers=num_workers,
-    #         sampler=sampler,
-    #         generator=generator,
-    #     )
-
-    #     step = 0
-    #     for _ in itertools.count() if repeat else [0]:
-    #         for i, batch in enumerate(loader):
-    #             step += 1
-    #             epoch_fractional = float(step) / num_batches
-    #             yield step, epoch_fractional, self._prepare_batch(batch, self._device)
-
+                
     def record_class_distribution(
         self,
         targets: Union[List, np.ndarray],

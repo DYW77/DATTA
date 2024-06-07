@@ -14,7 +14,7 @@ from ttab.loads.models.resnet import (
 )
 from ttab.loads.models.wideresnet import WideResNet
 from copy import deepcopy
-
+from finch import FINCH
 """optimization dynamics"""
 
 
@@ -887,3 +887,174 @@ class HLoss(nn.Module):
         b = entropy.mean()
 
         return b
+
+"""
+for vida
+"""
+class ViDAInjectedLinear(nn.Module):
+    def __init__(self, in_features, out_features, bias=False, r=4, r2 = 64):
+        super().__init__()
+
+        self.linear_vida = nn.Linear(in_features, out_features, bias)
+        self.vida_down = nn.Linear(in_features, r, bias=False)
+        self.vida_up = nn.Linear(r, out_features, bias=False)
+        self.vida_down2 = nn.Linear(in_features, r2, bias=False)
+        self.vida_up2 = nn.Linear(r2, out_features, bias=False)
+        self.scale1 = 1.0
+        self.scale2 = 1.0
+
+        nn.init.normal_(self.vida_down.weight, std=1 / r**2)
+        nn.init.zeros_(self.vida_up.weight)
+
+        nn.init.normal_(self.vida_down2.weight, std=1 / r2**2)
+        nn.init.zeros_(self.vida_up2.weight)
+
+    def forward(self, input):
+        # return self.linear_vida(input) + self.vida_up(self.vida_down(input)) * self.scale1 
+        return self.linear_vida(input) \
+            *torch.sigmoid(self.vida_up(self.vida_down(input)) * self.scale1)
+    
+def inject_trainable_vida(
+    model: nn.Module,
+    r: int = 4,
+    r2: int = 16,
+):
+    require_grad_params = []
+    names = []
+
+    for name, module in model.named_children():
+        if isinstance(module, nn.Linear):
+            weight = module.weight
+            bias = module.bias
+            tmp = ViDAInjectedLinear(
+                module.in_features,
+                module.out_features,
+                module.bias is not None,
+                r,
+                r2,
+            )
+            tmp.linear_vida.weight = weight
+            if bias is not None:
+                tmp.linear_vida.bias = bias
+
+            # Switch the module
+            setattr(model, name, tmp)
+
+            require_grad_params.extend(tmp.vida_up.parameters())
+            require_grad_params.extend(tmp.vida_down.parameters())
+            tmp.vida_up.weight.requires_grad = True
+            tmp.vida_down.weight.requires_grad = True
+
+            require_grad_params.extend(tmp.vida_up2.parameters())
+            require_grad_params.extend(tmp.vida_down2.parameters())
+            tmp.vida_up2.weight.requires_grad = True
+            tmp.vida_down2.weight.requires_grad = True
+
+            names.append(name)   
+    return require_grad_params, names
+
+
+"""
+for dyn
+"""
+class ClusterAwareBatchNorm2d(nn.Module):
+    def __init__(self, num_channels, eps=1e-5, momentum=0.1, affine=True):
+        super(ClusterAwareBatchNorm2d, self).__init__()
+        self.num_channels = num_channels
+        self.eps = eps
+        self.affine = affine
+        self._bn = nn.BatchNorm2d(
+            num_channels, eps=eps, momentum=momentum, affine=affine
+        )
+        self.source_rate = nn.parameter.Parameter(torch.tensor(0.8))
+        self.test_rate = nn.parameter.Parameter(torch.tensor(0.))
+
+    def Lisc(self, x, mu_s, sigma2_s):
+        _, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)
+
+        data = mu.view(-1, self.num_channels).cpu().detach().numpy()
+
+        c1, _, _ = FINCH(data, verbose=False)
+
+
+        labels = c1[:, 0]
+        
+        unique_labels, _ = np.unique(labels, axis=0, return_inverse=True)
+        rate_ = 1 - (self.source_rate)
+
+        x_new = x.clone() 
+
+        for label in unique_labels:
+            cluster_indices = np.where(labels == label)
+            cluster_data = x[cluster_indices]
+
+            cluster_sigma2, cluster_mu = torch.var_mean(
+                x[cluster_indices], dim=[0, 2, 3], keepdim=True, unbiased=True
+            )
+
+            sigma2_s_expanded = sigma2_s.repeat(cluster_data.shape[0], 1, 1, 1)
+            mu_s_expanded = mu_s.repeat(cluster_data.shape[0], 1, 1, 1)
+
+            x_new[cluster_indices] = (
+                x[cluster_indices]
+                - (rate_ * cluster_mu + self.source_rate * mu_s_expanded)
+            ) * torch.rsqrt(
+                (rate_ * cluster_sigma2 + self.source_rate * sigma2_s_expanded) + self.eps
+            )
+
+            del sigma2_s_expanded, mu_s_expanded, cluster_sigma2, cluster_mu, cluster_data
+        return x_new  
+    def _softshrink(self, x, lbd):
+        x_p = F.relu(x - lbd, inplace=True)
+        x_n = F.relu(-(x + lbd), inplace=True)
+        y = x_p - x_n
+        return y
+    def forward(self, x):
+        b,c,h,w = x.size()
+        if (
+            self._bn.track_running_stats == False
+            and self._bn.running_mean is None
+            and self._bn.running_var is None
+        ):  # use batch stats
+                sigma2_b, mu_b = torch.var_mean(
+                    x, dim=[0, 2, 3], keepdim=True, unbiased=True
+                )
+        else:
+                mu_s = self._bn.running_mean.view(1, c, 1, 1)
+                sigma2_s = self._bn.running_var.view(1, c, 1, 1)
+        x_n = self.Lisc(x, mu_s, sigma2_s)
+
+        if self.affine:
+            weight = self._bn.weight.view(c, 1, 1)
+            bias = self._bn.bias.view(c, 1, 1)
+            x_n = x_n * weight + bias
+            
+        return x_n
+    
+    def calculate_similarity(self, x, running_mean, running_var):
+        b,c,h,w = x.size()
+        source_mu = running_mean.reshape(1, c, 1, 1)
+        source_sigma2 = running_var.reshape(1, c, 1, 1)
+        
+        sigma2_b, mu_b = torch.var_mean(x, dim=[0, 2, 3], keepdim=True)
+        _, mu_i = torch.var_mean(x, dim=[2, 3], keepdim=True)
+        mu_b = mu_b.repeat(b, 1, 1, 1)
+        sigma2_b = sigma2_b.repeat(b, 1, 1, 1)
+        source_mu = source_mu.repeat(b,1,1,1)
+        source_sigma2 = source_sigma2.repeat(b,1,1,1)
+        dsi = mu_i 
+        # dti = mu_b - x 
+        dst = mu_b 
+        if torch.isnan(dsi).any():
+            print("[Warning] NaNs found in dsi. Handling NaNs...")
+        if torch.isnan(dst).any():
+            print("[Warning] NaNs found in dst. Handling NaNs...")
+        cos_similarity = nn.CosineSimilarity(dim=1, eps=1e-8)
+        similarity = cos_similarity(x, mu_b)
+        if torch.isnan(similarity).any():
+            print("[Warning] NaNs found in similarity. Handling NaNs...")
+        similarity = torch.clamp(similarity, -1.0, 1.0)
+        curve_batch = torch.arccos(similarity)
+        if torch.isnan(curve_batch).any():
+            print("[Warning] NaNs found in curve_batch. Handling NaNs...")
+        return similarity.cpu().detach().numpy(),curve_batch.cpu().detach().numpy()

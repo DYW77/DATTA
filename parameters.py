@@ -199,7 +199,7 @@ def get_args():
     parser.add_argument("--intra_domain_shuffle", default=True, type=str2bool)
     parser.add_argument(
         "--inter_domain",
-        default="HeterogeneousNoMixture",
+        default="HomogeneousNoMixture",
         choices=[
             "HomogeneousNoMixture",
             "HeterogeneousNoMixture",

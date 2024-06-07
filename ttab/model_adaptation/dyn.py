@@ -2,12 +2,8 @@
 import copy
 import functools
 from typing import List
-import os
-# from ttab.draw.bn_performance import  bn_performance
-import PIL
 import torch
 import torch.nn as nn
-# import torch.nn.functional as F
 import torchvision.transforms.functional as F
 import ttab.model_adaptation.utils as utils
 from ttab.api import Batch
@@ -17,16 +13,9 @@ from ttab.model_selection.metrics import Metrics
 from ttab.utils.auxiliary import fork_rng_with_seed
 from ttab.utils.logging import Logger
 from ttab.utils.timer import Timer
-from torchvision.transforms import ColorJitter, Compose, Lambda
-# from ttab.model_adaptation import utils_tent
+from ttab.model_adaptation import utils
 
-from ttab.loads.models.resnet import Bottleneck
-# from ttab.utils.cam import apply_grad_cam
-from ttab.model_adaptation import utils_tent
-from ttab.loads.define_model import load_pretrained_model
-from numpy import random
-# from ttab.model_adaptation.inject_vida import inject_trainable_vida
-# import torchvision.transforms as transforms
+
 class DYN(BaseAdaptation):
     """
     
@@ -35,79 +24,44 @@ class DYN(BaseAdaptation):
         super(DYN, self).__init__(meta_conf, model)
         # self._meta_conf.step = 0
 
-    def convert_ClusterNorm2d(self, module: nn.Module, **kwargs):
+    def convert_ClusterAwareBatchNorm2d(self, module: nn.Module, **kwargs):
         """
         Recursively convert all BatchNorm to ClusterNorm.
         """
         module_output = module
 
         if isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)):
-            ClusterNorm2d = (
-                utils_tent.ClusterNorm2d
+            ClusterAwareBatchNorm2d = (
+                utils.ClusterAwareBatchNorm2d
                 if isinstance(module, nn.BatchNorm2d)
                 else nn.BatchNorm1d
             )
-            module_output = ClusterNorm2d(
+            module_output = ClusterAwareBatchNorm2d(
                 num_channels=module.num_features,
                 eps=module.eps,
                 momentum=module.momentum,
-                threshold=self._meta_conf.threshold_note,
+                # threshold=self._meta_conf.threshold_note,
                 affine=module.affine,
             )
 
-            # 复制 BatchNorm 的状态信息到 ClusterNorm 的 _bn 属性中
             module_output._bn = copy.deepcopy(module)
-            # module_output._bn.load_state_dict(module.state_dict())
-
-            # print(module_output._bn.running_mean)
 
         for name, child in module.named_children():
-            module_output.add_module(name, self.convert_ClusterNorm2d(child, **kwargs))
+            module_output.add_module(name, self.convert_ClusterAwareBatchNorm2d(child, **kwargs))
 
         del module
         return module_output
-    # def adjust_clusternorm(self, model, domain_result):
-    #     # if self._meta_conf.base_data_name == "cifar10":
-    #     #     dataset_num = 1050
-    #     # elif self._meta_conf.base_data_name == "cifar100":
-    #     #     dataset_num = 1200   
-    #     # elif self._meta_conf.base_data_name == "imagenet":
-    #     #     dataset_num = 4000
-    #     for module in model.modules():
-    #         if isinstance(module, utils_tent.ClusterNorm2d):
-    #             module.CNState = True
-    #             CNState = True
-    #             # if domain_result <= dataset_num:
-    #             #     # 根据域分割结果调整ClusterNorm的参数
-    #             #     module.CNState = False  
-    #             #     CNState = False
-    #             #     # print("BBBBBBBBBBBBBBBBBBBBB")
-    #             #     # 可以根据需要调整其他参数
-    #             # else:
-    #             #     # 恢复ClusterNorm的原始参数
-    #             #     # print(module.original_threshold)
-    #             #     module.CNState = True
-    #             #     CNState = True
-    #             #     # print("CCCCCCCCCCCCCCCCCCCCCCCC")
-    #             #     # 恢复其他参数
-    #     return model,CNState
     def _initialize_model(self, model: nn.Module):
         """Configure model for adaptation."""
         # model.train()
-        self.convert_ClusterNorm2d(model) 
+        self.convert_ClusterAwareBatchNorm2d(model) 
         model.requires_grad_(False)
         for module in model.modules():
             if isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)):
                 module.requires_grad_(True)
                 module.track_running_stats = False
-                # module.running_mean = None
-                # module.running_var = None
-                # module.weight.requires_grad_(True)
-                # module.bias.requires_grad_(True)
             elif isinstance(module, (nn.LayerNorm, nn.GroupNorm)):
                 module.requires_grad_(True)
-                # module.weight.requires_grad_(True)
-                # module.bias.requires_grad_(True)
             elif isinstance(module, (nn.Conv2d)):
                 module.weight.requires_grad_(True)
         return model.to(self._meta_conf.device)
@@ -115,22 +69,12 @@ class DYN(BaseAdaptation):
     def _initialize_trainable_parameters(self):
 
         """select target params for adaptation methods."""
-        # self.freeze_list = ["bn"]
         
         self._adapt_module_names = []
         adapt_params = []
         adapt_param_names = []
         
         for name_module, module in self._model.named_modules():
-        # for name_module, module in self._model.named_children():
-            # if not isinstance(module, utils_tent.ClusterNorm2d):  # 排除批标准化层
-                # self._adapt_module_names.append(name_module)
-                # for name_param, param in module.named_parameters():
-                #     if name_param in ["weight", "bias"]:
-                #     # if "bn" not in name_param:  # 排除批标准化层
-                #     # if not isinstance(module, utils_tent.ClusterNorm2d):  # 排除批标准化层
-                #         adapt_params.append(param)
-                #         adapt_param_names.append(f"{name_module}.{name_param}")
             if isinstance(
                 module, (nn.BatchNorm2d, nn.LayerNorm, nn.GroupNorm)
             ):  # only bn is used in the paper.
@@ -156,14 +100,6 @@ class DYN(BaseAdaptation):
 
         with timer("forward"):
             with fork_rng_with_seed(random_seed):
-                # change
-                # hook = DomainDivisionHook(model.layer1)
-                # y_hat = model(batch._x)
-                # # domain_result = 0
-                # domain_result = hook.get_result()
-                # _,CNState = self.adjust_clusternorm(model,domain_result)
-                # hook.close()
-                # CNState = True
                 y_hat = model(batch._x)
 
             loss = utils.softmax_entropy(y_hat).mean(0)
@@ -181,23 +117,11 @@ class DYN(BaseAdaptation):
                 loss += ewc_loss
 
         with timer("backward"):
-            # if CNState != False :
             grads = dict(
                 (name, param.grad.clone().detach())
                 for name, param in model.named_parameters()
                 if param.grad is not None
             )
-            # optimizer.zero_grad()
-                           
-            # elif CNState == False :
-            #     loss.backward()
-            #     grads = dict(
-            #         (name, param.grad.clone().detach())
-            #         for name, param in model.named_parameters()
-            #         if param.grad is not None
-            #     )
-            #     optimizer.step()
-            #     optimizer.zero_grad()
 
         return {
             "optimizer": copy.deepcopy(optimizer).state_dict(),

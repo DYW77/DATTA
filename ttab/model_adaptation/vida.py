@@ -19,7 +19,7 @@ from ttab.model_selection.metrics import Metrics
 from ttab.utils.auxiliary import fork_rng_with_seed
 from ttab.utils.logging import Logger
 from ttab.utils.timer import Timer
-from ttab.model_adaptation.inject_vida import inject_trainable_vida
+from ttab.model_adaptation.utils import inject_trainable_vida
 
 class ViDA(BaseAdaptation):
 
