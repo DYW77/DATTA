@@ -1,5 +1,5 @@
 <<<<<<< HEAD
-# Test-Time Adaptation Benchmark (TTAB)
+# Discover Your Neighbors(DYN): Advanced Stable Test-Time Adaptation in Dynamic World
 
 This repository is the official implementation of
 <br>
