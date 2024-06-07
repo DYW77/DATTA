@@ -9,6 +9,7 @@ from ttab.loads.datasets.dataset_shifts import (
 )
 from ttab.scenarios import (
     CrossMixture,
+    CrossHeterMixture,
     HeterogeneousNoMixture,
     HomogeneousNoMixture,
     InOutMixture,
@@ -39,6 +40,7 @@ def get_inter_domain(config):
         "InOutMixture": InOutMixture,
         "CrossMixture": CrossMixture,
         "BatchMixing": BatchMixing,
+        "CrossHeterMixture":CrossHeterMixture,
     }.get(inter_domain_name, HomogeneousNoMixture)
 
     if "InOutMixture" == inter_domain_name:
@@ -85,6 +87,7 @@ def _is_defined_name_tuple(in_object):
                 HeterogeneousNoMixture,
                 InOutMixture,
                 CrossMixture,
+                CrossHeterMixture,
                 BatchMixing,
                 TestCase,
                 TestDomain,

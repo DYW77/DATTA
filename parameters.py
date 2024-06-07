@@ -199,7 +199,7 @@ def get_args():
     parser.add_argument("--intra_domain_shuffle", default=True, type=str2bool)
     parser.add_argument(
         "--inter_domain",
-        default="HomogeneousNoMixture",
+        default="HeterogeneousNoMixture",
         choices=[
             "HomogeneousNoMixture",
             "HeterogeneousNoMixture",
@@ -212,7 +212,7 @@ def get_args():
     )
     #################Only for BatchMixing#################
     parser.add_argument("--sp_order", 
-        default="Shuffle_Shuffle",
+        default="",
         help="Interval/Shuffle: scenarios appear on turn or not,"
              "Seq/Shuffle: For Homo scenario, shuffle Homo or not",
         choices=[
@@ -223,7 +223,7 @@ def get_args():
         type=str,
     )
     parser.add_argument("--sp_scenarios", 
-        default="Homo&Cross&Heter",
+        default="",
         help="How to mix batch",
         choices=[
             "Homo&Cross",
@@ -236,7 +236,7 @@ def get_args():
     ##################################
     # Test domain
     parser.add_argument("--domain_sampling_name", default="uniform", type=str)
-    parser.add_argument("--domain_sampling_ratio", default=1, type=float)
+    parser.add_argument("--domain_sampling_ratio", default=0.1, type=float)
     # HeterogeneousNoMixture
     parser.add_argument("--non_iid_pattern", default="class_wise_over_domain", type=str)
     parser.add_argument("--non_iid_ness", default=0.01, type=float)

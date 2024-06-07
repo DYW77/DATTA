@@ -65,7 +65,11 @@ class CrossMixture(NamedTuple):
 
     # cross-shuffle test domains.
     has_mixture: bool = True
-
+    
+class CrossHeterMixture(NamedTuple):
+    has_mixture: bool = True
+    non_iid_pattern: str = "class_wise_over_domain"
+    non_iid_ness: float = 100
 
 class TestCase(NamedTuple):
     """

@@ -5,6 +5,7 @@ import os
 import random
 from typing import Callable, List, Tuple
 
+from collections import Counter
 import numpy as np
 import torch
 
@@ -28,15 +29,17 @@ from ttab.loads.datasets.datasets import (
     PACSDataset,
     WBirdsDataset,
     YearBookDataset,
+    MergedImageNetDataset,
+    SpecialMergeMultiDataset,
 )
 from ttab.loads.datasets.imagenet import ImageNetSyntheticShift, ImageNetValNaturalShift
 from ttab.loads.datasets.mnist import ColoredSyntheticShift
 from ttab.scenarios import (
     CrossMixture,
-    CrossHeterMixture,
     HeterogeneousNoMixture,
     HomogeneousNoMixture,
     InOutMixture,
+    BatchMixing,
     Scenario,
     TestCase,
     TestDomain,
@@ -54,83 +57,12 @@ class MergeMultiTestDatasets(object):
         )
         return dataset
 
-    @staticmethod
-    def _intra_non_iid_shift2(
-        dataset: PyTorchDataset,
-        non_iid_pattern: str = "class_wise_over_domain",
-        non_iid_ness: float = 0.1,
-        random_seed: int = None,
-    ) -> PyTorchDataset:
-        """make iid dataset non-iid through applying dirichlet distribution."""
-        indices = dataset.query_dataset_attr("indices")
-        targets = dataset.query_dataset_attr(
-            "targets"
-        )  # targets are always the same, which is the original label list.
-        # print(indices)
-
-        targets = [
-            targets[i] for i in indices
-        ]  # use indices to get the targets of interest.
-        new_indices = []
-        if non_iid_pattern == "class_wise_over_domain":
-            dirichlet_numchunks = dataset.num_classes
-            min_size = -1
-            N = len(dataset)
-            min_size_threshold = 5  # hyperparameter.
-            while (
-                min_size < min_size_threshold
-            ):  # prevent any chunk having too less data
-                idx_batch = [[] for _ in range(dirichlet_numchunks)]
-                idx_batch_cls = [
-                    [] for _ in range(dirichlet_numchunks)
-                ]  # contains data per each class
-                for k in range(dataset.num_classes):
-                    targets_np = torch.Tensor(targets).numpy()
-                    idx_k = np.where(targets_np == k)[0]
-                    np.random.shuffle(idx_k)
-                    proportions = np.random.dirichlet(
-                        np.repeat(non_iid_ness, dirichlet_numchunks)
-                    )
-                    # balance
-                    proportions = np.array(
-                        [
-                            p * (len(idx_j) < N / dirichlet_numchunks)
-                            for p, idx_j in zip(proportions, idx_batch)
-                        ]
-                    )
-                    proportions = proportions / proportions.sum()
-                    proportions = (np.cumsum(proportions) * len(idx_k)).astype(int)[:-1]
-                    idx_batch = [
-                        idx_j + idx.tolist()
-                        for idx_j, idx in zip(idx_batch, np.split(idx_k, proportions))
-                    ]
-
-                    min_size = min([len(idx_j) for idx_j in idx_batch])
-                    print("[info] min_size",min_size)
-                    # store class-wise data
-                    for idx_j, idx in zip(idx_batch_cls, np.split(idx_k, proportions)):
-                        idx_j.append(idx)
-            sequence_stats = []
-            # create temporally correlated toy dataset by shuffling classes
-            for chunk in idx_batch_cls:
-                cls_seq = list(range(dataset.num_classes))
-                np.random.shuffle(cls_seq)
-                for cls in cls_seq:
-                    idx = chunk[cls]
-                    indices_ = [indices[i] for i in idx]
-                    new_indices.extend(indices_)
-                    sequence_stats.extend(list(np.repeat(cls, len(idx))))
-            num_samples = len(new_indices)
-            new_indices = new_indices[:num_samples]
-            dataset.replace_indices(indices_pattern="new", new_indices=new_indices)
-        return dataset
-
     # https://github.com/IBM/probabilistic-federated-neural-matching/blob/f44cf4281944fae46cdce1b8bc7cde3e7c44bd70/experiment.py
     @staticmethod
     def _intra_non_iid_shift(
         dataset: PyTorchDataset,
         non_iid_pattern: str = "class_wise_over_domain",
-        non_iid_ness: float = 0.1,
+        non_iid_ness: float = 0.01,
         random_seed: int = None,
     ) -> PyTorchDataset:
         """make iid dataset non-iid through applying dirichlet distribution."""
@@ -138,24 +70,27 @@ class MergeMultiTestDatasets(object):
         targets = dataset.query_dataset_attr(
             "targets"
         )  # targets are always the same, which is the original label list.
+
         targets = [
             targets[i] for i in indices
         ]  # use indices to get the targets of interest.
+
         new_indices = []
 
         if non_iid_pattern == "class_wise_over_domain":
-            dirichlet_numchunks = dataset.num_classes
+            dirichlet_numchunks = int(dataset.num_classes)
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 5  # hyperparameter.
+            min_size_threshold = 3  # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data
+                #print(min_size)
                 idx_batch = [[] for _ in range(dirichlet_numchunks)]
                 idx_batch_cls = [
                     [] for _ in range(dirichlet_numchunks)
                 ]  # contains data per each class
-                for k in range(dataset.num_classes):
+                for k in range(int(dataset.num_classes)):
                     targets_np = torch.Tensor(targets).numpy()
                     idx_k = np.where(targets_np == k)[0]
                     np.random.shuffle(idx_k)
@@ -177,15 +112,15 @@ class MergeMultiTestDatasets(object):
                         for idx_j, idx in zip(idx_batch, np.split(idx_k, proportions))
                     ]
                     min_size = min([len(idx_j) for idx_j in idx_batch])
-                    print("[info] min_size",min_size)
+
                     # store class-wise data
                     for idx_j, idx in zip(idx_batch_cls, np.split(idx_k, proportions)):
                         idx_j.append(idx)
-
+            print("此标志出现15次即完成Heter数据构建")
             sequence_stats = []
             # create temporally correlated toy dataset by shuffling classes
             for chunk in idx_batch_cls:
-                cls_seq = list(range(dataset.num_classes))
+                cls_seq = list(range(int(dataset.num_classes)))
                 np.random.shuffle(cls_seq)
                 for cls in cls_seq:
                     idx = chunk[cls]
@@ -224,11 +159,9 @@ class MergeMultiTestDatasets(object):
         if isinstance(test_case.inter_domain, HomogeneousNoMixture):
             return self._merge_datasets(
                 [
-                    (
-                        self._intra_shuffle_dataset(test_dataset, random_seed)
-                        if test_case.intra_domain_shuffle
-                        else test_dataset
-                    )
+                    self._intra_shuffle_dataset(test_dataset, random_seed)
+                    if test_case.intra_domain_shuffle
+                    else test_dataset
                     for test_dataset in test_datasets
                 ]
             )
@@ -267,28 +200,104 @@ class MergeMultiTestDatasets(object):
             return self._intra_shuffle_dataset(
                 self._merge_datasets(test_datasets), random_seed=random_seed
             )
-        elif isinstance(test_case.inter_domain, CrossHeterMixture):
+        elif isinstance(test_case.inter_domain, BatchMixing):
+            #if test_case.inter_domain.sp_buildtype == "Copy":
+            if test_case.inter_domain.sp_scenarios == "Homo&Cross":
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
+                processed_dataset1 = self._merge_datasets(
+                    [
+                        self._intra_shuffle_dataset(test_dataset, random_seed)
+                        if test_case.intra_domain_shuffle
+                        else test_dataset
+                        for test_dataset in test_dataset1
+                    ]
+                )
+                processed_dataset3 = self._intra_shuffle_dataset(
+                    self._merge_datasets(test_dataset3), random_seed=random_seed
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset3], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
+            elif test_case.inter_domain.sp_scenarios == "Homo&Heter":
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset2 = copy.deepcopy(test_datasets)
+                processed_dataset1 = self._merge_datasets(
+                    [
+                        self._intra_shuffle_dataset(test_dataset, random_seed)
+                        if test_case.intra_domain_shuffle
+                        else test_dataset
+                        for test_dataset in test_dataset1
+                    ]
+                )
+                processed_dataset2 = self._merge_datasets(
+                    [
+                        self._intra_non_iid_shift(
+                            dataset=dataset,
+                            non_iid_pattern=test_case.inter_domain.non_iid_pattern,
+                            non_iid_ness=test_case.inter_domain.non_iid_ness,
+                            random_seed=random_seed,
+                        )
+                        for dataset in test_dataset2
+                    ]
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset2], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
+            elif test_case.inter_domain.sp_scenarios == "Cross&Heter":
+                test_dataset2 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
+                processed_dataset2 = self._merge_datasets(
+                    [
+                        self._intra_non_iid_shift(
+                            dataset=dataset,
+                            non_iid_pattern=test_case.inter_domain.non_iid_pattern,
+                            non_iid_ness=test_case.inter_domain.non_iid_ness,
+                            random_seed=random_seed,
+                        )
+                        for dataset in test_dataset2
+                    ]
+                )
+                processed_dataset3 = self._intra_shuffle_dataset(
+                    self._merge_datasets(test_dataset3), random_seed=random_seed
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset3,processed_dataset2], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
+            elif test_case.inter_domain.sp_scenarios == "Homo&Cross&Heter":
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset2 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
+                processed_dataset1 = self._merge_datasets(
+                    [
+                        self._intra_shuffle_dataset(test_dataset, random_seed)
+                        if test_case.intra_domain_shuffle
+                        else test_dataset
+                        for test_dataset in test_dataset1
+                    ]
+                )
+                processed_dataset2 = self._merge_datasets(
+                    [
+                        self._intra_non_iid_shift(
+                            dataset=dataset,
+                            non_iid_pattern=test_case.inter_domain.non_iid_pattern,
+                            non_iid_ness=test_case.inter_domain.non_iid_ness,
+                            random_seed=random_seed,
+                        )
+                        for dataset in test_dataset2
+                    ]
+                )
+                processed_dataset3 = self._intra_shuffle_dataset(
+                    self._merge_datasets(test_dataset3), random_seed=random_seed
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset3,processed_dataset2], batch_size = test_case.inter_domain.batch_size,sp_order = test_case.inter_domain.sp_order )
 
-            data = self._intra_shuffle_dataset(
-                self._merge_datasets(test_datasets), random_seed=random_seed
-            )
-            data2 = self._intra_non_iid_shift2(
-                dataset=data,
-                non_iid_pattern=test_case.inter_domain.non_iid_pattern,
-                non_iid_ness=test_case.inter_domain.non_iid_ness,
-                random_seed=random_seed,
-            )
-            # indices = data2.query_dataset_attr("indices")
-            # targets = data2.query_dataset_attr(
-            #     "targets"
-            # )  # targets are always the same, which is the original label list.
-            # targets = [
-            #     targets[i] for i in indices
-            # ]  # use indices to get the targets of interest.
+            #elif test_case.inter_domain.sp_buildtype == "Split":
+                # split_test_datasets = []
+                # for test_dataset in test_datasets:
+                #     split_datasets = test_dataset.split_data(sizes=[test_dataset.__len__() // 3]*3,seed=random_seed)
+                #     split_test_datasets.append(split_datasets)
 
-            return data2
-
-
+                # test_dataset1 = [dataset[0] for dataset in split_test_datasets]
+                # test_dataset2 = [dataset[1] for dataset in split_test_datasets]
+                # test_dataset3 = [dataset[2] for dataset in split_test_datasets]
+            
+            return result
+        
 class ConstructTestDataset(object):
     def __init__(self, config):
         self.meta_conf = config
@@ -618,7 +627,7 @@ class ConstructTestDataset(object):
             data_shift_class=data_shift_class,
         )
         return dataset
-
+    
     def _get_yearbook_test_domain_datasets_helper(
         self, test_domain: TestDomain, data_augment: bool = False, split: str = "test"
     ) -> PyTorchDataset:
