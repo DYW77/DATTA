@@ -28,6 +28,7 @@ from ttab.loads.datasets.datasets import (
     PACSDataset,
     WBirdsDataset,
     YearBookDataset,
+    SpecialMergeMultiDataset,
 )
 from ttab.loads.datasets.imagenet import ImageNetSyntheticShift, ImageNetValNaturalShift
 from ttab.loads.datasets.mnist import ColoredSyntheticShift
@@ -36,6 +37,7 @@ from ttab.scenarios import (
     CrossHeterMixture,
     HeterogeneousNoMixture,
     HomogeneousNoMixture,
+    BatchMixing,
     InOutMixture,
     Scenario,
     TestCase,
@@ -76,7 +78,7 @@ class MergeMultiTestDatasets(object):
             dirichlet_numchunks = dataset.num_classes
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 1  # hyperparameter.
+            min_size_threshold = 5  # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data
@@ -147,7 +149,7 @@ class MergeMultiTestDatasets(object):
             dirichlet_numchunks = dataset.num_classes
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 1  # hyperparameter.
+            min_size_threshold = 5  # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data
@@ -279,16 +281,105 @@ class MergeMultiTestDatasets(object):
                 non_iid_ness=test_case.inter_domain.non_iid_ness,
                 random_seed=random_seed,
             )
-            # indices = data2.query_dataset_attr("indices")
-            # targets = data2.query_dataset_attr(
-            #     "targets"
-            # )  # targets are always the same, which is the original label list.
-            # targets = [
-            #     targets[i] for i in indices
-            # ]  # use indices to get the targets of interest.
 
             return data2
+        elif isinstance(test_case.inter_domain, BatchMixing):
+            #if test_case.inter_domain.sp_buildtype == "Copy":
+            if test_case.inter_domain.sp_scenarios == "Homo&Cross":
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
+                processed_dataset1 = self._merge_datasets(
+                    [
+                        self._intra_shuffle_dataset(test_dataset, random_seed)
+                        if test_case.intra_domain_shuffle
+                        else test_dataset
+                        for test_dataset in test_dataset1
+                    ]
+                )
+                processed_dataset3 = self._intra_shuffle_dataset(
+                    self._merge_datasets(test_dataset3), random_seed=random_seed
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset3], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
+            elif test_case.inter_domain.sp_scenarios == "Homo&Heter":
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset2 = copy.deepcopy(test_datasets)
+                processed_dataset1 = self._merge_datasets(
+                    [
+                        self._intra_shuffle_dataset(test_dataset, random_seed)
+                        if test_case.intra_domain_shuffle
+                        else test_dataset
+                        for test_dataset in test_dataset1
+                    ]
+                )
+                processed_dataset2 = self._merge_datasets(
+                    [
+                        self._intra_non_iid_shift(
+                            dataset=dataset,
+                            non_iid_pattern=test_case.inter_domain.non_iid_pattern,
+                            non_iid_ness=test_case.inter_domain.non_iid_ness,
+                            random_seed=random_seed,
+                        )
+                        for dataset in test_dataset2
+                    ]
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset2], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
+            elif test_case.inter_domain.sp_scenarios == "Cross&Heter":
+                test_dataset2 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
+                processed_dataset2 = self._merge_datasets(
+                    [
+                        self._intra_non_iid_shift(
+                            dataset=dataset,
+                            non_iid_pattern=test_case.inter_domain.non_iid_pattern,
+                            non_iid_ness=test_case.inter_domain.non_iid_ness,
+                            random_seed=random_seed,
+                        )
+                        for dataset in test_dataset2
+                    ]
+                )
+                processed_dataset3 = self._intra_shuffle_dataset(
+                    self._merge_datasets(test_dataset3), random_seed=random_seed
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset3,processed_dataset2], batch_size = test_case.inter_domain.batch_size ,sp_order = test_case.inter_domain.sp_order )
+            elif test_case.inter_domain.sp_scenarios == "Homo&Cross&Heter":
+                test_dataset1 = copy.deepcopy(test_datasets)
+                test_dataset2 = copy.deepcopy(test_datasets)
+                test_dataset3 = copy.deepcopy(test_datasets)
+                processed_dataset1 = self._merge_datasets(
+                    [
+                        self._intra_shuffle_dataset(test_dataset, random_seed)
+                        if test_case.intra_domain_shuffle
+                        else test_dataset
+                        for test_dataset in test_dataset1
+                    ]
+                )
+                processed_dataset2 = self._merge_datasets(
+                    [
+                        self._intra_non_iid_shift(
+                            dataset=dataset,
+                            non_iid_pattern=test_case.inter_domain.non_iid_pattern,
+                            non_iid_ness=test_case.inter_domain.non_iid_ness,
+                            random_seed=random_seed,
+                        )
+                        for dataset in test_dataset2
+                    ]
+                )
+                processed_dataset3 = self._intra_shuffle_dataset(
+                    self._merge_datasets(test_dataset3), random_seed=random_seed
+                )
+                result =  SpecialMergeMultiDataset(datasets = [processed_dataset1,processed_dataset3,processed_dataset2], batch_size = test_case.inter_domain.batch_size,sp_order = test_case.inter_domain.sp_order )
 
+            #elif test_case.inter_domain.sp_buildtype == "Split":
+                # split_test_datasets = []
+                # for test_dataset in test_datasets:
+                #     split_datasets = test_dataset.split_data(sizes=[test_dataset.__len__() // 3]*3,seed=random_seed)
+                #     split_test_datasets.append(split_datasets)
+
+                # test_dataset1 = [dataset[0] for dataset in split_test_datasets]
+                # test_dataset2 = [dataset[1] for dataset in split_test_datasets]
+                # test_dataset3 = [dataset[2] for dataset in split_test_datasets]
+            
+            return result
 
 class ConstructTestDataset(object):
     def __init__(self, config):

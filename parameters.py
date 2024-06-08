@@ -19,10 +19,10 @@ def get_args():
     
     # define test evaluation info.
     parser.add_argument("--root_path", default="./logs", type=str)
-    parser.add_argument("--data_path", default="./datasets", type=str)
+    parser.add_argument("--data_path", default="/home/wdy/Exp/datasets", type=str)
     parser.add_argument(
         "--ckpt_path",
-        default="./pretrain/ckpt/rn50_bn_cifar10.pth",
+        default="/home/wdy/Exp/model/rn50_bn_cifar10.pth",
         type=str,
     )
     parser.add_argument("--seed", default=2022, type=int)
@@ -194,7 +194,7 @@ def get_args():
     parser.add_argument("--intra_domain_shuffle", default=True, type=str2bool)
     parser.add_argument(
         "--inter_domain",
-        default="HomogeneousNoMixture",
+        default="BatchMixing",
         choices=[
             "HomogeneousNoMixture",
             "HeterogeneousNoMixture",
@@ -207,7 +207,7 @@ def get_args():
     )
     #################Only for BatchMixing#################
     parser.add_argument("--sp_order", 
-        default="Interval_Seq",
+        default="Interval_Shuffle",
         help="Interval/Shuffle: scenarios appear on turn or not,"
              "Seq/Shuffle: For Homo scenario, shuffle Homo or not",
         choices=[

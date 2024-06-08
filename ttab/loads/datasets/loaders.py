@@ -12,7 +12,7 @@ D = Union[torch.utils.data.Dataset, PyTorchDataset]
 class BaseLoader(object):
     def __init__(self, dataset: PyTorchDataset):
         self.dataset = dataset
-
+        print("[info]",dataset)
     def iterator(
         self,
         batch_size: int,
