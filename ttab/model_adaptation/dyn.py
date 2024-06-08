@@ -17,12 +17,8 @@ from ttab.model_adaptation import utils
 
 
 class DYN(BaseAdaptation):
-    """
-    
-    """
     def __init__(self, meta_conf, model: nn.Module):
         super(DYN, self).__init__(meta_conf, model)
-        # self._meta_conf.step = 0
 
     def convert_ClusterAwareBatchNorm2d(self, module: nn.Module, **kwargs):
         """
