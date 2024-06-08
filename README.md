@@ -8,21 +8,18 @@ It's based on the  **[TTAB repository](https://github.com/LINs-lab/ttab)**, whic
 
 
 > We introduce a novel test-time adaptation method DYN whose core innovation is identifying similar samples via instance normalization statistics and clustering into groups which provides consistent class-irrelevant representations.
-> - To our knowledge, this is the first backward-free TTA method addressing dynamic test patterns, and we conduct sufficient measurements to re-understanding of the batch normalization statistics through class-related and class-irrelevant features. 
-> - We propose a test-time normalization approach that utilizes instance normalization statistics to cluster samples with similar category-independent distributions. Combining TCN and SBN statistics enables robust representations adaptable to dynamic data.
-> - Experiments on benchmark datasets demonstrate robust performance compared to state-of-the-art studies under dynamic distribution shifts, with up to a 35\% increase in accuracy.
 
 ## Overview
 Our repository contains:
-1. dyn, vida, deyo
-2. 新场景
+1. The implementation of **[ViDA](https://arxiv.org/abs/2306.04344)**, **[DeYO](https://arxiv.org/abs/2403.07366)**, and **our method** on TTAB
+2. The code introducing new scenarios, including random and shuffle.
+> - Random indicates that the input samples in each batch are randomly switched between multiple different distributions or maintained as i.i.d. 
+> - Shuffle indicates that the input samples in each batch remain i.i.d., but batches containing samples from different distributions are mixed in intermittently.
 
 
 ## News
 - June 2024: We updated the implementation of our Test-time Adaptation method DYN(Discover Your Neighbors).
 
-## Installation
-To run a baseline test, please prepare the relevant pre-trained checkpoints for the base model and place them in `pretrain/ckpt/`.
 ### Requirements
 The TTAB package depends on the following requirements:
 
@@ -45,6 +42,7 @@ We provide an example script that can be used to adapt distribution shifts on th
 python run_exp.py
 ```
 
+For more details, please refer to **[TTAB repository](https://github.com/LINs-lab/ttab)**.
 
 
 
