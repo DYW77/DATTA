@@ -19,11 +19,10 @@ def get_args():
     
     # define test evaluation info.
     parser.add_argument("--root_path", default="./logs", type=str)
-    parser.add_argument("--data_path", default="/home/wdy/Exp/datasets", type=str)
+    parser.add_argument("--data_path", default="./datasets", type=str)
     parser.add_argument(
         "--ckpt_path",
-        default="/home/wdy/Exp/model/rn50_bn_cifar10.pth",
-        # default="/home/wdy/Exp/model/rn26_bn_ssh_cifar100.pth",
+        default="./pretrain/ckpt/rn50_bn_cifar10.pth",
         type=str,
     )
     parser.add_argument("--seed", default=2022, type=int)
@@ -70,45 +69,41 @@ def get_args():
     """
     cifar10
     """
-    # parser.add_argument(
-    #     "--base_data_name",
-    #     default="cifar10",
-    #     choices=[
-    #         "cifar10",
-    #         "cifar100",
-    #         "imagenet",
-    #         "officehome",
-    #         "pacs",
-    #         "coloredmnist",
-    #         "waterbirds",
+    parser.add_argument(
+        "--base_data_name",
+        default="cifar10",
+        choices=[
+            "cifar10",
+            "cifar100",
+            "imagenet",
+            "officehome",
+            "pacs",
+            "coloredmnist",
+            "waterbirds",
 
-    #     ],
-    #     type=str,
-    # )
-    # parser.add_argument("--src_data_name", default="cifar10", type=str)
-    # parser.add_argument(
-    #     "--data_names", default=
-    #                             "cifar10_c_deterministic-gaussian_noise-5;"
-    #                             "cifar10_c_deterministic-shot_noise-5;"
-    #                             "cifar10_c_deterministic-impulse_noise-5;"
-    #                             "cifar10_c_deterministic-defocus_blur-5;"
-    #                             "cifar10_c_deterministic-glass_blur-5;"
-    #                             "cifar10_c_deterministic-motion_blur-5;"
-    #                             "cifar10_c_deterministic-zoom_blur-5;"
-    #                             "cifar10_c_deterministic-snow-5;"
-    #                             "cifar10_c_deterministic-frost-5;"
-    #                             "cifar10_c_deterministic-fog-5;"
-    #                             "cifar10_c_deterministic-brightness-5;"
-    #                             "cifar10_c_deterministic-contrast-5;"
-    #                             "cifar10_c_deterministic-elastic_transform-5;"
-    #                             "cifar10_c_deterministic-pixelate-5;"
-    #                             "cifar10_c_deterministic-jpeg_compression-5"
-
-
-    #                             # "cifar10_c_deterministic-pixelate-5"
-    #                             # "cifar10_c_deterministic-gaussian_noise-5"
-    #     , type=str
-    # )
+        ],
+        type=str,
+    )
+    parser.add_argument("--src_data_name", default="cifar10", type=str)
+    parser.add_argument(
+        "--data_names", default=
+                                "cifar10_c_deterministic-gaussian_noise-5;"
+                                "cifar10_c_deterministic-shot_noise-5;"
+                                "cifar10_c_deterministic-impulse_noise-5;"
+                                "cifar10_c_deterministic-defocus_blur-5;"
+                                "cifar10_c_deterministic-glass_blur-5;"
+                                "cifar10_c_deterministic-motion_blur-5;"
+                                "cifar10_c_deterministic-zoom_blur-5;"
+                                "cifar10_c_deterministic-snow-5;"
+                                "cifar10_c_deterministic-frost-5;"
+                                "cifar10_c_deterministic-fog-5;"
+                                "cifar10_c_deterministic-brightness-5;"
+                                "cifar10_c_deterministic-contrast-5;"
+                                "cifar10_c_deterministic-elastic_transform-5;"
+                                "cifar10_c_deterministic-pixelate-5;"
+                                "cifar10_c_deterministic-jpeg_compression-5"
+        , type=str
+    )
     """
     cifar100
     """
@@ -150,41 +145,41 @@ def get_args():
     """
     imagenet
     """
-    parser.add_argument(
-        "--base_data_name",
-        default="imagenet",
-        choices=[
-            "cifar10",
-            "cifar100",
-            "imagenet",
-            "officehome",
-            "pacs",
-            "coloredmnist",
-            "waterbirds",
+    # parser.add_argument(
+    #     "--base_data_name",
+    #     default="imagenet",
+    #     choices=[
+    #         "cifar10",
+    #         "cifar100",
+    #         "imagenet",
+    #         "officehome",
+    #         "pacs",
+    #         "coloredmnist",
+    #         "waterbirds",
 
-        ],
-        type=str,
-    )
-    parser.add_argument("--src_data_name", default="imagenet", type=str)
-    parser.add_argument(
-        "--data_names", default=
-                                "imagenet_c_deterministic-gaussian_noise-5;"
-                                "imagenet_c_deterministic-shot_noise-5;"
-                                "imagenet_c_deterministic-impulse_noise-5;"
-                                "imagenet_c_deterministic-defocus_blur-5;"
-                                "imagenet_c_deterministic-glass_blur-5;"
-                                "imagenet_c_deterministic-motion_blur-5;"
-                                "imagenet_c_deterministic-zoom_blur-5;"
-                                "imagenet_c_deterministic-snow-5;"
-                                "imagenet_c_deterministic-frost-5;"
-                                "imagenet_c_deterministic-fog-5;"
-                                "imagenet_c_deterministic-brightness-5;"
-                                "imagenet_c_deterministic-contrast-5;"
-                                "imagenet_c_deterministic-elastic_transform-5;"
-                                "imagenet_c_deterministic-pixelate-5;"
-                                "imagenet_c_deterministic-jpeg_compression-5"
-        , type=str
-    )
+    #     ],
+    #     type=str,
+    # )
+    # parser.add_argument("--src_data_name", default="imagenet", type=str)
+    # parser.add_argument(
+    #     "--data_names", default=
+    #                             "imagenet_c_deterministic-gaussian_noise-5;"
+    #                             "imagenet_c_deterministic-shot_noise-5;"
+    #                             "imagenet_c_deterministic-impulse_noise-5;"
+    #                             "imagenet_c_deterministic-defocus_blur-5;"
+    #                             "imagenet_c_deterministic-glass_blur-5;"
+    #                             "imagenet_c_deterministic-motion_blur-5;"
+    #                             "imagenet_c_deterministic-zoom_blur-5;"
+    #                             "imagenet_c_deterministic-snow-5;"
+    #                             "imagenet_c_deterministic-frost-5;"
+    #                             "imagenet_c_deterministic-fog-5;"
+    #                             "imagenet_c_deterministic-brightness-5;"
+    #                             "imagenet_c_deterministic-contrast-5;"
+    #                             "imagenet_c_deterministic-elastic_transform-5;"
+    #                             "imagenet_c_deterministic-pixelate-5;"
+    #                             "imagenet_c_deterministic-jpeg_compression-5"
+    #     , type=str
+    # )
     parser.add_argument(
         "--data_wise",
         default="batch_wise",
@@ -212,7 +207,7 @@ def get_args():
     )
     #################Only for BatchMixing#################
     parser.add_argument("--sp_order", 
-        default="",
+        default="Interval_Seq",
         help="Interval/Shuffle: scenarios appear on turn or not,"
              "Seq/Shuffle: For Homo scenario, shuffle Homo or not",
         choices=[
@@ -223,7 +218,7 @@ def get_args():
         type=str,
     )
     parser.add_argument("--sp_scenarios", 
-        default="",
+        default="Homo&Cross",
         help="How to mix batch",
         choices=[
             "Homo&Cross",
@@ -236,7 +231,7 @@ def get_args():
     ##################################
     # Test domain
     parser.add_argument("--domain_sampling_name", default="uniform", type=str)
-    parser.add_argument("--domain_sampling_ratio", default=0.1, type=float)
+    parser.add_argument("--domain_sampling_ratio", default=1, type=float)
     # HeterogeneousNoMixture
     parser.add_argument("--non_iid_pattern", default="class_wise_over_domain", type=str)
     parser.add_argument("--non_iid_ness", default=0.01, type=float)
