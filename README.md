@@ -22,7 +22,7 @@ Our repository contains:
 
 ### Requirements
 The TTAB package depends on the following requirements:
-
+- finch-clust>=0.2.0
 - numpy>=1.21.5
 - pandas>=1.1.5
 - pillow>=9.0.1
