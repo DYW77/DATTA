@@ -78,7 +78,7 @@ class MergeMultiTestDatasets(object):
             dirichlet_numchunks = dataset.num_classes
             min_size = -1
             N = len(dataset)
-            min_size_threshold = 5  # hyperparameter.
+            min_size_threshold = 1 # hyperparameter.
             while (
                 min_size < min_size_threshold
             ):  # prevent any chunk having too less data
@@ -108,10 +108,10 @@ class MergeMultiTestDatasets(object):
                     ]
 
                     min_size = min([len(idx_j) for idx_j in idx_batch])
-                    print("[info] min_size",min_size)
                     # store class-wise data
                     for idx_j, idx in zip(idx_batch_cls, np.split(idx_k, proportions)):
                         idx_j.append(idx)
+                print("[info] min_size",min_size)
             sequence_stats = []
             # create temporally correlated toy dataset by shuffling classes
             for chunk in idx_batch_cls:
