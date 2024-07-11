@@ -165,6 +165,7 @@ class PyTorchDataset(object):
             type_num = 10000
         elif data_name == "imagenet":
             type_num = 50000
+        else: type_num = 10000
         for _ in itertools.count() if repeat else [0]:
             for i, batch in enumerate(loader):
                 step += 1

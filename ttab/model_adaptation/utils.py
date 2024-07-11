@@ -14,7 +14,7 @@ from ttab.loads.models.resnet import (
 )
 from ttab.loads.models.wideresnet import WideResNet
 from copy import deepcopy
-from finch import FINCH
+from ttab.model_adaptation.finch import FINCH
 """optimization dynamics"""
 
 
@@ -963,98 +963,208 @@ class ClusterAwareBatchNorm2d(nn.Module):
         self.num_channels = num_channels
         self.eps = eps
         self.affine = affine
+        # self.k = 3
         self._bn = nn.BatchNorm2d(
             num_channels, eps=eps, momentum=momentum, affine=affine
         )
         self.source_rate = nn.parameter.Parameter(torch.tensor(0.8))
-        self.test_rate = nn.parameter.Parameter(torch.tensor(0.))
+        # self.test_rate = nn.parameter.Parameter(torch.tensor(0.0))
+        # self.Domain_discriminator = False
+    def Lisc(self, x, mu_b, sigma2_b, source_rate):
+        b, c, _, _ = x.size()
+        rate_ = 1 - source_rate
 
-    def Lisc(self, x, mu_s, sigma2_s):
-        _, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)
+        # 计算均值和方差
+        sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)
+        mu_flat = mu.view(b, c)
+        sigma2_flat = sigma2.view(b, c)
 
-        data = mu.view(-1, self.num_channels).cpu().detach().numpy()
+        # 获取聚类标签
+        data = mu_flat
+        c1, _ = FINCH(data)
+        unique_labels, inverse_indices = torch.unique(c1, dim=0, return_inverse=True)
 
-        c1, _, _ = FINCH(data, verbose=False)
+        # 将标签转换为one-hot编码
+        label_onehot = nn.functional.one_hot(inverse_indices, num_classes=len(unique_labels)).float().to(x.device)
+        # 聚类均值和方差
+        label_sums = torch.matmul(label_onehot.transpose(0, 1), mu_flat)
+        label_counts = label_onehot.sum(dim=0, keepdim=True).transpose(0, 1) + self.eps
+        cluster_mus = label_sums / label_counts
 
-
-        labels = c1[:, 0]
+        label_vars = torch.matmul(label_onehot.transpose(0, 1), sigma2_flat)
+        cluster_sigma2s = label_vars / label_counts
         
-        unique_labels, _ = np.unique(labels, axis=0, return_inverse=True)
-        rate_ = 1 - (self.source_rate)
+        mu_diff_squared = (mu_flat.unsqueeze(1) - cluster_mus.unsqueeze(0))**2
+        weighted_mu_diff_squared = torch.einsum('blc,bl->lc', mu_diff_squared, label_onehot) / label_counts
+        # mu_diff_squared = (mu_flat.unsqueeze(1) - cluster_mus.unsqueeze(0)) ** 2
+        # weighted_mu_diff_squared = torch.matmul(label_onehot.transpose(0, 1), mu_diff_squared) / label_counts
+        cluster_sigma2s += weighted_mu_diff_squared
+        
+        # 计算用于标准化的均值和方差
+        cluster_mus_expanded = torch.matmul(label_onehot, cluster_mus).view(b, c, 1, 1)
+        cluster_sigma2s_expanded = torch.matmul(label_onehot, cluster_sigma2s).view(b, c, 1, 1)
 
-        x_new = x.clone() 
+        # 扩展 mu_b 和 sigma2_b
+        mu_b_expanded = mu_b.expand(b, -1, -1, -1)
+        sigma2_b_expanded = sigma2_b.expand(b, -1, -1, -1)
 
-        for label in unique_labels:
-            cluster_indices = np.where(labels == label)
-            cluster_data = x[cluster_indices]
+        # 标准化
+        x = (x - (rate_ * cluster_mus_expanded + source_rate * mu_b_expanded)) * torch.rsqrt(
+            (rate_ * cluster_sigma2s_expanded + source_rate * sigma2_b_expanded) + self.eps
+        )
 
-            cluster_sigma2, cluster_mu = torch.var_mean(
-                x[cluster_indices], dim=[0, 2, 3], keepdim=True, unbiased=True
-            )
+        return x
+    # def Lisc(self, x, mu_b, sigma2_b, source_rate):
+    #     b, c, _, _ = x.size()
+    #     rate_ = 1 - source_rate
 
-            sigma2_s_expanded = sigma2_s.repeat(cluster_data.shape[0], 1, 1, 1)
-            mu_s_expanded = mu_s.repeat(cluster_data.shape[0], 1, 1, 1)
+    #     # 计算均值和方差
+    #     sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)
+    #     mu_flat = mu.view(b, c)
+    #     sigma2_flat = sigma2.view(b, c)
 
-            x_new[cluster_indices] = (
-                x[cluster_indices]
-                - (rate_ * cluster_mu + self.source_rate * mu_s_expanded)
-            ) * torch.rsqrt(
-                (rate_ * cluster_sigma2 + self.source_rate * sigma2_s_expanded) + self.eps
-            )
+    #     # 获取聚类标签
+    #     data = mu_flat
+    #     c1, _ = FINCH(data)
+    #     unique_labels, inverse_indices = torch.unique(c1, dim=0, return_inverse=True)
 
-            del sigma2_s_expanded, mu_s_expanded, cluster_sigma2, cluster_mu, cluster_data
-        return x_new  
-    def _softshrink(self, x, lbd):
-        x_p = F.relu(x - lbd, inplace=True)
-        x_n = F.relu(-(x + lbd), inplace=True)
-        y = x_p - x_n
-        return y
+    #     # 将标签转换为one-hot编码
+    #     label_onehot = nn.functional.one_hot(inverse_indices, num_classes=len(unique_labels)).float().to(x.device)
+    #     # # 聚类均值和方差
+    #     # label_sums = torch.einsum('bc,bl->lc', mu_flat, label_onehot)
+    #     # label_counts = torch.einsum('bl->l', label_onehot).unsqueeze(1) + self.eps
+    #     # cluster_mus = label_sums / label_counts
+
+    #     # label_vars = torch.einsum('bc,bl->lc', sigma2_flat, label_onehot)
+    #     # cluster_sigma2s = label_vars / label_counts
+        
+    #     # mu_diff_squared = (mu_flat.unsqueeze(1) - cluster_mus.unsqueeze(0))**2
+    #     # weighted_mu_diff_squared = torch.einsum('blc,bl->lc', mu_diff_squared, label_onehot) / label_counts
+    #     # cluster_sigma2s += weighted_mu_diff_squared.squeeze(1)
+    #         # 聚类均值和方差
+    #     label_sums = torch.matmul(label_onehot.transpose(0, 1), mu_flat)
+    #     label_counts = label_onehot.sum(dim=0, keepdim=True).transpose(0, 1) + self.eps
+    #     cluster_mus = label_sums / label_counts
+
+    #     label_vars = torch.matmul(label_onehot.transpose(0, 1), sigma2_flat)
+    #     cluster_sigma2s = label_vars / label_counts
+
+    #     mu_diff_squared = (mu_flat.unsqueeze(1) - cluster_mus.unsqueeze(0))**2
+    #     weighted_mu_diff_squared = torch.einsum('blc,bl->lc', mu_diff_squared, label_onehot) / label_counts
+    #     # mu_diff_squared = (mu_flat.unsqueeze(1) - cluster_mus.unsqueeze(0)) ** 2
+    #     # weighted_mu_diff_squared = torch.matmul(label_onehot.transpose(0, 1), mu_diff_squared) / label_counts
+    #     cluster_sigma2s += weighted_mu_diff_squared
+    #     # 计算用于标准化的均值和方差
+    #     cluster_mus_expanded = torch.matmul(label_onehot, cluster_mus).view(b, c, 1, 1)
+    #     cluster_sigma2s_expanded = torch.matmul(label_onehot, cluster_sigma2s).view(b, c, 1, 1)
+
+    #     # 扩展 mu_b 和 sigma2_b
+    #     mu_b_expanded = mu_b.expand(b, -1, -1, -1)
+    #     sigma2_b_expanded = sigma2_b.expand(b, -1, -1, -1)
+
+    #     # 标准化
+    #     x = (x - (rate_ * cluster_mus_expanded + source_rate * mu_b_expanded)) * torch.rsqrt(
+    #         (rate_ * cluster_sigma2s_expanded + source_rate * sigma2_b_expanded) + self.eps
+    #     )
+
+    #     return x
+    # def Lisc(self, x, mu_b, sigma2_b, source_rate):
+    #     b, c, _, _ = x.size()
+    #     rate_ = 1 - source_rate
+        
+    #     # 计算均值和方差
+    #     sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)
+        
+    #     # 展开 mu 和 sigma2
+    #     mu_flat = mu.view(b, c)
+    #     sigma2_flat = sigma2.view(b, c)
+        
+    #     # 获取聚类标签
+    #     data = mu_flat
+    #     c1, _ = FINCH(data)
+    #     unique_labels, inverse_indices = torch.unique(c1, dim=0, return_inverse=True)
+        
+    #     # 将标签转换为one-hot编码
+    #     label_onehot = nn.functional.one_hot(inverse_indices, num_classes=len(unique_labels)).float().to(x.device)
+
+    #     # 聚类均值和方差
+    #     label_sums = torch.einsum('bc,bl->lc', mu_flat, label_onehot)
+    #     label_counts = torch.einsum('bl->l', label_onehot).unsqueeze(1) + self.eps
+    #     cluster_mus = label_sums / label_counts
+
+    #     label_vars = torch.einsum('bc,bl->lc', sigma2_flat, label_onehot)
+    #     cluster_sigma2s = label_vars / label_counts
+        
+    #     mu_diff_squared = (mu_flat.unsqueeze(1) - cluster_mus.unsqueeze(0))**2
+    #     weighted_mu_diff_squared = torch.einsum('blc,bl->lc', mu_diff_squared, label_onehot) / label_counts
+    #     cluster_sigma2s += weighted_mu_diff_squared
+
+    #     # 计算用于标准化的均值和方差
+    #     cluster_mus_expanded = torch.einsum("lc,bl->bc", cluster_mus, label_onehot).view(b, c, 1, 1)
+    #     cluster_sigma2s_expanded = torch.einsum("lc,bl->bc", cluster_sigma2s, label_onehot).view(b, c, 1, 1)
+        
+    #     # 扩展 mu_b 和 sigma2_b
+    #     mu_b_expanded = mu_b.repeat(b, 1, 1, 1)
+    #     sigma2_b_expanded = sigma2_b.repeat(b, 1, 1, 1)
+        
+    #     # 标准化
+    #     x = (x - (rate_ * cluster_mus_expanded + source_rate * mu_b_expanded)) * torch.rsqrt(
+    #         (rate_ * cluster_sigma2s_expanded + source_rate * sigma2_b_expanded) + self.eps
+    #     )
+        
+    #     return x    
+    # def Lisc(self, x, mu_b, sigma2_b, source_rate):
+    #     b, c, _, _ = x.size()
+    #     sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)
+    #     data = mu.view(b, c)
+    #     c1, _ = FINCH(data)
+    #     unique_labels, inverse_indices = torch.unique(c1, dim=0, return_inverse=True)
+    #     rate_ = 1 - source_rate
+
+    #     sigma2_b_expanded = sigma2_b.repeat(b, 1, 1, 1)
+    #     mu_b_expanded = mu_b.repeat(b, 1, 1, 1)
+    #     label_onehot = nn.functional.one_hot(
+    #         inverse_indices, num_classes=len(unique_labels)
+    #     ).float().to(x.device)
+
+    #     mu = mu.view(b, c)
+    #     sigma2 = sigma2.view(b, c)
+
+    #     cluster_mus = torch.einsum('bc,bl->lc', mu, label_onehot) /( torch.einsum('bl->l', label_onehot).unsqueeze(1)+self.eps)
+    #     weighted_sigma2 = torch.einsum('bc,bl->lc', sigma2, label_onehot) / (torch.einsum('bl->l', label_onehot).unsqueeze(1)+self.eps)
+    #     mu_diff_squared = (mu.unsqueeze(1) - cluster_mus.unsqueeze(0))**2  # (batch_size, labelsize, channels)
+    #     weighted_mu_diff_squared = torch.einsum('blc,bl->lc', mu_diff_squared, label_onehot) / (torch.einsum('bl->l', label_onehot).unsqueeze(1)+self.eps)
+    #     cluster_sigma2s = weighted_sigma2 + weighted_mu_diff_squared
+        
+    #     cluster_mus_2 = torch.einsum("lc,bl->bc", cluster_mus, label_onehot).view(b, c, 1, 1)
+    #     cluster_sigma2s_2 = torch.einsum("lc,bl->bc", cluster_sigma2s, label_onehot).view(b, c, 1, 1)
+
+    #     x = (x - (rate_ * cluster_mus_2 + source_rate * mu_b_expanded)) * torch.rsqrt(
+    #         (rate_ * cluster_sigma2s_2 + source_rate * sigma2_b_expanded) + self.eps
+    #     )
+    #     return x
     def forward(self, x):
-        b,c,h,w = x.size()
-        if (
-            self._bn.track_running_stats == False
-            and self._bn.running_mean is None
-            and self._bn.running_var is None
-        ):  # use batch stats
-                sigma2_b, mu_b = torch.var_mean(
-                    x, dim=[0, 2, 3], keepdim=True, unbiased=True
-                )
-        else:
-                mu_s = self._bn.running_mean.view(1, c, 1, 1)
-                sigma2_s = self._bn.running_var.view(1, c, 1, 1)
-        x_n = self.Lisc(x, mu_s, sigma2_s)
+        b, c, h, w = x.size()
+        # if self.training:
+        #     _ = self._bn(x)
+        #     sigma2_s, mu_s = torch.var_mean(
+        #         x, dim=[0, 2, 3], keepdim=True, unbiased=True
+        #     )
+        # else:
+        # if (
+        #     self._bn.track_running_stats == False
+        #     and self._bn.running_mean is None
+        #     and self._bn.running_var is None
+        # ):  # use batch stats
+        #     sigma2_b, mu_b = torch.var_mean(
+        #         x, dim=[0, 2, 3], keepdim=True, unbiased=True
+        #     )
+        # else:
+        mu_s = self._bn.running_mean.view(1, c, 1, 1)
+        sigma2_s = self._bn.running_var.view(1, c, 1, 1)
 
-        if self.affine:
-            weight = self._bn.weight.view(c, 1, 1)
-            bias = self._bn.bias.view(c, 1, 1)
-            x_n = x_n * weight + bias
-            
+        x_n = self.Lisc(x, mu_s, sigma2_s, self.source_rate)  # + self.eps
+        weight = self._bn.weight.view(c, 1, 1)
+        bias = self._bn.bias.view(c, 1, 1)
+        x_n = x_n * weight + bias
         return x_n
-    
-    def calculate_similarity(self, x, running_mean, running_var):
-        b,c,h,w = x.size()
-        source_mu = running_mean.reshape(1, c, 1, 1)
-        source_sigma2 = running_var.reshape(1, c, 1, 1)
-        
-        sigma2_b, mu_b = torch.var_mean(x, dim=[0, 2, 3], keepdim=True)
-        _, mu_i = torch.var_mean(x, dim=[2, 3], keepdim=True)
-        mu_b = mu_b.repeat(b, 1, 1, 1)
-        sigma2_b = sigma2_b.repeat(b, 1, 1, 1)
-        source_mu = source_mu.repeat(b,1,1,1)
-        source_sigma2 = source_sigma2.repeat(b,1,1,1)
-        dsi = mu_i 
-        # dti = mu_b - x 
-        dst = mu_b 
-        if torch.isnan(dsi).any():
-            print("[Warning] NaNs found in dsi. Handling NaNs...")
-        if torch.isnan(dst).any():
-            print("[Warning] NaNs found in dst. Handling NaNs...")
-        cos_similarity = nn.CosineSimilarity(dim=1, eps=1e-8)
-        similarity = cos_similarity(x, mu_b)
-        if torch.isnan(similarity).any():
-            print("[Warning] NaNs found in similarity. Handling NaNs...")
-        similarity = torch.clamp(similarity, -1.0, 1.0)
-        curve_batch = torch.arccos(similarity)
-        if torch.isnan(curve_batch).any():
-            print("[Warning] NaNs found in curve_batch. Handling NaNs...")
-        return similarity.cpu().detach().numpy(),curve_batch.cpu().detach().numpy()

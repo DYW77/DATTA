@@ -10,6 +10,7 @@ from .deyo import DEYO
 from .dyn import DYN
 from .iabn import IABN
 from .vida import ViDA
+from .tbn_adapt import TBNAdapt
 def get_model_adaptation_method(adaptation_name):
     return {
         "no_adaptation": NoAdaptation,
@@ -23,4 +24,5 @@ def get_model_adaptation_method(adaptation_name):
         "dyn":DYN,
         "iabn":IABN,
         "vida":ViDA,
+        "tbn_adapt":TBNAdapt,
     }[adaptation_name]

@@ -31,6 +31,14 @@ dataset_defaults = {
         },
         "img_shape": (224, 224, 3),
     },
+    "domainnet": {
+        "statistics": {
+            "mean": (0.485, 0.456, 0.406),
+            "std": (0.229, 0.224, 0.225),
+            "n_classes": 126,
+        },
+        "img_shape": (224, 224, 3),
+    },
     "pacs": {
         "statistics": {
             "mean": (0.485, 0.456, 0.406),

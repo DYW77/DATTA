@@ -9,6 +9,9 @@ algorithm_defaults = {
     "no_adaptation": {"model_selection_method": "last_iterate"},
     #
     "bn_adapt": {
+        "adapt_prior": 0.6,  # the ratio of training set statistics.
+    },
+    "tbn_adapt": {
         "adapt_prior": 0,  # the ratio of training set statistics.
     },
     "dyn":{
@@ -117,7 +120,7 @@ algorithm_defaults = {
         "reweight_ent": 1, # reweight entropy loss
         "reweight_plpd": 1, # reweight plpd loss
     },
-    "tent_iabn":{
+    "iabn":{
         "optimizer": "SGD",  # use Adam in the paper
         "memory_size": 64,
         "update_every_x": 64,  # This param may change in our codebase.

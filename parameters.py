@@ -22,7 +22,9 @@ def get_args():
     parser.add_argument("--data_path", default="/home/wdy/Exp/datasets", type=str)
     parser.add_argument(
         "--ckpt_path",
-        default="/home/wdy/Exp/model/rn50_bn_cifar10.pth",
+        default=
+            # "/home/wdy/Exp/model/resnet50_bn_ssh_waterbirds.pth",
+            "/home/wdy/Exp/model/rn50_bn_cifar10.pth",
         type=str,
     )
     parser.add_argument("--seed", default=2022, type=int)
@@ -34,7 +36,7 @@ def get_args():
     parser.add_argument("--group_norm_num_groups", default=None, type=int)
     parser.add_argument(
         "--model_adaptation_method",
-        default="no_adaptation",
+        default="dyn",
         choices=[
             "no_adaptation",
             "tent",
@@ -87,20 +89,20 @@ def get_args():
     # parser.add_argument("--src_data_name", default="cifar10", type=str)
     # parser.add_argument(
     #     "--data_names", default=
-    #                             "cifar10_c_deterministic-gaussian_noise-5;"
-    #                             "cifar10_c_deterministic-shot_noise-5;"
-    #                             "cifar10_c_deterministic-impulse_noise-5;"
-    #                             "cifar10_c_deterministic-defocus_blur-5;"
-    #                             "cifar10_c_deterministic-glass_blur-5;"
-    #                             "cifar10_c_deterministic-motion_blur-5;"
-    #                             "cifar10_c_deterministic-zoom_blur-5;"
-    #                             "cifar10_c_deterministic-snow-5;"
-    #                             "cifar10_c_deterministic-frost-5;"
-    #                             "cifar10_c_deterministic-fog-5;"
-    #                             "cifar10_c_deterministic-brightness-5;"
-    #                             "cifar10_c_deterministic-contrast-5;"
-    #                             "cifar10_c_deterministic-elastic_transform-5;"
-    #                             "cifar10_c_deterministic-pixelate-5;"
+    #                             # "cifar10_c_deterministic-gaussian_noise-5;"
+    #                             # "cifar10_c_deterministic-shot_noise-5;"
+    #                             # "cifar10_c_deterministic-impulse_noise-5;"
+    #                             # "cifar10_c_deterministic-defocus_blur-5;"
+    #                             # "cifar10_c_deterministic-glass_blur-5;"
+    #                             # "cifar10_c_deterministic-motion_blur-5;"
+    #                             # "cifar10_c_deterministic-zoom_blur-5;"
+    #                             # "cifar10_c_deterministic-snow-5;"
+    #                             # "cifar10_c_deterministic-frost-5;"
+    #                             # "cifar10_c_deterministic-fog-5;"
+    #                             # "cifar10_c_deterministic-brightness-5;"
+    #                             # "cifar10_c_deterministic-contrast-5;"
+    #                             # "cifar10_c_deterministic-elastic_transform-5;"
+    #                             # "cifar10_c_deterministic-pixelate-5;"
     #                             "cifar10_c_deterministic-jpeg_compression-5"
     #     , type=str
     # )
@@ -163,6 +165,7 @@ def get_args():
     parser.add_argument("--src_data_name", default="imagenet", type=str)
     parser.add_argument(
         "--data_names", default=
+        # "imagenet_c_deterministic-gaussian_noise-5"
                                 "imagenet_c_deterministic-gaussian_noise-5;"
                                 "imagenet_c_deterministic-shot_noise-5;"
                                 "imagenet_c_deterministic-impulse_noise-5;"
@@ -180,6 +183,53 @@ def get_args():
                                 "imagenet_c_deterministic-jpeg_compression-5"
         , type=str
     )
+    """
+    # for waterbird
+    # """
+    # parser.add_argument(
+    #     "--base_data_name",
+    #     default="waterbirds",
+    #     choices=[
+    #         "cifar10",
+    #         "cifar100",
+    #         "imagenet",
+    #         "officehome",
+    #         "pacs",
+    #         "coloredmnist",
+    #         "waterbirds",
+
+    #     ],
+    #     type=str,
+    # )
+    # parser.add_argument("--src_data_name", default="waterbirds", type=str)
+    # parser.add_argument(
+    #     "--data_names", default="waterbirds"
+    #     , type=str
+    # )
+    """
+    for waterbird
+    """
+    # parser.add_argument(
+    #     "--base_data_name",
+    #     default="terra_incognita",
+    #     choices=[
+    #         "cifar10",
+    #         "cifar100",
+    #         "imagenet",
+    #         "officehome",
+    #         "pacs",
+    #         "coloredmnist",
+    #         "waterbirds",
+
+    #     ],
+    #     type=str,
+    # )
+    # parser.add_argument("--src_data_name", default="terra_incognita", type=str)
+    # parser.add_argument(
+    #     "--data_names", default="location_38"
+    #     , type=str
+    # )
+
     parser.add_argument(
         "--data_wise",
         default="batch_wise",

@@ -35,6 +35,10 @@ data2shift = dict(
     coloredmnist="synthetic",
     waterbirds="natural",
     yearbook="natural",
+    domainnet_painting="natural",
+    domainnet_clipart="natural",
+    domainnet_sketch="natural",
+    domainnet_real="natural",
 )
 
 

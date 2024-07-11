@@ -30,6 +30,7 @@ class DEYO(BaseAdaptation):
             numClasses = 100
         elif self._meta_conf.base_data_name == "imagenet":
             numClasses = 1000
+        # elif 
 
         self._deyo_margin = math.log(numClasses) * 0.5
         self._filter_ent = self._meta_conf.filter_ent

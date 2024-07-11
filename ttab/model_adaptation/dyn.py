@@ -54,12 +54,13 @@ class DYN(BaseAdaptation):
         model.requires_grad_(False)
         for module in model.modules():
             if isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)):
-                module.requires_grad_(True)
-                module.track_running_stats = False
-            elif isinstance(module, (nn.LayerNorm, nn.GroupNorm)):
-                module.requires_grad_(True)
-            elif isinstance(module, (nn.Conv2d)):
                 module.weight.requires_grad_(True)
+                module.bias.requires_grad_(True)
+                module.track_running_stats = True
+            # elif isinstance(module, (nn.LayerNorm, nn.GroupNorm)):
+                # module.requires_grad_(True)
+            # elif isinstance(module, (nn.Conv2d)):
+                # module.weight.requires_grad_(True)
         return model.to(self._meta_conf.device)
 
     def _initialize_trainable_parameters(self):
@@ -79,10 +80,10 @@ class DYN(BaseAdaptation):
                     if name_parameter in ["weight", "bias"]:
                         adapt_params.append(parameter)
                         adapt_param_names.append(f"{name_module}.{name_parameter}")
-        assert (
-            len(self._adapt_module_names) > 0
-        ), "TENT needs some adaptable model parameters."
-        print(adapt_param_names)
+        # assert (
+        #     len(self._adapt_module_names) > 0
+        # ), "TENT needs some adaptable model parameters."
+        # print(adapt_param_names)
         return adapt_params, adapt_param_names
     def one_adapt_step(
         self,
@@ -96,7 +97,8 @@ class DYN(BaseAdaptation):
 
         with timer("forward"):
             with fork_rng_with_seed(random_seed):
-                y_hat = model(batch._x)
+                with torch.no_grad():
+                    y_hat = model(batch._x)
 
             loss = utils.softmax_entropy(y_hat).mean(0)
             if self.fishers is not None:
@@ -113,12 +115,14 @@ class DYN(BaseAdaptation):
                 loss += ewc_loss
 
         with timer("backward"):
+            # loss.backward()
+            # optimizer.step()
             grads = dict(
                 (name, param.grad.clone().detach())
                 for name, param in model.named_parameters()
                 if param.grad is not None
             )
-
+            optimizer.zero_grad()
         return {
             "optimizer": copy.deepcopy(optimizer).state_dict(),
             "loss": loss.item(),

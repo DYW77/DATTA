@@ -463,6 +463,8 @@ class ConstructTestDataset(object):
             helper_fn = self._get_waterbirds_test_domain_datasets_helper
         elif "yearbook" in self.base_data_name:
             helper_fn = self._get_yearbook_test_domain_datasets_helper
+        elif "domainnet" in self.base_data_name:
+            helper_fn = self._get_domainnet_test_domain_datasets_helper
         else:
             raise NotImplementedError(
                 f"invalid base_data_name={self.base_data_name} for test domain."
@@ -618,7 +620,35 @@ class ConstructTestDataset(object):
             data_size=self.meta_conf.data_size,
         )
         return dataset
+    def _get_domainnet_test_domain_datasets_helper(
+        self, test_domain: TestDomain, data_augment: bool = False, split: str = "test"
+    ) -> PyTorchDataset:
+        if test_domain.shift_type != "natural":
+            raise NotImplementedError(
+                f"invalid shift type={test_domain.shift_type} for domainnet dataset."
+            )
 
+        _data_names = test_domain.data_name.split("_")  # e.g., "pacs_art"
+        domain_path = os.path.join(self.data_path, self.base_data_name, _data_names[1])
+        data_shift_class = functools.partial(
+            NaturalShiftedData,
+            data_name=test_domain.data_name,
+            new_data=ImageFolderDataset(root=domain_path),
+        )
+
+        src_domain_path = os.path.join(
+            self.data_path,
+            self.base_data_name,
+            self.meta_conf.src_data_name.split("_")[1],
+        )
+        dataset = PACSDataset(
+            root=src_domain_path,
+            device=self.device,
+            data_augment=data_augment,
+            data_shift_class=data_shift_class,
+            data_size=self.meta_conf.data_size,
+        )
+        return dataset
     def _get_pacs_test_domain_datasets_helper(
         self, test_domain: TestDomain, data_augment: bool = False, split: str = "test"
     ) -> PyTorchDataset:

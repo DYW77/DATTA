@@ -227,5 +227,27 @@ class Benchmark(object):
             tags={"split": "test", "type": "overall"},
             display=True,
         )
+
+        # 获取最大分配的内存和最大缓存的内存
+        max_memory_allocated = torch.cuda.max_memory_allocated(self._meta_conf.device)
+        max_memory_cached = torch.cuda.max_memory_reserved(self._meta_conf.device)
+
+        self._logger.log(f"The maximum allocated memory: {max_memory_allocated / 1024**3:.2f} GB")
+        self._logger.log(f"The maximum cached memory: {max_memory_cached / 1024**3:.2f} GB")
+        self._logger.log(self._timer.summary())
+        
+        torch.cuda.empty_cache()
+        # 重置最大内存分配和缓存的统计数据
+        torch.cuda.reset_max_memory_allocated(self._meta_conf.device)
+        torch.cuda.reset_max_memory_cached(self._meta_conf.device)
+        torch.cuda.reset_peak_memory_stats(self._meta_conf.device)
+        # torch.cuda.caching_allocator_delete(self._meta_conf.device)
+
+        max_memory_allocated = torch.cuda.max_memory_allocated(self._meta_conf.device)
+        max_memory_cached = torch.cuda.max_memory_reserved(self._meta_conf.device)
+        self._logger.log(f"The maximum allocated memory: {max_memory_allocated / 1024**3:.2f} GB")
+        self._logger.log(f"The maximum cached memory: {max_memory_cached / 1024**3:.2f} GB")
+        # torch.cuda.reset_max_memory_reserved(self._meta_conf.device)
+
         self._logger.save_json()
         return stats
