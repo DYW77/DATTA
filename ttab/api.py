@@ -181,22 +181,22 @@ class PyTorchDataset(object):
                 domain_count=domain.value_counts()
                 
                 
-                print('------------------------------------------------------------------------------------------\n')
-                print('\n------------------------------------batch data Preview------------------------------------')
-                print(f"batch {step}", [idx // type_num + 1 for idx in batch_indices])
-                print(f'batch target{batch_target}')
-                for value, count in domain_count.items():
-                    print(f"Domain{value} got {count} pictures")
+                # print('------------------------------------------------------------------------------------------\n')
+                # print('\n------------------------------------batch data Preview------------------------------------')
+                # print(f"batch {step}", [idx // type_num + 1 for idx in batch_indices])
+                # print(f'batch target{batch_target}')
+                # for value, count in domain_count.items():
+                #     print(f"Domain{value} got {count} pictures")
                 
                 batch_target = pd.Series(batch_target)
                 target_count=batch_target.value_counts()
-                for value, count in target_count.items():
-                    print(f"target{value} got {count} pictures")
+                # for value, count in target_count.items():
+                    # print(f"target{value} got {count} pictures")
                 combain = list(zip(domain,batch_target))
                 # grad.Combine = combain
-                print('\n',combain)
-                print('------------------------------------------------------------------------------------------\n')
-                print('\n-------------------------------------Runtime Preview--------------------------------------')
+                # print('\n',combain)
+                # print('------------------------------------------------------------------------------------------\n')
+                # print('\n-------------------------------------Runtime Preview--------------------------------------')
                 yield step, epoch_fractional, self._prepare_batch(batch, self._device)
                 
     def record_class_distribution(

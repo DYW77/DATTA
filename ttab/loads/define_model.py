@@ -7,6 +7,7 @@ import ttab.model_adaptation.utils as adaptation_utils
 from torch import nn
 from ttab.loads.models import WideResNet, cct_7_3x1_32, resnet
 from ttab.loads.models.resnet import ResNetCifar, ResNetImagenet, ResNetMNIST
+from ttab.loads.models.efficientvit import EfficientViT
 
 
 class SelfSupervisedModel(nn.Module):
@@ -108,7 +109,7 @@ class SelfSupervisedModel(nn.Module):
 
 def define_model(config):
     # use public models and checkpoints and not adjust the model arch.
-    if "imagenet" in config.data_names:
+    if "imagenet" in config.data_names and "efficientvit" not in config.model_name:
         if config.group_norm_num_groups is not None:
             assert config.model_name == "resnet50"
             return timm.create_model(config.model_name + "_gn", pretrained=True)
@@ -135,13 +136,30 @@ def define_model(config):
             group_norm_num_groups=config.group_norm_num_groups,
             grad_checkpoint=config.grad_checkpoint,
         )
-    elif "vit" in config.model_name:
-        init_model = timm.create_model(config.model_name, pretrained=False)
-        init_model.head = nn.Linear(
-            init_model.head.in_features, config.statistics["n_classes"]
+    # elif "vit" in config.model_name:
+    #     init_model = timm.create_model(config.model_name, pretrained=False)
+    #     init_model.head = nn.Linear(
+    #         init_model.head.in_features, config.statistics["n_classes"]
+    #     )
+    #     if config.grad_checkpoint:
+    #         init_model.set_grad_checkpointing()
+    elif "efficientvit" in config.model_name:
+        # Define the EfficientViT model
+        init_model = EfficientViT(
+            img_size=224,
+            patch_size=16,
+            in_chans=3,
+            num_classes=config.statistics["n_classes"],
+            stages=['s', 's', 's'],
+            embed_dim=[192, 288, 384],
+            key_dim=[16, 16, 16],
+            depth=[1, 3, 4],
+            num_heads=[3, 3, 4],
+            window_size=[7, 7, 7],
+            kernels=[7, 5, 3, 3],
+            down_ops=config.down_ops if hasattr(config, "down_ops") else [['subsample', 2], ['subsample', 2], ['']],
+            distillation=config.distillation if hasattr(config, "distillation") else False,
         )
-        if config.grad_checkpoint:
-            init_model.set_grad_checkpointing()
     elif "cct" in config.model_name:
         return cct_7_3x1_32(pretrained=False)  # not support TTT yet.
     else:
@@ -173,9 +191,10 @@ def load_pretrained_model(config, model):
                 iabn_flag = True
         if not iabn_flag:
             return
-
-    if "imagenet" in config.data_names:
-        return
+        
+    if "vit" not in config.model_name:
+        if "imagenet" in config.data_names:
+            return
 
     # load parameters
     if isinstance(model, SelfSupervisedModel):

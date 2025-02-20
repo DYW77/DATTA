@@ -7,7 +7,7 @@ __pycache__/
 *.so
 *_Collect.py
 *_Collect_*.py
-standard_test*.py
+# standard_test*.py
 *iabn.py
 # Distribution / packaging
 .Python

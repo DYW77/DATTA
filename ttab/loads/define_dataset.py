@@ -390,6 +390,7 @@ class ConstructTestDataset(object):
         self.device = self.meta_conf.device
         self.input_size = (
             int(self.meta_conf.model_name.split("_")[-1])
+            # 224
             if "vit" in self.meta_conf.model_name
             else 32
         )

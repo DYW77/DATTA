@@ -46,7 +46,7 @@ class NOTE(BaseAdaptation):
         Recursively convert all BatchNorm to InstanceAwareBatchNorm.
         """
         module_output = module
-        if isinstance(module, (nn.BatchNorm2d, nn.BatchNorm1d)):
+        if isinstance(module, (nn.BatchNorm2d)):#, nn.BatchNorm1d
             IABN = (
                 adaptation_utils.InstanceAwareBatchNorm2d
                 if isinstance(module, nn.BatchNorm2d)

@@ -32,7 +32,7 @@ class ViDA(BaseAdaptation):
         # disable grad, to (re-)enable only what specified adaptation method updates
         model.requires_grad_(False)
         for m in model.modules():
-            if isinstance(m, nn.BatchNorm2d):
+            if isinstance(m, (nn.BatchNorm2d, nn.BatchNorm1d)):
                 m.requires_grad_(True)
                 # bn module always uses batch statistics, in both training and eval modes
                 m.track_running_stats = False
@@ -88,7 +88,7 @@ class ViDA(BaseAdaptation):
             self._oracle_model_selection = False
 
         self._model = self._initialize_model(model=copy.deepcopy(self._base_model))
-        print(self._model)
+        # print(self._model)
         self._base_model = copy.deepcopy(self._model)  # update base model
         # params, names = self._initialize_trainable_parameters()
         vida_params, vida_name = inject_trainable_vida(
@@ -96,7 +96,7 @@ class ViDA(BaseAdaptation):
             self._meta_conf.vida_rank1,
             self._meta_conf.vida_rank2
         )
-        print(self._model)
+        # print(self._model)
         model_param, vida_param = self.collect_params(self._model)
         self._model.to(self._meta_conf.device)
         # self._optimizer = self._initialize_optimizer(params)
@@ -108,7 +108,10 @@ class ViDA(BaseAdaptation):
         self._auxiliary_data_cls = define_dataset.ConstructAuxiliaryDataset(
             config=self._meta_conf
         )
-        self.transform = self.get_aug_transforms(img_shape=self._meta_conf.img_shape)
+        if self._meta_conf.model_name == "efficientvit_224": 
+            self.transform = self.get_aug_transforms(img_shape=(224, 224, 3))
+        else:
+            self.transform = self.get_aug_transforms(img_shape=self._meta_conf.img_shape)
         # compute fisher regularizer
         self.fishers = None
         self.ewc_optimizer = torch.optim.SGD(model_param, 0.001)
@@ -249,6 +252,9 @@ class ViDA(BaseAdaptation):
             # Augmentation-averaged Prediction
             outputs_emas = []
             for i in range(self._meta_conf.aug_size):
+                
+                # print("[info] batch._x size:", batch._x.size())  # or batch._x.shape
+                # print("[info] transform batch._x size:", self.transform(batch._x).size())
                 outputs_ = self.model_ema(self.transform(batch._x)).detach()
                 outputs_emas.append(outputs_)
                 

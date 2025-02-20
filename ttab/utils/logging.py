@@ -189,3 +189,22 @@ class CSVBatchLogger:
 
     def close(self):
         self.file.close()
+        
+class CSVLogger:
+    def __init__(self, csv_path, mode="w"):
+        self.path = csv_path
+        os.makedirs(os.path.dirname(csv_path), exist_ok=True)
+        self.file = open(csv_path, mode)
+        self.writer = csv.DictWriter(self.file, fieldnames=["epoch","yhat","y","accuracy","similarity","accuracy","loss","domain_indices","weight","bias","peak1","peak2","valley"])
+        # self.writer = csv.DictWriter(self.file, fieldnames=["epoch","yhat","y","accuracy","similarity","accuracy","grads","loss","domain_indices"])
+        if mode == "w":
+            self.writer.writeheader()
+
+    def log(self, stats):
+        self.writer.writerow(stats)
+
+    def flush(self):
+        self.file.flush()
+
+    def close(self):
+        self.file.close()

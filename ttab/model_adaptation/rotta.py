@@ -37,7 +37,11 @@ class Rotta(BaseAdaptation):
             lambda_u=self._meta_conf.lambda_u,
         )
         self.model_ema = self.build_ema(self._model)
-        self.transform = self.get_tta_transforms(self._meta_conf)
+        if self._meta_conf.model_name == "efficientvit_224": 
+            self.transform = self.get_tta_transforms(img_shape=(224, 224, 3))
+        else:
+            self.transform = self.get_tta_transforms(img_shape=self._meta_conf.img_shape)
+        # self.transform = self.get_tta_transforms(self._meta_conf)
         self.nu = self._meta_conf.nu
         self.update_frequency = self._meta_conf.update_frequency
         self.current_instance = 0
@@ -138,12 +142,14 @@ class Rotta(BaseAdaptation):
         # get memory data
         sup_data, ages = self.mem.get_memory()
         l_sup = None
+        device = next(model.parameters()).device
         if len(sup_data) > 0:
             sup_data = torch.stack(sup_data)
-            strong_sup_aug = self.transform(sup_data)
-            ema_sup_out = self.model_ema(sup_data)
+            
+            strong_sup_aug = self.transform(sup_data).to(device)
+            ema_sup_out = self.model_ema(sup_data).to(device)
             stu_sup_out = model(strong_sup_aug)
-            instance_weight = self.timeliness_reweighting(ages)
+            instance_weight = self.timeliness_reweighting(ages).to(device)
             l_sup = (self.softmax_entropy(stu_sup_out, ema_sup_out) * instance_weight).mean()
 
         l = l_sup
@@ -272,8 +278,8 @@ class Rotta(BaseAdaptation):
         return params, names
     
     @staticmethod
-    def get_tta_transforms(cfg, gaussian_std: float = 0.005, soft=False):
-        img_shape = (*cfg.img_shape, 3)
+    def get_tta_transforms(img_shape: tuple, gaussian_std: float = 0.005, soft=False):
+        # img_shape = (*cfg.img_shape, 3)
         n_pixels = img_shape[0]
 
         clip_min, clip_max = 0.0, 1.0

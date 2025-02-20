@@ -3,7 +3,10 @@ import copy
 import os
 import time
 from typing import Dict, List, Type, Union
-
+import numpy as np
+import GPUtil
+import psutil
+from threading import Thread
 import torch
 import ttab.scenarios as scenarios
 import ttab.utils.auxiliary as auxiliary
@@ -38,6 +41,8 @@ class Benchmark(object):
         # init.
         self._safety_check()
         self._init_benchmark()
+        self._memory_monitor = MemoryMonitor()
+        self._memory_monitor.start()
 
     def _safety_check(self) -> None:
         assert hasattr(self._meta_conf, "seed")
@@ -128,7 +133,28 @@ class Benchmark(object):
         previous_batches: List[Batch],
         display_info: bool = True,
     ):
+        # 记录并打印显卡信息
+        def print_gpu_info():
+            if torch.cuda.is_available():
+                # 获取当前 GPU 的 ID (通常是 0)
+                gpu_id = torch.cuda.current_device()
+                # 打印显存使用情况
+                print(f"GPU {gpu_id} - Allocated: {torch.cuda.memory_allocated(gpu_id) / (1024 ** 2):.2f} MB")
+                print(f"GPU {gpu_id} - Reserved: {torch.cuda.memory_reserved(gpu_id) / (1024 ** 2):.2f} MB")
+                print(f"GPU {gpu_id} - Max Reserved: {torch.cuda.max_memory_reserved(gpu_id) / (1024 ** 2):.2f} MB")
+
+                # 使用 GPUtil 获取更详细的信息，包括总容量和剩余容量
+                gpus = GPUtil.getGPUs()
+                for gpu in gpus:
+                    print(f"GPU {gpu.id}: {gpu.name}")
+                    print(f"  Total Memory: {gpu.memoryTotal} MB")
+                    print(f"  Free Memory: {gpu.memoryFree} MB")
+                    print(f"  Used Memory: {gpu.memoryUsed} MB")
+            else:
+                print("CUDA is not available. No GPU found.")
+
         with self._timer("adapt_and_eval", step=step, epoch=epoch):
+
             self._model_adaptation_cls.adapt_and_eval(
                 episodic=self._scenario.test_case.episodic,
                 metrics=self._metrics,
@@ -138,6 +164,8 @@ class Benchmark(object):
                 logger=self._logger,
                 timer=self._timer,
             )
+        # 在适应和评估后打印 GPU 使用情况
+        # print_gpu_info()
 
         with self._timer("logging", step=step, epoch=epoch):
             self._logger.log_metric(
@@ -152,8 +180,12 @@ class Benchmark(object):
                 display=True and display_info,
             )
 
-        with self._timer("data_swap", step=step, epoch=epoch):
-            previous_batches.append(batch.to(device="cpu"))
+        # 在日志记录后再次打印 GPU 使用情况
+        # print_gpu_info()
+
+        # with self._timer("data_swap", step=step, epoch=epoch):
+        #     previous_batches.append(batch.to(device="cpu"))
+        
         return previous_batches
 
     def eval(self) -> Dict:
@@ -187,7 +219,6 @@ class Benchmark(object):
                 self._model_adaptation_cls.compute_fishers(
                     scenario=self._scenario, data_size=self._meta_conf.fisher_size
                 )
-
             for step, epoch, batch in self._test_loader.iterator(
                 batch_size=self._batch_size,  # apply the batch-wise or sample-wise setting.
                 shuffle=False,  # we will apply shuffle operation in preparing dataset.
@@ -200,13 +231,19 @@ class Benchmark(object):
                 drop_last=False,
                 data_name=self._meta_conf.base_data_name
             ):
-                previous_batches = self._online_adapt_step(
-                    step=step,
-                    epoch=epoch,
-                    batch=batch,
-                    previous_batches=previous_batches,
-                )
+                # if step < 2:
+                    previous_batches = self._online_adapt_step(
+                        step=step,
+                        epoch=epoch,
+                        batch=batch,
+                        previous_batches=previous_batches,
+                    )
 
+                    # if step == 100:
+                    #     break
+        # wtf_stats = np.array(self._model_adaptation_cls.stats_list)
+        # print(f'Saving /home/wdy/DYN/logs/stats.npy')
+        # np.save(f'/home/wdy/DYN/logs/stats.npy', wtf_stats)
         stats = self._metrics.tracker()
         # group-wise stats
         if self._meta_conf.base_data_name in ["waterbirds"]:
@@ -227,8 +264,13 @@ class Benchmark(object):
             tags={"split": "test", "type": "overall"},
             display=True,
         )
+        # 停止监控
+        self._memory_monitor.stop()
 
-        # 获取最大分配的内存和最大缓存的内存
+        # 获取最大内存使用
+        max_memory_usage = self._memory_monitor.get_max_memory_usage()
+        log_cpu_memory_usage(self._logger, max_memory_usage)        # 获取最大分配的内存和最大缓存的内存
+        
         max_memory_allocated = torch.cuda.max_memory_allocated(self._meta_conf.device)
         max_memory_cached = torch.cuda.max_memory_reserved(self._meta_conf.device)
 
@@ -251,3 +293,30 @@ class Benchmark(object):
 
         self._logger.save_json()
         return stats
+
+class MemoryMonitor:
+    def __init__(self):
+        self.max_memory_usage = 0
+        self.running = False
+
+    def start(self):
+        self.running = True
+        self.thread = Thread(target=self._monitor)
+        self.thread.start()
+
+    def _monitor(self):
+        process = psutil.Process()
+        while self.running:
+            memory_info = process.memory_info().rss
+            self.max_memory_usage = max(self.max_memory_usage, memory_info)
+            time.sleep(0.1)  # 每0.1秒检查一次
+
+    def stop(self):
+        self.running = False
+        self.thread.join()
+
+    def get_max_memory_usage(self):
+        return self.max_memory_usage / 1024**3  # 转换为GB
+    
+def log_cpu_memory_usage(logger, max_memory_usage):
+    logger.log(f"Maximum CPU memory usage during algorithm: {max_memory_usage:.2f} GB")

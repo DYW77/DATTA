@@ -11,7 +11,7 @@ from ttab.model_selection import get_model_selection_method
 def main(init_config):
     # Required auguments.
     config, scenario = configs_utils.config_hparams(config=init_config)
-
+    print("[scenario]",scenario)
     test_data_cls = define_dataset.ConstructTestDataset(config=config)
     test_loader = test_data_cls.construct_test_loader(scenario=scenario)
 

@@ -1,24 +1,19 @@
-# Discover Your Neighbors(DYN): Advanced Stable Test-Time Adaptation in Dynamic World
+# DATTA: Domain Diversity Aware Test-Time Adaptation for Dynamic Domain Shift Stream
 
 This repository is the official implementation of
 <br>
-**[Discover Your Neighbors: Advanced Stable Test-Time Adaptation in Dynamic World]()**
+**[DATTA: Domain Diversity Aware Test-Time Adaptation for Dynamic Domain Shift Stream]()**
 <br> 
 It's based on the  **[TTAB repository](https://github.com/LINs-lab/ttab)**, which is offically implementation of the paper **[On Pitfalls of Test-time Adaptation](https://arxiv.org/abs/2306.03536)** 
 
 
-> We introduce a novel test-time adaptation method DYN whose core innovation is identifying similar samples via instance normalization statistics and clustering into groups which provides consistent class-irrelevant representations.
-
 ## Overview
 Our repository contains:
 1. The implementation of **[ViDA](https://arxiv.org/abs/2306.04344)**, **[DeYO](https://arxiv.org/abs/2403.07366)**, and **our method** on TTAB
-2. The code introducing new scenarios, including random and shuffle.
-> - Random indicates that the input samples in each batch are randomly switched between multiple different distributions or maintained as i.i.d. 
-> - Shuffle indicates that the input samples in each batch remain i.i.d., but batches containing samples from different distributions are mixed in intermittently.
+2. The code introducing new scenario.
 
 
 ## News
-- June 2024: We updated the implementation of our Test-time Adaptation method DYN(Discover Your Neighbors).
 
 ### Requirements
 The TTAB package depends on the following requirements:

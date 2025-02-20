@@ -51,7 +51,7 @@ class DEYO(BaseAdaptation):
         # disable grad, to (re-)enable only what specified adaptation method updates
         model.requires_grad_(False)
         for m in model.modules():
-            if isinstance(m, nn.BatchNorm2d):
+            if isinstance(m, (nn.BatchNorm2d,nn.BatchNorm1d)):
                 m.requires_grad_(True)
                 # bn module always uses batch statistics, in both training and eval modes
                 m.track_running_stats = False
@@ -76,7 +76,7 @@ class DEYO(BaseAdaptation):
 
         for name_module, module in self._model.named_modules():
             if isinstance(
-                module, (nn.BatchNorm2d, nn.LayerNorm, nn.GroupNorm)
+                module, (nn.BatchNorm2d,nn.BatchNorm1d, nn.LayerNorm, nn.GroupNorm)
             ):  # only bn is used in the paper.
                 self._adapt_module_names.append(name_module)
                 for name_parameter, parameter in module.named_parameters():
