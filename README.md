@@ -7,10 +7,18 @@ Chuyang Ye†, Dongyan Wei†, Zhendong Liu, Yuanyi Pang, Yixi Lin, Qinting Jian
 
 It's based on the  **[TTAB repository](https://github.com/LINs-lab/ttab)**, which is offically implementation of the paper **[On Pitfalls of Test-time Adaptation](https://arxiv.org/abs/2306.03536)**.
 
-> TL;DR: We propose Domain-Diversity Adaptive Test-Time Adaptation (DATTA), the first approach to handle TTA under dynamic domain shift streams. It is guided by a novel domain-diversity score. DATTA has three key components: 
-> - a domain diversity discriminator to recognize single- and multi-domain patterns, 
-> - domain-diversity adaptive batch normalization to combine source and test-time statistics,
-> - domain-diversity adaptive fine-tuning to resolve gradient conflicts.
+
+**Introduction**  
+
+Test-Time Adaptation (TTA) addresses domain shifts between training and testing data to maintain model robustness in real-world scenarios. However, existing TTA methods assume a static target domain (e.g., homogeneous single-domain data) at each moment, failing to handle **dynamic domain shift streams**—where data distributions unpredictably alternate between single-domain and multi-domain configurations. Such dynamics, common in applications like autonomous driving (e.g., abrupt shifts from clear daytime to rainy urban night scenes), cause performance degradation due to inaccurate batch normalization (BN) statistics and gradient conflicts during adaptation.  
+
+This paper introduces **DATTA**, the **first TTA framework** explicitly designed to address **dynamic domain shift streams**. Its key contributions are **three pioneering innovations**, **first proposed** to tackle evolving domain diversity in real-world data streams:  
+1. **Domain-Diversity Score**: **The first metric** for quantifying real-time domain transitions in **dynamic domain shift streams**, evaluating alignment between samples and batch distributions via BN statistics and feature maps. This capability, absent in prior static TTA methods, enables proactive adaptation to unpredictable domain mixtures.  
+2. **Domain-Diversity Adaptive BN (DABN)**: **The first normalization mechanism** tailored for **dynamic domain shifts**, dynamically blending source and test-time statistics based on diversity scores. DABN overcomes the instability of fixed BN strategies under rapid domain alternations.  
+3. **Domain-Diversity Adaptive Fine-Tuning (DAFT)**: **The first optimization strategy** designed for multi-domain mixtures in streaming data, selectively updating parameters to mitigate gradient conflicts while maintaining robustness to transient domains.  
+
+Experiments demonstrate DATTA’s superiority over state-of-the-art methods (by up to **13%**) under **dynamic domain shift streams**, validating its effectiveness in real-world scenarios with evolving domain diversity. 
+
 
 <table>
   <tr>
