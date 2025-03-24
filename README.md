@@ -14,8 +14,8 @@ It's based on the  **[TTAB repository](https://github.com/LINs-lab/ttab)**, whic
 
 <table>
   <tr>
-    <td><img src="/figs/overview_of_scenarios.png" width="100%"></td>
-    <td><img src="/figs/overview_of_method.png" width="100%"></td>
+    <td><img src="./figs/overview_of_scenarios.png" width="100%"></td>
+    <td><img src="./figs/overview_of_method.png" width="100%"></td>
   </tr>
 </table>
 
