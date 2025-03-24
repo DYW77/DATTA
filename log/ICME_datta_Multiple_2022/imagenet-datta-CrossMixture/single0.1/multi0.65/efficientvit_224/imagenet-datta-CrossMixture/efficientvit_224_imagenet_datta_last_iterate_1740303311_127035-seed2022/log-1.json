@@ -1,0 +1,6157 @@
+[
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:11",
+  "step": 1,
+  "epoch": 0.0017064846416382253,
+  "cross_entropy": 4.439473628997803,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.049806833267211914,
+  "event": "forward"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.0002815723419189453,
+  "event": "backward"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.00041294097900390625,
+  "event": "evaluate_adaptation_result"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.020963191986083984,
+  "event": "select_optimal_checkpoint"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.12905430793762207,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "timer",
+  "step": 2,
+  "epoch": 0.0034129692832764505,
+  "value": 0.13596367835998535,
+  "event": "adapt_and_eval"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:11",
+  "step": 2,
+  "epoch": 0.0034129692832764505,
+  "cross_entropy": 3.932748794555664,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 2,
+  "epoch": 0.0034129692832764505,
+  "value": 0.0003819465637207031,
+  "event": "logging"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.0002827644348144531,
+  "event": "backward"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.0003719329833984375,
+  "event": "evaluate_adaptation_result"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.020653963088989258,
+  "event": "select_optimal_checkpoint"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:11",
+  "step": 3,
+  "epoch": 0.005119453924914676,
+  "cross_entropy": 4.384222507476807,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 3,
+  "epoch": 0.005119453924914676,
+  "value": 0.00030493736267089844,
+  "event": "logging"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.020515918731689453,
+  "event": "select_optimal_checkpoint"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.12762737274169922,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:11",
+  "step": 4,
+  "epoch": 0.006825938566552901,
+  "cross_entropy": 4.00424861907959,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 4,
+  "epoch": 0.006825938566552901,
+  "value": 0.0003094673156738281,
+  "event": "logging"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.12778472900390625,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "timer",
+  "step": 5,
+  "epoch": 0.008532423208191127,
+  "value": 0.13456392288208008,
+  "event": "adapt_and_eval"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:12",
+  "step": 5,
+  "epoch": 0.008532423208191127,
+  "cross_entropy": 4.986376762390137,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.0002655982971191406,
+  "event": "backward"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.12735605239868164,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:12",
+  "step": 6,
+  "epoch": 0.010238907849829351,
+  "cross_entropy": 4.411328315734863,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.12732648849487305,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:12",
+  "step": 7,
+  "epoch": 0.011945392491467578,
+  "cross_entropy": 4.987263202667236,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 7,
+  "epoch": 0.011945392491467578,
+  "value": 0.00032401084899902344,
+  "event": "logging"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:12",
+  "step": 8,
+  "epoch": 0.013651877133105802,
+  "cross_entropy": 4.56781005859375,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:12",
+  "step": 9,
+  "epoch": 0.015358361774744027,
+  "cross_entropy": 4.288168430328369,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.05059552192687988,
+  "event": "forward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:12",
+  "step": 10,
+  "epoch": 0.017064846416382253,
+  "cross_entropy": 4.367363452911377,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:12",
+  "step": 11,
+  "epoch": 0.01877133105802048,
+  "cross_entropy": 4.704782962799072,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.05034208297729492,
+  "event": "forward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:13",
+  "step": 12,
+  "epoch": 0.020477815699658702,
+  "cross_entropy": 4.399468421936035,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:13",
+  "step": 13,
+  "epoch": 0.02218430034129693,
+  "cross_entropy": 4.359610080718994,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.1277017593383789,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:13",
+  "step": 14,
+  "epoch": 0.023890784982935155,
+  "cross_entropy": 4.620996475219727,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:13",
+  "step": 15,
+  "epoch": 0.025597269624573378,
+  "cross_entropy": 4.814566612243652,
+  "accuracy_top1": 12.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.05050063133239746,
+  "event": "forward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:13",
+  "step": 16,
+  "epoch": 0.027303754266211604,
+  "cross_entropy": 4.498373031616211,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:13",
+  "step": 17,
+  "epoch": 0.02901023890784983,
+  "cross_entropy": 4.290709495544434,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:13",
+  "step": 18,
+  "epoch": 0.030716723549488054,
+  "cross_entropy": 4.604649543762207,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:14",
+  "step": 19,
+  "epoch": 0.032423208191126277,
+  "cross_entropy": 4.314328670501709,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.1269817352294922,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:14",
+  "step": 20,
+  "epoch": 0.034129692832764506,
+  "cross_entropy": 4.356046199798584,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:14",
+  "step": 21,
+  "epoch": 0.03583617747440273,
+  "cross_entropy": 4.426974773406982,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:14",
+  "step": 22,
+  "epoch": 0.03754266211604096,
+  "cross_entropy": 4.495747089385986,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 22,
+  "epoch": 0.03754266211604096,
+  "value": 0.00010323524475097656,
+  "event": "logging"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:14",
+  "step": 23,
+  "epoch": 0.03924914675767918,
+  "cross_entropy": 4.211663722991943,
+  "accuracy_top1": 37.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:14",
+  "step": 24,
+  "epoch": 0.040955631399317405,
+  "cross_entropy": 4.389765739440918,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:15",
+  "step": 25,
+  "epoch": 0.042662116040955635,
+  "cross_entropy": 4.259979724884033,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.020328521728515625,
+  "event": "select_optimal_checkpoint"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:15",
+  "step": 26,
+  "epoch": 0.04436860068259386,
+  "cross_entropy": 4.869343280792236,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:15",
+  "step": 27,
+  "epoch": 0.04607508532423208,
+  "cross_entropy": 4.053730010986328,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:15",
+  "step": 28,
+  "epoch": 0.04778156996587031,
+  "cross_entropy": 5.021814823150635,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:15",
+  "step": 29,
+  "epoch": 0.04948805460750853,
+  "cross_entropy": 4.267270565032959,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:15",
+  "step": 30,
+  "epoch": 0.051194539249146756,
+  "cross_entropy": 4.712704658508301,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:15",
+  "step": 31,
+  "epoch": 0.052901023890784986,
+  "cross_entropy": 5.183730602264404,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:16",
+  "step": 32,
+  "epoch": 0.05460750853242321,
+  "cross_entropy": 4.995511054992676,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:16",
+  "step": 33,
+  "epoch": 0.05631399317406143,
+  "cross_entropy": 4.615068435668945,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 34,
+  "epoch": 0.05802047781569966,
+  "value": 0.13412213325500488,
+  "event": "adapt_and_eval"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:16",
+  "step": 34,
+  "epoch": 0.05802047781569966,
+  "cross_entropy": 4.496770858764648,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:16",
+  "step": 35,
+  "epoch": 0.059726962457337884,
+  "cross_entropy": 4.696674346923828,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:16",
+  "step": 36,
+  "epoch": 0.06143344709897611,
+  "cross_entropy": 4.276394367218018,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:16",
+  "step": 37,
+  "epoch": 0.06313993174061433,
+  "cross_entropy": 4.279816150665283,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:16",
+  "step": 38,
+  "epoch": 0.06484641638225255,
+  "cross_entropy": 4.779019832611084,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:17",
+  "step": 39,
+  "epoch": 0.06655290102389079,
+  "cross_entropy": 4.489742755889893,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:17",
+  "step": 40,
+  "epoch": 0.06825938566552901,
+  "cross_entropy": 4.6882243156433105,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:17",
+  "step": 41,
+  "epoch": 0.06996587030716724,
+  "cross_entropy": 3.9890971183776855,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:17",
+  "step": 42,
+  "epoch": 0.07167235494880546,
+  "cross_entropy": 4.60573673248291,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:17",
+  "step": 43,
+  "epoch": 0.07337883959044368,
+  "cross_entropy": 4.904865264892578,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:17",
+  "step": 44,
+  "epoch": 0.07508532423208192,
+  "cross_entropy": 4.0265631675720215,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:17",
+  "step": 45,
+  "epoch": 0.07679180887372014,
+  "cross_entropy": 5.087110996246338,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 46,
+  "epoch": 0.07849829351535836,
+  "cross_entropy": 4.30355167388916,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 47,
+  "epoch": 0.08020477815699659,
+  "cross_entropy": 4.6960296630859375,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 48,
+  "epoch": 0.08191126279863481,
+  "cross_entropy": 4.187944412231445,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 49,
+  "epoch": 0.08361774744027303,
+  "cross_entropy": 4.839004039764404,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 50,
+  "epoch": 0.08532423208191127,
+  "cross_entropy": 4.835561275482178,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 51,
+  "epoch": 0.08703071672354949,
+  "cross_entropy": 4.475178241729736,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 52,
+  "epoch": 0.08873720136518772,
+  "cross_entropy": 5.031167507171631,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:18",
+  "step": 53,
+  "epoch": 0.09044368600682594,
+  "cross_entropy": 4.47637414932251,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:19",
+  "step": 54,
+  "epoch": 0.09215017064846416,
+  "cross_entropy": 4.46480131149292,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:19",
+  "step": 55,
+  "epoch": 0.09385665529010238,
+  "cross_entropy": 4.924642562866211,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:19",
+  "step": 56,
+  "epoch": 0.09556313993174062,
+  "cross_entropy": 4.545181751251221,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:19",
+  "step": 57,
+  "epoch": 0.09726962457337884,
+  "cross_entropy": 4.209808349609375,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:19",
+  "step": 58,
+  "epoch": 0.09897610921501707,
+  "cross_entropy": 4.596859931945801,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:19",
+  "step": 59,
+  "epoch": 0.10068259385665529,
+  "cross_entropy": 4.017466068267822,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:19",
+  "step": 60,
+  "epoch": 0.10238907849829351,
+  "cross_entropy": 4.3633294105529785,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.00027370452880859375,
+  "event": "backward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:20",
+  "step": 61,
+  "epoch": 0.10409556313993173,
+  "cross_entropy": 4.674083232879639,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:20",
+  "step": 62,
+  "epoch": 0.10580204778156997,
+  "cross_entropy": 4.904867649078369,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:20",
+  "step": 63,
+  "epoch": 0.1075085324232082,
+  "cross_entropy": 3.910518169403076,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:20",
+  "step": 64,
+  "epoch": 0.10921501706484642,
+  "cross_entropy": 3.8269498348236084,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:20",
+  "step": 65,
+  "epoch": 0.11092150170648464,
+  "cross_entropy": 4.508342742919922,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:20",
+  "step": 66,
+  "epoch": 0.11262798634812286,
+  "cross_entropy": 4.790133476257324,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:21",
+  "step": 67,
+  "epoch": 0.11433447098976109,
+  "cross_entropy": 4.890872478485107,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:21",
+  "step": 68,
+  "epoch": 0.11604095563139932,
+  "cross_entropy": 4.243151664733887,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:21",
+  "step": 69,
+  "epoch": 0.11774744027303755,
+  "cross_entropy": 4.952706336975098,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:21",
+  "step": 70,
+  "epoch": 0.11945392491467577,
+  "cross_entropy": 4.256134986877441,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:21",
+  "step": 71,
+  "epoch": 0.12116040955631399,
+  "cross_entropy": 4.4263386726379395,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:21",
+  "step": 72,
+  "epoch": 0.12286689419795221,
+  "cross_entropy": 4.336888790130615,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.020288705825805664,
+  "event": "select_optimal_checkpoint"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:21",
+  "step": 73,
+  "epoch": 0.12457337883959044,
+  "cross_entropy": 4.967616558074951,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:22",
+  "step": 74,
+  "epoch": 0.12627986348122866,
+  "cross_entropy": 4.20534086227417,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:22",
+  "step": 75,
+  "epoch": 0.12798634812286688,
+  "cross_entropy": 4.566568851470947,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:22",
+  "step": 76,
+  "epoch": 0.1296928327645051,
+  "cross_entropy": 4.293782711029053,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:22",
+  "step": 77,
+  "epoch": 0.13139931740614336,
+  "cross_entropy": 4.812376022338867,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:22",
+  "step": 78,
+  "epoch": 0.13310580204778158,
+  "cross_entropy": 4.47670316696167,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:22",
+  "step": 79,
+  "epoch": 0.1348122866894198,
+  "cross_entropy": 4.7580766677856445,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:22",
+  "step": 80,
+  "epoch": 0.13651877133105803,
+  "cross_entropy": 4.720495223999023,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:23",
+  "step": 81,
+  "epoch": 0.13822525597269625,
+  "cross_entropy": 4.731639385223389,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:23",
+  "step": 82,
+  "epoch": 0.13993174061433447,
+  "cross_entropy": 4.775761127471924,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:23",
+  "step": 83,
+  "epoch": 0.1416382252559727,
+  "cross_entropy": 4.702938556671143,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:23",
+  "step": 84,
+  "epoch": 0.14334470989761092,
+  "cross_entropy": 4.48171854019165,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:23",
+  "step": 85,
+  "epoch": 0.14505119453924914,
+  "cross_entropy": 3.6162054538726807,
+  "accuracy_top1": 48.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:23",
+  "step": 86,
+  "epoch": 0.14675767918088736,
+  "cross_entropy": 4.173517227172852,
+  "accuracy_top1": 40.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:23",
+  "step": 87,
+  "epoch": 0.14846416382252559,
+  "cross_entropy": 4.335214614868164,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:24",
+  "step": 88,
+  "epoch": 0.15017064846416384,
+  "cross_entropy": 4.4899821281433105,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:24",
+  "step": 89,
+  "epoch": 0.15187713310580206,
+  "cross_entropy": 5.048274040222168,
+  "accuracy_top1": 12.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:24",
+  "step": 90,
+  "epoch": 0.15358361774744028,
+  "cross_entropy": 4.325178623199463,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:24",
+  "step": 91,
+  "epoch": 0.1552901023890785,
+  "cross_entropy": 4.281015872955322,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:24",
+  "step": 92,
+  "epoch": 0.15699658703071673,
+  "cross_entropy": 4.3354949951171875,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:24",
+  "step": 93,
+  "epoch": 0.15870307167235495,
+  "cross_entropy": 4.428843021392822,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:24",
+  "step": 94,
+  "epoch": 0.16040955631399317,
+  "cross_entropy": 4.746184349060059,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:25",
+  "step": 95,
+  "epoch": 0.1621160409556314,
+  "cross_entropy": 4.001249313354492,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:25",
+  "step": 96,
+  "epoch": 0.16382252559726962,
+  "cross_entropy": 4.4913859367370605,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.13011860847473145,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:25",
+  "step": 97,
+  "epoch": 0.16552901023890784,
+  "cross_entropy": 4.753152370452881,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:25",
+  "step": 98,
+  "epoch": 0.16723549488054607,
+  "cross_entropy": 3.9393293857574463,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:25",
+  "step": 99,
+  "epoch": 0.1689419795221843,
+  "cross_entropy": 4.914596080780029,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:25",
+  "step": 100,
+  "epoch": 0.17064846416382254,
+  "cross_entropy": 4.2863593101501465,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:25",
+  "step": 101,
+  "epoch": 0.17235494880546076,
+  "cross_entropy": 4.307244300842285,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:26",
+  "step": 102,
+  "epoch": 0.17406143344709898,
+  "cross_entropy": 4.086881160736084,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:26",
+  "step": 103,
+  "epoch": 0.1757679180887372,
+  "cross_entropy": 4.080806255340576,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:26",
+  "step": 104,
+  "epoch": 0.17747440273037543,
+  "cross_entropy": 4.483518600463867,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:26",
+  "step": 105,
+  "epoch": 0.17918088737201365,
+  "cross_entropy": 3.932921886444092,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:26",
+  "step": 106,
+  "epoch": 0.18088737201365188,
+  "cross_entropy": 4.87155294418335,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:26",
+  "step": 107,
+  "epoch": 0.1825938566552901,
+  "cross_entropy": 4.271223068237305,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:27",
+  "step": 108,
+  "epoch": 0.18430034129692832,
+  "cross_entropy": 4.044494152069092,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:27",
+  "step": 109,
+  "epoch": 0.18600682593856654,
+  "cross_entropy": 4.627330303192139,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:27",
+  "step": 110,
+  "epoch": 0.18771331058020477,
+  "cross_entropy": 4.016646862030029,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:27",
+  "step": 111,
+  "epoch": 0.189419795221843,
+  "cross_entropy": 4.119289398193359,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:27",
+  "step": 112,
+  "epoch": 0.19112627986348124,
+  "cross_entropy": 4.3092241287231445,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:27",
+  "step": 113,
+  "epoch": 0.19283276450511946,
+  "cross_entropy": 4.258171081542969,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:27",
+  "step": 114,
+  "epoch": 0.1945392491467577,
+  "cross_entropy": 4.304908275604248,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:28",
+  "step": 115,
+  "epoch": 0.1962457337883959,
+  "cross_entropy": 4.715719699859619,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:28",
+  "step": 116,
+  "epoch": 0.19795221843003413,
+  "cross_entropy": 4.700588703155518,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:28",
+  "step": 117,
+  "epoch": 0.19965870307167236,
+  "cross_entropy": 4.5501861572265625,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:28",
+  "step": 118,
+  "epoch": 0.20136518771331058,
+  "cross_entropy": 4.902734756469727,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:28",
+  "step": 119,
+  "epoch": 0.2030716723549488,
+  "cross_entropy": 4.439969062805176,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:28",
+  "step": 120,
+  "epoch": 0.20477815699658702,
+  "cross_entropy": 4.538156986236572,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:28",
+  "step": 121,
+  "epoch": 0.20648464163822525,
+  "cross_entropy": 4.818357944488525,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:29",
+  "step": 122,
+  "epoch": 0.20819112627986347,
+  "cross_entropy": 5.006071090698242,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:29",
+  "step": 123,
+  "epoch": 0.2098976109215017,
+  "cross_entropy": 4.7460408210754395,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:29",
+  "step": 124,
+  "epoch": 0.21160409556313994,
+  "cross_entropy": 4.2311577796936035,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:29",
+  "step": 125,
+  "epoch": 0.21331058020477817,
+  "cross_entropy": 4.429327011108398,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:29",
+  "step": 126,
+  "epoch": 0.2150170648464164,
+  "cross_entropy": 4.0927863121032715,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.00037097930908203125,
+  "event": "evaluate_adaptation_result"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:29",
+  "step": 127,
+  "epoch": 0.2167235494880546,
+  "cross_entropy": 4.150814533233643,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:29",
+  "step": 128,
+  "epoch": 0.21843003412969283,
+  "cross_entropy": 4.150876045227051,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:30",
+  "step": 129,
+  "epoch": 0.22013651877133106,
+  "cross_entropy": 4.552493572235107,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:30",
+  "step": 130,
+  "epoch": 0.22184300341296928,
+  "cross_entropy": 3.9275569915771484,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:30",
+  "step": 131,
+  "epoch": 0.2235494880546075,
+  "cross_entropy": 4.673478603363037,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:30",
+  "step": 132,
+  "epoch": 0.22525597269624573,
+  "cross_entropy": 4.594299793243408,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:30",
+  "step": 133,
+  "epoch": 0.22696245733788395,
+  "cross_entropy": 4.461768627166748,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:30",
+  "step": 134,
+  "epoch": 0.22866894197952217,
+  "cross_entropy": 5.061387538909912,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:30",
+  "step": 135,
+  "epoch": 0.23037542662116042,
+  "cross_entropy": 4.911767482757568,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:31",
+  "step": 136,
+  "epoch": 0.23208191126279865,
+  "cross_entropy": 4.991450309753418,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.00025725364685058594,
+  "event": "backward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:31",
+  "step": 137,
+  "epoch": 0.23378839590443687,
+  "cross_entropy": 4.479742050170898,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:31",
+  "step": 138,
+  "epoch": 0.2354948805460751,
+  "cross_entropy": 4.777842998504639,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:31",
+  "step": 139,
+  "epoch": 0.23720136518771331,
+  "cross_entropy": 4.859428405761719,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:31",
+  "step": 140,
+  "epoch": 0.23890784982935154,
+  "cross_entropy": 4.8837127685546875,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:31",
+  "step": 141,
+  "epoch": 0.24061433447098976,
+  "cross_entropy": 4.009180068969727,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:32",
+  "step": 142,
+  "epoch": 0.24232081911262798,
+  "cross_entropy": 4.6209611892700195,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:32",
+  "step": 143,
+  "epoch": 0.2440273037542662,
+  "cross_entropy": 4.852070331573486,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:32",
+  "step": 144,
+  "epoch": 0.24573378839590443,
+  "cross_entropy": 3.937723159790039,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:32",
+  "step": 145,
+  "epoch": 0.24744027303754265,
+  "cross_entropy": 4.525210857391357,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:32",
+  "step": 146,
+  "epoch": 0.24914675767918087,
+  "cross_entropy": 4.586362838745117,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:32",
+  "step": 147,
+  "epoch": 0.2508532423208191,
+  "cross_entropy": 4.312254905700684,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:32",
+  "step": 148,
+  "epoch": 0.2525597269624573,
+  "cross_entropy": 4.520745277404785,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:33",
+  "step": 149,
+  "epoch": 0.25426621160409557,
+  "cross_entropy": 4.658600807189941,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:33",
+  "step": 150,
+  "epoch": 0.25597269624573377,
+  "cross_entropy": 4.297410488128662,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:33",
+  "step": 151,
+  "epoch": 0.257679180887372,
+  "cross_entropy": 4.585999488830566,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:33",
+  "step": 152,
+  "epoch": 0.2593856655290102,
+  "cross_entropy": 4.677090167999268,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:33",
+  "step": 153,
+  "epoch": 0.26109215017064846,
+  "cross_entropy": 4.400599002838135,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:33",
+  "step": 154,
+  "epoch": 0.2627986348122867,
+  "cross_entropy": 4.525889873504639,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:33",
+  "step": 155,
+  "epoch": 0.2645051194539249,
+  "cross_entropy": 4.139052391052246,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:34",
+  "step": 156,
+  "epoch": 0.26621160409556316,
+  "cross_entropy": 4.3034987449646,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:34",
+  "step": 157,
+  "epoch": 0.26791808873720135,
+  "cross_entropy": 4.293254375457764,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:34",
+  "step": 158,
+  "epoch": 0.2696245733788396,
+  "cross_entropy": 4.007632255554199,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:34",
+  "step": 159,
+  "epoch": 0.2713310580204778,
+  "cross_entropy": 4.144838333129883,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:34",
+  "step": 160,
+  "epoch": 0.27303754266211605,
+  "cross_entropy": 4.561244010925293,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:34",
+  "step": 161,
+  "epoch": 0.27474402730375425,
+  "cross_entropy": 4.624841690063477,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:34",
+  "step": 162,
+  "epoch": 0.2764505119453925,
+  "cross_entropy": 5.094236373901367,
+  "accuracy_top1": 12.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:35",
+  "step": 163,
+  "epoch": 0.2781569965870307,
+  "cross_entropy": 4.062469482421875,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:35",
+  "step": 164,
+  "epoch": 0.27986348122866894,
+  "cross_entropy": 4.066987991333008,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:35",
+  "step": 165,
+  "epoch": 0.2815699658703072,
+  "cross_entropy": 4.710133075714111,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:35",
+  "step": 166,
+  "epoch": 0.2832764505119454,
+  "cross_entropy": 4.148159503936768,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:35",
+  "step": 167,
+  "epoch": 0.28498293515358364,
+  "cross_entropy": 4.019889831542969,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:35",
+  "step": 168,
+  "epoch": 0.28668941979522183,
+  "cross_entropy": 3.8421871662139893,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:35",
+  "step": 169,
+  "epoch": 0.2883959044368601,
+  "cross_entropy": 4.879723072052002,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:36",
+  "step": 170,
+  "epoch": 0.2901023890784983,
+  "cross_entropy": 4.74451208114624,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:36",
+  "step": 171,
+  "epoch": 0.29180887372013653,
+  "cross_entropy": 4.297619342803955,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:36",
+  "step": 172,
+  "epoch": 0.2935153583617747,
+  "cross_entropy": 4.089585304260254,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:36",
+  "step": 173,
+  "epoch": 0.295221843003413,
+  "cross_entropy": 4.828780651092529,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:36",
+  "step": 174,
+  "epoch": 0.29692832764505117,
+  "cross_entropy": 4.690610408782959,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:36",
+  "step": 175,
+  "epoch": 0.2986348122866894,
+  "cross_entropy": 4.9759202003479,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:36",
+  "step": 176,
+  "epoch": 0.3003412969283277,
+  "cross_entropy": 4.60746431350708,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:37",
+  "step": 177,
+  "epoch": 0.30204778156996587,
+  "cross_entropy": 4.357983589172363,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:37",
+  "step": 178,
+  "epoch": 0.3037542662116041,
+  "cross_entropy": 4.3267412185668945,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:37",
+  "step": 179,
+  "epoch": 0.3054607508532423,
+  "cross_entropy": 4.825419902801514,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:37",
+  "step": 180,
+  "epoch": 0.30716723549488056,
+  "cross_entropy": 4.07334041595459,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:37",
+  "step": 181,
+  "epoch": 0.30887372013651876,
+  "cross_entropy": 4.335240840911865,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:37",
+  "step": 182,
+  "epoch": 0.310580204778157,
+  "cross_entropy": 4.623385906219482,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:38",
+  "step": 183,
+  "epoch": 0.3122866894197952,
+  "cross_entropy": 4.223403453826904,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:38",
+  "step": 184,
+  "epoch": 0.31399317406143346,
+  "cross_entropy": 4.5543036460876465,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.0002810955047607422,
+  "event": "backward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:38",
+  "step": 185,
+  "epoch": 0.31569965870307165,
+  "cross_entropy": 4.0774078369140625,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:38",
+  "step": 186,
+  "epoch": 0.3174061433447099,
+  "cross_entropy": 4.292725563049316,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:38",
+  "step": 187,
+  "epoch": 0.3191126279863481,
+  "cross_entropy": 4.177404403686523,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:38",
+  "step": 188,
+  "epoch": 0.32081911262798635,
+  "cross_entropy": 4.656636714935303,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:38",
+  "step": 189,
+  "epoch": 0.3225255972696246,
+  "cross_entropy": 4.493404865264893,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:39",
+  "step": 190,
+  "epoch": 0.3242320819112628,
+  "cross_entropy": 3.9320600032806396,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:39",
+  "step": 191,
+  "epoch": 0.32593856655290104,
+  "cross_entropy": 4.323974132537842,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:39",
+  "step": 192,
+  "epoch": 0.32764505119453924,
+  "cross_entropy": 4.2400970458984375,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:39",
+  "step": 193,
+  "epoch": 0.3293515358361775,
+  "cross_entropy": 4.2905755043029785,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:39",
+  "step": 194,
+  "epoch": 0.3310580204778157,
+  "cross_entropy": 4.085376262664795,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:39",
+  "step": 195,
+  "epoch": 0.33276450511945393,
+  "cross_entropy": 4.183961868286133,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:39",
+  "step": 196,
+  "epoch": 0.33447098976109213,
+  "cross_entropy": 4.5374884605407715,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:40",
+  "step": 197,
+  "epoch": 0.3361774744027304,
+  "cross_entropy": 3.9851410388946533,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:40",
+  "step": 198,
+  "epoch": 0.3378839590443686,
+  "cross_entropy": 4.299281120300293,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:40",
+  "step": 199,
+  "epoch": 0.3395904436860068,
+  "cross_entropy": 4.0854620933532715,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:40",
+  "step": 200,
+  "epoch": 0.3412969283276451,
+  "cross_entropy": 4.468281269073486,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:40",
+  "step": 201,
+  "epoch": 0.3430034129692833,
+  "cross_entropy": 4.490333557128906,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:40",
+  "step": 202,
+  "epoch": 0.3447098976109215,
+  "cross_entropy": 4.431495666503906,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:40",
+  "step": 203,
+  "epoch": 0.3464163822525597,
+  "cross_entropy": 3.9623823165893555,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:41",
+  "step": 204,
+  "epoch": 0.34812286689419797,
+  "cross_entropy": 5.087368965148926,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:41",
+  "step": 205,
+  "epoch": 0.34982935153583616,
+  "cross_entropy": 4.380842208862305,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:41",
+  "step": 206,
+  "epoch": 0.3515358361774744,
+  "cross_entropy": 4.48175048828125,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:41",
+  "step": 207,
+  "epoch": 0.3532423208191126,
+  "cross_entropy": 4.609114170074463,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:41",
+  "step": 208,
+  "epoch": 0.35494880546075086,
+  "cross_entropy": 4.791935443878174,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:41",
+  "step": 209,
+  "epoch": 0.35665529010238906,
+  "cross_entropy": 4.448355197906494,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:41",
+  "step": 210,
+  "epoch": 0.3583617747440273,
+  "cross_entropy": 4.603881359100342,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:42",
+  "step": 211,
+  "epoch": 0.36006825938566556,
+  "cross_entropy": 4.080038070678711,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:42",
+  "step": 212,
+  "epoch": 0.36177474402730375,
+  "cross_entropy": 4.417802810668945,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:42",
+  "step": 213,
+  "epoch": 0.363481228668942,
+  "cross_entropy": 4.166903495788574,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.020316600799560547,
+  "event": "select_optimal_checkpoint"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:42",
+  "step": 214,
+  "epoch": 0.3651877133105802,
+  "cross_entropy": 4.492376327514648,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:42",
+  "step": 215,
+  "epoch": 0.36689419795221845,
+  "cross_entropy": 4.260985851287842,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:42",
+  "step": 216,
+  "epoch": 0.36860068259385664,
+  "cross_entropy": 4.817646026611328,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:42",
+  "step": 217,
+  "epoch": 0.3703071672354949,
+  "cross_entropy": 4.502289772033691,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:43",
+  "step": 218,
+  "epoch": 0.3720136518771331,
+  "cross_entropy": 4.92620325088501,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:43",
+  "step": 219,
+  "epoch": 0.37372013651877134,
+  "cross_entropy": 4.048750877380371,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:43",
+  "step": 220,
+  "epoch": 0.37542662116040953,
+  "cross_entropy": 4.312256336212158,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:43",
+  "step": 221,
+  "epoch": 0.3771331058020478,
+  "cross_entropy": 4.362868309020996,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:43",
+  "step": 222,
+  "epoch": 0.378839590443686,
+  "cross_entropy": 4.612043380737305,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:43",
+  "step": 223,
+  "epoch": 0.38054607508532423,
+  "cross_entropy": 3.9978764057159424,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:44",
+  "step": 224,
+  "epoch": 0.3822525597269625,
+  "cross_entropy": 4.392375469207764,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:44",
+  "step": 225,
+  "epoch": 0.3839590443686007,
+  "cross_entropy": 3.5486695766448975,
+  "accuracy_top1": 39.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:44",
+  "step": 226,
+  "epoch": 0.3856655290102389,
+  "cross_entropy": 4.477517604827881,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:44",
+  "step": 227,
+  "epoch": 0.3873720136518771,
+  "cross_entropy": 4.519124507904053,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:44",
+  "step": 228,
+  "epoch": 0.3890784982935154,
+  "cross_entropy": 4.636144161224365,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:44",
+  "step": 229,
+  "epoch": 0.39078498293515357,
+  "cross_entropy": 4.208238124847412,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:44",
+  "step": 230,
+  "epoch": 0.3924914675767918,
+  "cross_entropy": 4.1893792152404785,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:45",
+  "step": 231,
+  "epoch": 0.39419795221843,
+  "cross_entropy": 3.994279146194458,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:45",
+  "step": 232,
+  "epoch": 0.39590443686006827,
+  "cross_entropy": 4.581472396850586,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:45",
+  "step": 233,
+  "epoch": 0.39761092150170646,
+  "cross_entropy": 4.186978816986084,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:45",
+  "step": 234,
+  "epoch": 0.3993174061433447,
+  "cross_entropy": 4.460639476776123,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:45",
+  "step": 235,
+  "epoch": 0.40102389078498296,
+  "cross_entropy": 4.2041096687316895,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:45",
+  "step": 236,
+  "epoch": 0.40273037542662116,
+  "cross_entropy": 3.9377365112304688,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:45",
+  "step": 237,
+  "epoch": 0.4044368600682594,
+  "cross_entropy": 4.394208908081055,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:46",
+  "step": 238,
+  "epoch": 0.4061433447098976,
+  "cross_entropy": 4.417900085449219,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:46",
+  "step": 239,
+  "epoch": 0.40784982935153585,
+  "cross_entropy": 3.766289710998535,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 240,
+  "epoch": 0.40955631399317405,
+  "value": 0.1387486457824707,
+  "event": "adapt_and_eval"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:46",
+  "step": 240,
+  "epoch": 0.40955631399317405,
+  "cross_entropy": 3.8741469383239746,
+  "accuracy_top1": 37.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:46",
+  "step": 241,
+  "epoch": 0.4112627986348123,
+  "cross_entropy": 4.134054183959961,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:46",
+  "step": 242,
+  "epoch": 0.4129692832764505,
+  "cross_entropy": 5.01331090927124,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:46",
+  "step": 243,
+  "epoch": 0.41467576791808874,
+  "cross_entropy": 4.540708541870117,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:46",
+  "step": 244,
+  "epoch": 0.41638225255972694,
+  "cross_entropy": 4.330824851989746,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:47",
+  "step": 245,
+  "epoch": 0.4180887372013652,
+  "cross_entropy": 4.121632099151611,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:47",
+  "step": 246,
+  "epoch": 0.4197952218430034,
+  "cross_entropy": 4.053502082824707,
+  "accuracy_top1": 39.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:47",
+  "step": 247,
+  "epoch": 0.42150170648464164,
+  "cross_entropy": 5.140056133270264,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:47",
+  "step": 248,
+  "epoch": 0.4232081911262799,
+  "cross_entropy": 4.473083972930908,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:47",
+  "step": 249,
+  "epoch": 0.4249146757679181,
+  "cross_entropy": 4.983745574951172,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:47",
+  "step": 250,
+  "epoch": 0.42662116040955633,
+  "cross_entropy": 4.031388282775879,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:47",
+  "step": 251,
+  "epoch": 0.4283276450511945,
+  "cross_entropy": 4.079370975494385,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:48",
+  "step": 252,
+  "epoch": 0.4300341296928328,
+  "cross_entropy": 4.4428300857543945,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:48",
+  "step": 253,
+  "epoch": 0.431740614334471,
+  "cross_entropy": 5.539558410644531,
+  "accuracy_top1": 10.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:48",
+  "step": 254,
+  "epoch": 0.4334470989761092,
+  "cross_entropy": 4.5734171867370605,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:48",
+  "step": 255,
+  "epoch": 0.4351535836177474,
+  "cross_entropy": 4.536284446716309,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:48",
+  "step": 256,
+  "epoch": 0.43686006825938567,
+  "cross_entropy": 4.060306549072266,
+  "accuracy_top1": 37.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:48",
+  "step": 257,
+  "epoch": 0.43856655290102387,
+  "cross_entropy": 4.110456466674805,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:49",
+  "step": 258,
+  "epoch": 0.4402730375426621,
+  "cross_entropy": 3.885626792907715,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:49",
+  "step": 259,
+  "epoch": 0.44197952218430037,
+  "cross_entropy": 4.951562881469727,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:49",
+  "step": 260,
+  "epoch": 0.44368600682593856,
+  "cross_entropy": 4.164114475250244,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:49",
+  "step": 261,
+  "epoch": 0.4453924914675768,
+  "cross_entropy": 4.291811943054199,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:49",
+  "step": 262,
+  "epoch": 0.447098976109215,
+  "cross_entropy": 4.485325813293457,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:49",
+  "step": 263,
+  "epoch": 0.44880546075085326,
+  "cross_entropy": 4.405712127685547,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:50",
+  "step": 264,
+  "epoch": 0.45051194539249145,
+  "cross_entropy": 3.53971529006958,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:50",
+  "step": 265,
+  "epoch": 0.4522184300341297,
+  "cross_entropy": 4.51214599609375,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:50",
+  "step": 266,
+  "epoch": 0.4539249146757679,
+  "cross_entropy": 5.024881362915039,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:50",
+  "step": 267,
+  "epoch": 0.45563139931740615,
+  "cross_entropy": 4.173438549041748,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:50",
+  "step": 268,
+  "epoch": 0.45733788395904434,
+  "cross_entropy": 4.276827812194824,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:50",
+  "step": 269,
+  "epoch": 0.4590443686006826,
+  "cross_entropy": 3.9610044956207275,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:50",
+  "step": 270,
+  "epoch": 0.46075085324232085,
+  "cross_entropy": 4.211635589599609,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:51",
+  "step": 271,
+  "epoch": 0.46245733788395904,
+  "cross_entropy": 4.319223403930664,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:51",
+  "step": 272,
+  "epoch": 0.4641638225255973,
+  "cross_entropy": 4.157993793487549,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:51",
+  "step": 273,
+  "epoch": 0.4658703071672355,
+  "cross_entropy": 4.0258564949035645,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:51",
+  "step": 274,
+  "epoch": 0.46757679180887374,
+  "cross_entropy": 4.55519962310791,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:51",
+  "step": 275,
+  "epoch": 0.46928327645051193,
+  "cross_entropy": 4.136362552642822,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:51",
+  "step": 276,
+  "epoch": 0.4709897610921502,
+  "cross_entropy": 4.326901912689209,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:51",
+  "step": 277,
+  "epoch": 0.4726962457337884,
+  "cross_entropy": 4.907207489013672,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:52",
+  "step": 278,
+  "epoch": 0.47440273037542663,
+  "cross_entropy": 4.609644889831543,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:52",
+  "step": 279,
+  "epoch": 0.4761092150170648,
+  "cross_entropy": 5.141129016876221,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:52",
+  "step": 280,
+  "epoch": 0.4778156996587031,
+  "cross_entropy": 4.509898662567139,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:52",
+  "step": 281,
+  "epoch": 0.47952218430034127,
+  "cross_entropy": 4.729949474334717,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:52",
+  "step": 282,
+  "epoch": 0.4812286689419795,
+  "cross_entropy": 4.389475345611572,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:52",
+  "step": 283,
+  "epoch": 0.48293515358361777,
+  "cross_entropy": 4.350884914398193,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:52",
+  "step": 284,
+  "epoch": 0.48464163822525597,
+  "cross_entropy": 4.644603252410889,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:53",
+  "step": 285,
+  "epoch": 0.4863481228668942,
+  "cross_entropy": 4.305166244506836,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:53",
+  "step": 286,
+  "epoch": 0.4880546075085324,
+  "cross_entropy": 4.348136901855469,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:53",
+  "step": 287,
+  "epoch": 0.48976109215017066,
+  "cross_entropy": 4.436506271362305,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:53",
+  "step": 288,
+  "epoch": 0.49146757679180886,
+  "cross_entropy": 5.054112434387207,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:53",
+  "step": 289,
+  "epoch": 0.4931740614334471,
+  "cross_entropy": 4.179636001586914,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:53",
+  "step": 290,
+  "epoch": 0.4948805460750853,
+  "cross_entropy": 3.601323366165161,
+  "accuracy_top1": 39.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:53",
+  "step": 291,
+  "epoch": 0.49658703071672355,
+  "cross_entropy": 4.375911235809326,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:54",
+  "step": 292,
+  "epoch": 0.49829351535836175,
+  "cross_entropy": 3.976217031478882,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:54",
+  "step": 293,
+  "epoch": 0.5,
+  "cross_entropy": 4.200009822845459,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:54",
+  "step": 294,
+  "epoch": 0.5017064846416383,
+  "cross_entropy": 4.164636611938477,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:54",
+  "step": 295,
+  "epoch": 0.5034129692832765,
+  "cross_entropy": 4.594102382659912,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:54",
+  "step": 296,
+  "epoch": 0.5051194539249146,
+  "cross_entropy": 4.349536418914795,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:54",
+  "step": 297,
+  "epoch": 0.5068259385665529,
+  "cross_entropy": 4.408169746398926,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:55",
+  "step": 298,
+  "epoch": 0.5085324232081911,
+  "cross_entropy": 4.0355939865112305,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:55",
+  "step": 299,
+  "epoch": 0.5102389078498294,
+  "cross_entropy": 3.7545628547668457,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:55",
+  "step": 300,
+  "epoch": 0.5119453924914675,
+  "cross_entropy": 4.138667583465576,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:55",
+  "step": 301,
+  "epoch": 0.5136518771331058,
+  "cross_entropy": 4.7175092697143555,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:55",
+  "step": 302,
+  "epoch": 0.515358361774744,
+  "cross_entropy": 4.576308250427246,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:55",
+  "step": 303,
+  "epoch": 0.5170648464163823,
+  "cross_entropy": 4.6238837242126465,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:55",
+  "step": 304,
+  "epoch": 0.5187713310580204,
+  "cross_entropy": 4.029008388519287,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:56",
+  "step": 305,
+  "epoch": 0.5204778156996587,
+  "cross_entropy": 4.294061660766602,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:56",
+  "step": 306,
+  "epoch": 0.5221843003412969,
+  "cross_entropy": 4.77940034866333,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:56",
+  "step": 307,
+  "epoch": 0.5238907849829352,
+  "cross_entropy": 4.047806262969971,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:56",
+  "step": 308,
+  "epoch": 0.5255972696245734,
+  "cross_entropy": 4.590524673461914,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:56",
+  "step": 309,
+  "epoch": 0.5273037542662116,
+  "cross_entropy": 4.945287227630615,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:56",
+  "step": 310,
+  "epoch": 0.5290102389078498,
+  "cross_entropy": 5.3290791511535645,
+  "accuracy_top1": 12.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:56",
+  "step": 311,
+  "epoch": 0.5307167235494881,
+  "cross_entropy": 4.477894306182861,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:57",
+  "step": 312,
+  "epoch": 0.5324232081911263,
+  "cross_entropy": 4.515574932098389,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:57",
+  "step": 313,
+  "epoch": 0.5341296928327645,
+  "cross_entropy": 4.226640701293945,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:57",
+  "step": 314,
+  "epoch": 0.5358361774744027,
+  "cross_entropy": 5.018630027770996,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:57",
+  "step": 315,
+  "epoch": 0.537542662116041,
+  "cross_entropy": 4.395382881164551,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:57",
+  "step": 316,
+  "epoch": 0.5392491467576792,
+  "cross_entropy": 4.267308712005615,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:57",
+  "step": 317,
+  "epoch": 0.5409556313993175,
+  "cross_entropy": 4.437313556671143,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:58",
+  "step": 318,
+  "epoch": 0.5426621160409556,
+  "cross_entropy": 4.568817615509033,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:58",
+  "step": 319,
+  "epoch": 0.5443686006825939,
+  "cross_entropy": 4.101406097412109,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:58",
+  "step": 320,
+  "epoch": 0.5460750853242321,
+  "cross_entropy": 4.711617946624756,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:58",
+  "step": 321,
+  "epoch": 0.5477815699658704,
+  "cross_entropy": 4.49264669418335,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:58",
+  "step": 322,
+  "epoch": 0.5494880546075085,
+  "cross_entropy": 4.470695495605469,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:58",
+  "step": 323,
+  "epoch": 0.5511945392491467,
+  "cross_entropy": 4.2396955490112305,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:58",
+  "step": 324,
+  "epoch": 0.552901023890785,
+  "cross_entropy": 4.334156513214111,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:59",
+  "step": 325,
+  "epoch": 0.5546075085324232,
+  "cross_entropy": 4.630485534667969,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:59",
+  "step": 326,
+  "epoch": 0.5563139931740614,
+  "cross_entropy": 4.668056488037109,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:59",
+  "step": 327,
+  "epoch": 0.5580204778156996,
+  "cross_entropy": 4.821256637573242,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:59",
+  "step": 328,
+  "epoch": 0.5597269624573379,
+  "cross_entropy": 4.2152509689331055,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:59",
+  "step": 329,
+  "epoch": 0.5614334470989761,
+  "cross_entropy": 4.144132137298584,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:59",
+  "step": 330,
+  "epoch": 0.5631399317406144,
+  "cross_entropy": 4.813320159912109,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:35:59",
+  "step": 331,
+  "epoch": 0.5648464163822525,
+  "cross_entropy": 4.5113301277160645,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:00",
+  "step": 332,
+  "epoch": 0.5665529010238908,
+  "cross_entropy": 4.137018203735352,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:00",
+  "step": 333,
+  "epoch": 0.568259385665529,
+  "cross_entropy": 4.514108657836914,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:00",
+  "step": 334,
+  "epoch": 0.5699658703071673,
+  "cross_entropy": 4.138415813446045,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:00",
+  "step": 335,
+  "epoch": 0.5716723549488054,
+  "cross_entropy": 4.6971306800842285,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:00",
+  "step": 336,
+  "epoch": 0.5733788395904437,
+  "cross_entropy": 4.6054229736328125,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:00",
+  "step": 337,
+  "epoch": 0.5750853242320819,
+  "cross_entropy": 4.364759922027588,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:01",
+  "step": 338,
+  "epoch": 0.5767918088737202,
+  "cross_entropy": 4.473543167114258,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:01",
+  "step": 339,
+  "epoch": 0.5784982935153583,
+  "cross_entropy": 4.618789196014404,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:01",
+  "step": 340,
+  "epoch": 0.5802047781569966,
+  "cross_entropy": 4.636956214904785,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:01",
+  "step": 341,
+  "epoch": 0.5819112627986348,
+  "cross_entropy": 4.869883060455322,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:01",
+  "step": 342,
+  "epoch": 0.5836177474402731,
+  "cross_entropy": 4.183037757873535,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:01",
+  "step": 343,
+  "epoch": 0.5853242320819113,
+  "cross_entropy": 4.200771331787109,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:01",
+  "step": 344,
+  "epoch": 0.5870307167235495,
+  "cross_entropy": 4.998851299285889,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:02",
+  "step": 345,
+  "epoch": 0.5887372013651877,
+  "cross_entropy": 4.231034755706787,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:02",
+  "step": 346,
+  "epoch": 0.590443686006826,
+  "cross_entropy": 4.11746072769165,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:02",
+  "step": 347,
+  "epoch": 0.5921501706484642,
+  "cross_entropy": 4.738117694854736,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:02",
+  "step": 348,
+  "epoch": 0.5938566552901023,
+  "cross_entropy": 4.722650051116943,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:02",
+  "step": 349,
+  "epoch": 0.5955631399317406,
+  "cross_entropy": 4.419579982757568,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:02",
+  "step": 350,
+  "epoch": 0.5972696245733788,
+  "cross_entropy": 4.5000834465026855,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:02",
+  "step": 351,
+  "epoch": 0.5989761092150171,
+  "cross_entropy": 4.588022708892822,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:03",
+  "step": 352,
+  "epoch": 0.6006825938566553,
+  "cross_entropy": 4.508152008056641,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:03",
+  "step": 353,
+  "epoch": 0.6023890784982935,
+  "cross_entropy": 5.193766117095947,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:03",
+  "step": 354,
+  "epoch": 0.6040955631399317,
+  "cross_entropy": 4.273195266723633,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:03",
+  "step": 355,
+  "epoch": 0.60580204778157,
+  "cross_entropy": 3.9606592655181885,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:03",
+  "step": 356,
+  "epoch": 0.6075085324232082,
+  "cross_entropy": 4.312614440917969,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:03",
+  "step": 357,
+  "epoch": 0.6092150170648464,
+  "cross_entropy": 4.624160289764404,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:04",
+  "step": 358,
+  "epoch": 0.6109215017064846,
+  "cross_entropy": 4.895755767822266,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:04",
+  "step": 359,
+  "epoch": 0.6126279863481229,
+  "cross_entropy": 3.6155471801757812,
+  "accuracy_top1": 37.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:04",
+  "step": 360,
+  "epoch": 0.6143344709897611,
+  "cross_entropy": 4.253268718719482,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:04",
+  "step": 361,
+  "epoch": 0.6160409556313993,
+  "cross_entropy": 4.239538669586182,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:04",
+  "step": 362,
+  "epoch": 0.6177474402730375,
+  "cross_entropy": 4.093127727508545,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:04",
+  "step": 363,
+  "epoch": 0.6194539249146758,
+  "cross_entropy": 4.933658123016357,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:04",
+  "step": 364,
+  "epoch": 0.621160409556314,
+  "cross_entropy": 3.9866294860839844,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:05",
+  "step": 365,
+  "epoch": 0.6228668941979523,
+  "cross_entropy": 4.130202293395996,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:05",
+  "step": 366,
+  "epoch": 0.6245733788395904,
+  "cross_entropy": 4.298158645629883,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:05",
+  "step": 367,
+  "epoch": 0.6262798634812287,
+  "cross_entropy": 3.9038000106811523,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:05",
+  "step": 368,
+  "epoch": 0.6279863481228669,
+  "cross_entropy": 4.423786163330078,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:05",
+  "step": 369,
+  "epoch": 0.6296928327645052,
+  "cross_entropy": 4.144376754760742,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.0496826171875,
+  "event": "forward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:05",
+  "step": 370,
+  "epoch": 0.6313993174061433,
+  "cross_entropy": 4.693406105041504,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:05",
+  "step": 371,
+  "epoch": 0.6331058020477816,
+  "cross_entropy": 4.228893280029297,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:06",
+  "step": 372,
+  "epoch": 0.6348122866894198,
+  "cross_entropy": 4.33513879776001,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:06",
+  "step": 373,
+  "epoch": 0.636518771331058,
+  "cross_entropy": 4.2355732917785645,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:06",
+  "step": 374,
+  "epoch": 0.6382252559726962,
+  "cross_entropy": 4.526458740234375,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:06",
+  "step": 375,
+  "epoch": 0.6399317406143344,
+  "cross_entropy": 4.244319915771484,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:06",
+  "step": 376,
+  "epoch": 0.6416382252559727,
+  "cross_entropy": 4.264307022094727,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:06",
+  "step": 377,
+  "epoch": 0.643344709897611,
+  "cross_entropy": 4.185835361480713,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:07",
+  "step": 378,
+  "epoch": 0.6450511945392492,
+  "cross_entropy": 4.228765487670898,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:07",
+  "step": 379,
+  "epoch": 0.6467576791808873,
+  "cross_entropy": 4.439001083374023,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:07",
+  "step": 380,
+  "epoch": 0.6484641638225256,
+  "cross_entropy": 4.647047996520996,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:07",
+  "step": 381,
+  "epoch": 0.6501706484641638,
+  "cross_entropy": 4.12451696395874,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:07",
+  "step": 382,
+  "epoch": 0.6518771331058021,
+  "cross_entropy": 4.166741847991943,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:07",
+  "step": 383,
+  "epoch": 0.6535836177474402,
+  "cross_entropy": 4.130504608154297,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:07",
+  "step": 384,
+  "epoch": 0.6552901023890785,
+  "cross_entropy": 4.427145957946777,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:08",
+  "step": 385,
+  "epoch": 0.6569965870307167,
+  "cross_entropy": 4.304222106933594,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:08",
+  "step": 386,
+  "epoch": 0.658703071672355,
+  "cross_entropy": 5.084291934967041,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:08",
+  "step": 387,
+  "epoch": 0.6604095563139932,
+  "cross_entropy": 4.859734058380127,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:08",
+  "step": 388,
+  "epoch": 0.6621160409556314,
+  "cross_entropy": 4.4177470207214355,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:08",
+  "step": 389,
+  "epoch": 0.6638225255972696,
+  "cross_entropy": 5.110742568969727,
+  "accuracy_top1": 10.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:08",
+  "step": 390,
+  "epoch": 0.6655290102389079,
+  "cross_entropy": 4.556926250457764,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:09",
+  "step": 391,
+  "epoch": 0.6672354948805461,
+  "cross_entropy": 5.154317378997803,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:09",
+  "step": 392,
+  "epoch": 0.6689419795221843,
+  "cross_entropy": 4.467141151428223,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:09",
+  "step": 393,
+  "epoch": 0.6706484641638225,
+  "cross_entropy": 4.317965030670166,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:09",
+  "step": 394,
+  "epoch": 0.6723549488054608,
+  "cross_entropy": 4.801393985748291,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:09",
+  "step": 395,
+  "epoch": 0.674061433447099,
+  "cross_entropy": 4.993577003479004,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:09",
+  "step": 396,
+  "epoch": 0.6757679180887372,
+  "cross_entropy": 4.484366416931152,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:09",
+  "step": 397,
+  "epoch": 0.6774744027303754,
+  "cross_entropy": 4.173069953918457,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:10",
+  "step": 398,
+  "epoch": 0.6791808873720137,
+  "cross_entropy": 4.3636322021484375,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:10",
+  "step": 399,
+  "epoch": 0.6808873720136519,
+  "cross_entropy": 4.367491245269775,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:10",
+  "step": 400,
+  "epoch": 0.6825938566552902,
+  "cross_entropy": 4.254344463348389,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:10",
+  "step": 401,
+  "epoch": 0.6843003412969283,
+  "cross_entropy": 4.281850814819336,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:10",
+  "step": 402,
+  "epoch": 0.6860068259385665,
+  "cross_entropy": 4.315858364105225,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:10",
+  "step": 403,
+  "epoch": 0.6877133105802048,
+  "cross_entropy": 4.885304927825928,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:10",
+  "step": 404,
+  "epoch": 0.689419795221843,
+  "cross_entropy": 4.5718278884887695,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:11",
+  "step": 405,
+  "epoch": 0.6911262798634812,
+  "cross_entropy": 4.898080348968506,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:11",
+  "step": 406,
+  "epoch": 0.6928327645051194,
+  "cross_entropy": 4.0265703201293945,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:11",
+  "step": 407,
+  "epoch": 0.6945392491467577,
+  "cross_entropy": 4.4173712730407715,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:11",
+  "step": 408,
+  "epoch": 0.6962457337883959,
+  "cross_entropy": 4.138609409332275,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:11",
+  "step": 409,
+  "epoch": 0.6979522184300341,
+  "cross_entropy": 4.661736965179443,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:11",
+  "step": 410,
+  "epoch": 0.6996587030716723,
+  "cross_entropy": 3.857323169708252,
+  "accuracy_top1": 40.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:11",
+  "step": 411,
+  "epoch": 0.7013651877133106,
+  "cross_entropy": 4.028462886810303,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:12",
+  "step": 412,
+  "epoch": 0.7030716723549488,
+  "cross_entropy": 4.139005184173584,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:12",
+  "step": 413,
+  "epoch": 0.7047781569965871,
+  "cross_entropy": 4.44767951965332,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:12",
+  "step": 414,
+  "epoch": 0.7064846416382252,
+  "cross_entropy": 4.2655487060546875,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:12",
+  "step": 415,
+  "epoch": 0.7081911262798635,
+  "cross_entropy": 4.897848129272461,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:12",
+  "step": 416,
+  "epoch": 0.7098976109215017,
+  "cross_entropy": 3.9605348110198975,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:13",
+  "step": 417,
+  "epoch": 0.71160409556314,
+  "cross_entropy": 4.412339210510254,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:13",
+  "step": 418,
+  "epoch": 0.7133105802047781,
+  "cross_entropy": 4.596065521240234,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 419,
+  "epoch": 0.7150170648464164,
+  "value": 0.14362478256225586,
+  "event": "adapt_and_eval"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:13",
+  "step": 419,
+  "epoch": 0.7150170648464164,
+  "cross_entropy": 4.709897994995117,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:13",
+  "step": 420,
+  "epoch": 0.7167235494880546,
+  "cross_entropy": 4.283331394195557,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:13",
+  "step": 421,
+  "epoch": 0.7184300341296929,
+  "cross_entropy": 5.021243095397949,
+  "accuracy_top1": 9.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:13",
+  "step": 422,
+  "epoch": 0.7201365187713311,
+  "cross_entropy": 4.3242716789245605,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:13",
+  "step": 423,
+  "epoch": 0.7218430034129693,
+  "cross_entropy": 4.501962184906006,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:14",
+  "step": 424,
+  "epoch": 0.7235494880546075,
+  "cross_entropy": 4.699746131896973,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:14",
+  "step": 425,
+  "epoch": 0.7252559726962458,
+  "cross_entropy": 4.344213962554932,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:14",
+  "step": 426,
+  "epoch": 0.726962457337884,
+  "cross_entropy": 4.542083263397217,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:14",
+  "step": 427,
+  "epoch": 0.7286689419795221,
+  "cross_entropy": 4.797037601470947,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:14",
+  "step": 428,
+  "epoch": 0.7303754266211604,
+  "cross_entropy": 4.193731784820557,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:14",
+  "step": 429,
+  "epoch": 0.7320819112627986,
+  "cross_entropy": 4.4838547706604,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:14",
+  "step": 430,
+  "epoch": 0.7337883959044369,
+  "cross_entropy": 5.004892826080322,
+  "accuracy_top1": 12.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:15",
+  "step": 431,
+  "epoch": 0.735494880546075,
+  "cross_entropy": 4.691607475280762,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:15",
+  "step": 432,
+  "epoch": 0.7372013651877133,
+  "cross_entropy": 4.331371307373047,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:15",
+  "step": 433,
+  "epoch": 0.7389078498293515,
+  "cross_entropy": 3.666759967803955,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:15",
+  "step": 434,
+  "epoch": 0.7406143344709898,
+  "cross_entropy": 4.495309352874756,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:15",
+  "step": 435,
+  "epoch": 0.742320819112628,
+  "cross_entropy": 4.779971599578857,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:15",
+  "step": 436,
+  "epoch": 0.7440273037542662,
+  "cross_entropy": 4.699828624725342,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:15",
+  "step": 437,
+  "epoch": 0.7457337883959044,
+  "cross_entropy": 4.517117023468018,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:16",
+  "step": 438,
+  "epoch": 0.7474402730375427,
+  "cross_entropy": 4.113498687744141,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:16",
+  "step": 439,
+  "epoch": 0.7491467576791809,
+  "cross_entropy": 4.871098518371582,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:16",
+  "step": 440,
+  "epoch": 0.7508532423208191,
+  "cross_entropy": 4.099569320678711,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:16",
+  "step": 441,
+  "epoch": 0.7525597269624573,
+  "cross_entropy": 3.9885153770446777,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:16",
+  "step": 442,
+  "epoch": 0.7542662116040956,
+  "cross_entropy": 4.742637634277344,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:16",
+  "step": 443,
+  "epoch": 0.7559726962457338,
+  "cross_entropy": 3.8684475421905518,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:17",
+  "step": 444,
+  "epoch": 0.757679180887372,
+  "cross_entropy": 4.152572154998779,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:17",
+  "step": 445,
+  "epoch": 0.7593856655290102,
+  "cross_entropy": 4.305846214294434,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:17",
+  "step": 446,
+  "epoch": 0.7610921501706485,
+  "cross_entropy": 4.525101661682129,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:17",
+  "step": 447,
+  "epoch": 0.7627986348122867,
+  "cross_entropy": 4.590976715087891,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:17",
+  "step": 448,
+  "epoch": 0.764505119453925,
+  "cross_entropy": 4.680351257324219,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:17",
+  "step": 449,
+  "epoch": 0.7662116040955631,
+  "cross_entropy": 4.469237327575684,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:17",
+  "step": 450,
+  "epoch": 0.7679180887372014,
+  "cross_entropy": 4.8730998039245605,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:18",
+  "step": 451,
+  "epoch": 0.7696245733788396,
+  "cross_entropy": 4.286713600158691,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:18",
+  "step": 452,
+  "epoch": 0.7713310580204779,
+  "cross_entropy": 4.102625846862793,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:18",
+  "step": 453,
+  "epoch": 0.773037542662116,
+  "cross_entropy": 4.649711608886719,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:18",
+  "step": 454,
+  "epoch": 0.7747440273037542,
+  "cross_entropy": 4.845464706420898,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:18",
+  "step": 455,
+  "epoch": 0.7764505119453925,
+  "cross_entropy": 3.950916051864624,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:18",
+  "step": 456,
+  "epoch": 0.7781569965870307,
+  "cross_entropy": 4.083773612976074,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:19",
+  "step": 457,
+  "epoch": 0.7798634812286689,
+  "cross_entropy": 4.552962303161621,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:19",
+  "step": 458,
+  "epoch": 0.7815699658703071,
+  "cross_entropy": 4.056881904602051,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:19",
+  "step": 459,
+  "epoch": 0.7832764505119454,
+  "cross_entropy": 4.149064540863037,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:19",
+  "step": 460,
+  "epoch": 0.7849829351535836,
+  "cross_entropy": 4.567127227783203,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:19",
+  "step": 461,
+  "epoch": 0.7866894197952219,
+  "cross_entropy": 4.536770343780518,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:19",
+  "step": 462,
+  "epoch": 0.78839590443686,
+  "cross_entropy": 4.3521223068237305,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:19",
+  "step": 463,
+  "epoch": 0.7901023890784983,
+  "cross_entropy": 4.826418399810791,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:20",
+  "step": 464,
+  "epoch": 0.7918088737201365,
+  "cross_entropy": 4.350067138671875,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:20",
+  "step": 465,
+  "epoch": 0.7935153583617748,
+  "cross_entropy": 4.461604118347168,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:20",
+  "step": 466,
+  "epoch": 0.7952218430034129,
+  "cross_entropy": 4.329769611358643,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:20",
+  "step": 467,
+  "epoch": 0.7969283276450512,
+  "cross_entropy": 4.338825702667236,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:20",
+  "step": 468,
+  "epoch": 0.7986348122866894,
+  "cross_entropy": 4.2765727043151855,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:20",
+  "step": 469,
+  "epoch": 0.8003412969283277,
+  "cross_entropy": 3.990678310394287,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:21",
+  "step": 470,
+  "epoch": 0.8020477815699659,
+  "cross_entropy": 4.298584938049316,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:21",
+  "step": 471,
+  "epoch": 0.8037542662116041,
+  "cross_entropy": 4.240996837615967,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:21",
+  "step": 472,
+  "epoch": 0.8054607508532423,
+  "cross_entropy": 4.014161586761475,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:21",
+  "step": 473,
+  "epoch": 0.8071672354948806,
+  "cross_entropy": 4.6347479820251465,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:21",
+  "step": 474,
+  "epoch": 0.8088737201365188,
+  "cross_entropy": 4.443333625793457,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:21",
+  "step": 475,
+  "epoch": 0.810580204778157,
+  "cross_entropy": 4.326779842376709,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:21",
+  "step": 476,
+  "epoch": 0.8122866894197952,
+  "cross_entropy": 4.76956844329834,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:22",
+  "step": 477,
+  "epoch": 0.8139931740614335,
+  "cross_entropy": 4.313179016113281,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:22",
+  "step": 478,
+  "epoch": 0.8156996587030717,
+  "cross_entropy": 4.592410564422607,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:22",
+  "step": 479,
+  "epoch": 0.8174061433447098,
+  "cross_entropy": 4.676393032073975,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:22",
+  "step": 480,
+  "epoch": 0.8191126279863481,
+  "cross_entropy": 4.7935075759887695,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:22",
+  "step": 481,
+  "epoch": 0.8208191126279863,
+  "cross_entropy": 4.650613307952881,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:22",
+  "step": 482,
+  "epoch": 0.8225255972696246,
+  "cross_entropy": 4.011923313140869,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:22",
+  "step": 483,
+  "epoch": 0.8242320819112628,
+  "cross_entropy": 4.453274726867676,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.13814616203308105,
+  "event": "test_time_adaptation"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:23",
+  "step": 484,
+  "epoch": 0.825938566552901,
+  "cross_entropy": 4.345056533813477,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:23",
+  "step": 485,
+  "epoch": 0.8276450511945392,
+  "cross_entropy": 4.946544170379639,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:23",
+  "step": 486,
+  "epoch": 0.8293515358361775,
+  "cross_entropy": 4.799633502960205,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:23",
+  "step": 487,
+  "epoch": 0.8310580204778157,
+  "cross_entropy": 4.333675384521484,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:23",
+  "step": 488,
+  "epoch": 0.8327645051194539,
+  "cross_entropy": 4.761539459228516,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:23",
+  "step": 489,
+  "epoch": 0.8344709897610921,
+  "cross_entropy": 4.307082176208496,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:24",
+  "step": 490,
+  "epoch": 0.8361774744027304,
+  "cross_entropy": 4.364307403564453,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:24",
+  "step": 491,
+  "epoch": 0.8378839590443686,
+  "cross_entropy": 4.097590446472168,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:24",
+  "step": 492,
+  "epoch": 0.8395904436860068,
+  "cross_entropy": 4.057776927947998,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:24",
+  "step": 493,
+  "epoch": 0.841296928327645,
+  "cross_entropy": 4.130606174468994,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:24",
+  "step": 494,
+  "epoch": 0.8430034129692833,
+  "cross_entropy": 3.6870038509368896,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:24",
+  "step": 495,
+  "epoch": 0.8447098976109215,
+  "cross_entropy": 4.066981315612793,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:25",
+  "step": 496,
+  "epoch": 0.8464163822525598,
+  "cross_entropy": 4.349444389343262,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:25",
+  "step": 497,
+  "epoch": 0.8481228668941979,
+  "cross_entropy": 4.006308555603027,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:25",
+  "step": 498,
+  "epoch": 0.8498293515358362,
+  "cross_entropy": 4.370182991027832,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:25",
+  "step": 499,
+  "epoch": 0.8515358361774744,
+  "cross_entropy": 4.356884479522705,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:25",
+  "step": 500,
+  "epoch": 0.8532423208191127,
+  "cross_entropy": 5.152110576629639,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:25",
+  "step": 501,
+  "epoch": 0.8549488054607508,
+  "cross_entropy": 3.9785561561584473,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:25",
+  "step": 502,
+  "epoch": 0.856655290102389,
+  "cross_entropy": 5.146078109741211,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:26",
+  "step": 503,
+  "epoch": 0.8583617747440273,
+  "cross_entropy": 4.367214202880859,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:26",
+  "step": 504,
+  "epoch": 0.8600682593856656,
+  "cross_entropy": 4.775606632232666,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:26",
+  "step": 505,
+  "epoch": 0.8617747440273038,
+  "cross_entropy": 4.499245643615723,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:26",
+  "step": 506,
+  "epoch": 0.863481228668942,
+  "cross_entropy": 4.781132698059082,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:26",
+  "step": 507,
+  "epoch": 0.8651877133105802,
+  "cross_entropy": 4.6906657218933105,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:26",
+  "step": 508,
+  "epoch": 0.8668941979522184,
+  "cross_entropy": 4.318801403045654,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:27",
+  "step": 509,
+  "epoch": 0.8686006825938567,
+  "cross_entropy": 4.616021633148193,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:27",
+  "step": 510,
+  "epoch": 0.8703071672354948,
+  "cross_entropy": 4.658152103424072,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:27",
+  "step": 511,
+  "epoch": 0.8720136518771331,
+  "cross_entropy": 3.7112722396850586,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:27",
+  "step": 512,
+  "epoch": 0.8737201365187713,
+  "cross_entropy": 4.3370866775512695,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:27",
+  "step": 513,
+  "epoch": 0.8754266211604096,
+  "cross_entropy": 4.01401948928833,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:27",
+  "step": 514,
+  "epoch": 0.8771331058020477,
+  "cross_entropy": 4.302889823913574,
+  "accuracy_top1": 34.375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:27",
+  "step": 515,
+  "epoch": 0.878839590443686,
+  "cross_entropy": 4.8848395347595215,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:28",
+  "step": 516,
+  "epoch": 0.8805460750853242,
+  "cross_entropy": 4.518811225891113,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:28",
+  "step": 517,
+  "epoch": 0.8822525597269625,
+  "cross_entropy": 4.768676280975342,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:28",
+  "step": 518,
+  "epoch": 0.8839590443686007,
+  "cross_entropy": 4.606996059417725,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:28",
+  "step": 519,
+  "epoch": 0.8856655290102389,
+  "cross_entropy": 4.948292255401611,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:28",
+  "step": 520,
+  "epoch": 0.8873720136518771,
+  "cross_entropy": 4.036837100982666,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:28",
+  "step": 521,
+  "epoch": 0.8890784982935154,
+  "cross_entropy": 4.566137313842773,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:28",
+  "step": 522,
+  "epoch": 0.8907849829351536,
+  "cross_entropy": 4.750767707824707,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:29",
+  "step": 523,
+  "epoch": 0.8924914675767918,
+  "cross_entropy": 4.91031551361084,
+  "accuracy_top1": 12.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:29",
+  "step": 524,
+  "epoch": 0.89419795221843,
+  "cross_entropy": 4.501483917236328,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:29",
+  "step": 525,
+  "epoch": 0.8959044368600683,
+  "cross_entropy": 4.509612083435059,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:29",
+  "step": 526,
+  "epoch": 0.8976109215017065,
+  "cross_entropy": 4.505184650421143,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:29",
+  "step": 527,
+  "epoch": 0.8993174061433447,
+  "cross_entropy": 4.698348045349121,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:29",
+  "step": 528,
+  "epoch": 0.9010238907849829,
+  "cross_entropy": 4.499026775360107,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:30",
+  "step": 529,
+  "epoch": 0.9027303754266212,
+  "cross_entropy": 5.13539457321167,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:30",
+  "step": 530,
+  "epoch": 0.9044368600682594,
+  "cross_entropy": 4.942832946777344,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:30",
+  "step": 531,
+  "epoch": 0.9061433447098977,
+  "cross_entropy": 4.571390628814697,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:30",
+  "step": 532,
+  "epoch": 0.9078498293515358,
+  "cross_entropy": 4.962057113647461,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": -1,
+  "epoch": -1.0,
+  "value": 0.04982113838195801,
+  "event": "forward"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:30",
+  "step": 533,
+  "epoch": 0.909556313993174,
+  "cross_entropy": 3.6647655963897705,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:30",
+  "step": 534,
+  "epoch": 0.9112627986348123,
+  "cross_entropy": 4.361379623413086,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:31",
+  "step": 535,
+  "epoch": 0.9129692832764505,
+  "cross_entropy": 5.066421031951904,
+  "accuracy_top1": 15.625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:31",
+  "step": 536,
+  "epoch": 0.9146757679180887,
+  "cross_entropy": 4.808919906616211,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:31",
+  "step": 537,
+  "epoch": 0.9163822525597269,
+  "cross_entropy": 4.712711334228516,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:31",
+  "step": 538,
+  "epoch": 0.9180887372013652,
+  "cross_entropy": 4.356362342834473,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:31",
+  "step": 539,
+  "epoch": 0.9197952218430034,
+  "cross_entropy": 4.5418596267700195,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:31",
+  "step": 540,
+  "epoch": 0.9215017064846417,
+  "cross_entropy": 4.909160137176514,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:31",
+  "step": 541,
+  "epoch": 0.9232081911262798,
+  "cross_entropy": 4.205959796905518,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:32",
+  "step": 542,
+  "epoch": 0.9249146757679181,
+  "cross_entropy": 4.691735744476318,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:32",
+  "step": 543,
+  "epoch": 0.9266211604095563,
+  "cross_entropy": 4.379810333251953,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:32",
+  "step": 544,
+  "epoch": 0.9283276450511946,
+  "cross_entropy": 4.306761264801025,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:32",
+  "step": 545,
+  "epoch": 0.9300341296928327,
+  "cross_entropy": 4.472297668457031,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:32",
+  "step": 546,
+  "epoch": 0.931740614334471,
+  "cross_entropy": 4.550761699676514,
+  "accuracy_top1": 18.75,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:32",
+  "step": 547,
+  "epoch": 0.9334470989761092,
+  "cross_entropy": 4.765845775604248,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:33",
+  "step": 548,
+  "epoch": 0.9351535836177475,
+  "cross_entropy": 4.538681507110596,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:33",
+  "step": 549,
+  "epoch": 0.9368600682593856,
+  "cross_entropy": 4.569888591766357,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:33",
+  "step": 550,
+  "epoch": 0.9385665529010239,
+  "cross_entropy": 4.159790992736816,
+  "accuracy_top1": 32.8125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:33",
+  "step": 551,
+  "epoch": 0.9402730375426621,
+  "cross_entropy": 4.141697406768799,
+  "accuracy_top1": 37.5,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:33",
+  "step": 552,
+  "epoch": 0.9419795221843004,
+  "cross_entropy": 4.049492359161377,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:33",
+  "step": 553,
+  "epoch": 0.9436860068259386,
+  "cross_entropy": 4.126766681671143,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:33",
+  "step": 554,
+  "epoch": 0.9453924914675768,
+  "cross_entropy": 4.269460678100586,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:34",
+  "step": 555,
+  "epoch": 0.947098976109215,
+  "cross_entropy": 4.6194891929626465,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:34",
+  "step": 556,
+  "epoch": 0.9488054607508533,
+  "cross_entropy": 4.694558620452881,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:34",
+  "step": 557,
+  "epoch": 0.9505119453924915,
+  "cross_entropy": 4.383411884307861,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:34",
+  "step": 558,
+  "epoch": 0.9522184300341296,
+  "cross_entropy": 4.5382490158081055,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:34",
+  "step": 559,
+  "epoch": 0.9539249146757679,
+  "cross_entropy": 4.313612461090088,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:34",
+  "step": 560,
+  "epoch": 0.9556313993174061,
+  "cross_entropy": 4.3998003005981445,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:35",
+  "step": 561,
+  "epoch": 0.9573378839590444,
+  "cross_entropy": 4.316742420196533,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:35",
+  "step": 562,
+  "epoch": 0.9590443686006825,
+  "cross_entropy": 3.9206438064575195,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:35",
+  "step": 563,
+  "epoch": 0.9607508532423208,
+  "cross_entropy": 5.154599189758301,
+  "accuracy_top1": 10.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:35",
+  "step": 564,
+  "epoch": 0.962457337883959,
+  "cross_entropy": 4.113620281219482,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:35",
+  "step": 565,
+  "epoch": 0.9641638225255973,
+  "cross_entropy": 4.167572498321533,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:35",
+  "step": 566,
+  "epoch": 0.9658703071672355,
+  "cross_entropy": 4.338109970092773,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:35",
+  "step": 567,
+  "epoch": 0.9675767918088737,
+  "cross_entropy": 4.286816120147705,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:36",
+  "step": 568,
+  "epoch": 0.9692832764505119,
+  "cross_entropy": 4.370328903198242,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:36",
+  "step": 569,
+  "epoch": 0.9709897610921502,
+  "cross_entropy": 4.658012390136719,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "timer",
+  "step": 569,
+  "epoch": 0.9709897610921502,
+  "value": 0.00034046173095703125,
+  "event": "logging"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:36",
+  "step": 570,
+  "epoch": 0.9726962457337884,
+  "cross_entropy": 5.1667399406433105,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:36",
+  "step": 571,
+  "epoch": 0.9744027303754266,
+  "cross_entropy": 4.479834079742432,
+  "accuracy_top1": 29.6875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:36",
+  "step": 572,
+  "epoch": 0.9761092150170648,
+  "cross_entropy": 4.140249729156494,
+  "accuracy_top1": 28.125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:36",
+  "step": 573,
+  "epoch": 0.9778156996587031,
+  "cross_entropy": 4.230007171630859,
+  "accuracy_top1": 31.25,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:37",
+  "step": 574,
+  "epoch": 0.9795221843003413,
+  "cross_entropy": 4.1764445304870605,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:37",
+  "step": 575,
+  "epoch": 0.9812286689419796,
+  "cross_entropy": 4.324784278869629,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:37",
+  "step": 576,
+  "epoch": 0.9829351535836177,
+  "cross_entropy": 4.660836219787598,
+  "accuracy_top1": 20.3125,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:37",
+  "step": 577,
+  "epoch": 0.984641638225256,
+  "cross_entropy": 4.58641242980957,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:37",
+  "step": 578,
+  "epoch": 0.9863481228668942,
+  "cross_entropy": 4.802650451660156,
+  "accuracy_top1": 14.0625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:37",
+  "step": 579,
+  "epoch": 0.9880546075085325,
+  "cross_entropy": 4.514692306518555,
+  "accuracy_top1": 21.875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "step": 580,
+  "epoch": 0.9897610921501706,
+  "cross_entropy": 4.419555187225342,
+  "accuracy_top1": 26.5625,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "step": 581,
+  "epoch": 0.9914675767918089,
+  "cross_entropy": 4.649816036224365,
+  "accuracy_top1": 23.4375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "step": 582,
+  "epoch": 0.9931740614334471,
+  "cross_entropy": 4.04478645324707,
+  "accuracy_top1": 35.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "step": 583,
+  "epoch": 0.9948805460750854,
+  "cross_entropy": 4.586096286773682,
+  "accuracy_top1": 25.0,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "step": 584,
+  "epoch": 0.9965870307167235,
+  "cross_entropy": 4.799190521240234,
+  "accuracy_top1": 10.9375,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "step": 585,
+  "epoch": 0.9982935153583617,
+  "cross_entropy": 4.977701663970947,
+  "accuracy_top1": 17.1875,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "step": 586,
+  "epoch": 1.0,
+  "cross_entropy": 4.011294364929199,
+  "accuracy_top1": 26.66666603088379,
+  "split": "test",
+  "type": "step"
+ },
+ {
+  "measurement": "runtime",
+  "time": "2025-02-23 17:36:38",
+  "cross_entropy": 4.444035435892741,
+  "accuracy_top1": 25.194666665649414,
+  "split": "test",
+  "type": "overall"
+ }
+]

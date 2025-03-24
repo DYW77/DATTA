@@ -15,138 +15,15 @@ from ttab.loads.models.resnet import (
 )
 from ttab.loads.models.wideresnet import WideResNet
 from copy import deepcopy
-from ttab.model_adaptation.finch import FINCH
 """optimization dynamics"""
-
-class CustomBatchNorm(nn.Module):
-    def __init__(
-        self, num_channels, k=3.0, eps=1e-5, momentum=0.1, threshold=1, affine=True
-    ):
-        super(CustomBatchNorm, self).__init__()
-        # Initialize parameters
-        self.eps = eps
-        self.momentum = momentum
-        self._bn = nn.BatchNorm2d(
-            num_channels, eps=eps, momentum=momentum, affine=affine
-        )
-        self.domain_difference_sum = 0
-        self.k = 4
-        self.prior = 0.6
-        self.source_mu = None
-        self.source_sigma2 = None
-            
-    def _softshrink(self, x, lbd):
-        x_p = F.relu(x - lbd, inplace=True)
-        x_n = F.relu(-(x + lbd), inplace=True)
-        y = x_p - x_n
-        return y
-
-    # def forward(self, x):
-    def forward(self, x, judge):
-        rate = 0.2
-        rate2 = 1-rate
-        b, c, h, w = x.size()
-        # judge='STBN'
-        sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)  # IN
-        sigma2_b = self._bn.running_var.view(1, c, 1, 1)
-        s_sigma2 = (sigma2_b + self.eps) * np.sqrt(2 / (h * w - 1))
-
-        adj = self._softshrink(sigma2 - sigma2_b, self.k * s_sigma2)
-        adj_l2 = torch.linalg.norm(adj.flatten(), ord=2)
-
-        self.domain_difference_sum += adj_l2.item()
-
-        if judge == "iabn" and self.training is False:
-            mu_b = self._bn.running_mean.view(1, c, 1, 1)
-            s_mu = torch.sqrt((sigma2_b + self.eps) / (h * w))
-            mu_adj = rate*(mu_b + self._softshrink(mu - mu_b, self.k * s_mu))+rate2*self.running_mean.view(1, c, 1, 1)
-
-            sigma2_adj = rate*(sigma2_b + self._softshrink(
-                sigma2 - sigma2_b, self.k * s_sigma2
-            ))+rate2*self.running_var.view(1, c, 1, 1)
-            # sigma2_adj = F.relu(sigma2_adj)  # non negative
-            x_normalized = (x - mu_adj) * torch.rsqrt(sigma2_adj + self.eps)
-
-        else:  # STBN
-            var, mean = torch.var_mean(x, dim=[0, 2, 3], keepdim=True, unbiased=True)
-            running_mean = (
-                self.prior * self._bn.running_mean.view(1, c, 1, 1)
-                + (1 - self.prior) * mean
-            )
-            running_var = (
-                self.prior * self._bn.running_var.view(1, c, 1, 1)
-                + (1 - self.prior) * var
-            )
-            x_normalized = (x - running_mean) * torch.rsqrt(running_var + self.eps)
-
-        out = self._bn.weight.view(1, -1, 1, 1) * x_normalized + self._bn.bias.view(
-            1, -1, 1, 1
-        )
-        return out
-
-    def get_domain_difference_sum(self):
-        sum = self.domain_difference_sum
-        self.domain_difference_sum = 0
-        return sum
-
-    def sum_angle(self, x):
-        b, c, h, w = x.size()
-
-        source_mu = self._bn.running_mean
-        source_sigma2 = self._bn.running_var
-        sigma2_i, mu_i = torch.var_mean(x, dim=[2, 3], keepdim=True)  # IN
-        sigma2_b, mu_b = torch.var_mean(x, dim=[0, 2, 3], keepdim=True)
-
-        self.degree_all = 0
-        self.sinList = []
-        self.cosList = []
-        self.distance = 0
-        self.Dst = torch.norm(source_mu - mu_b.view(c))
-        Dst = self.Dst
-
-        for i in mu_i:
-            dsi = torch.norm(i.view(c) - source_mu)
-            dti = torch.norm(i.view(c) - mu_b.view(c))
-
-            cos_angle = (dsi**2 + Dst**2 - dti**2) / (2 * dsi * Dst)
-            cos = ((cos_angle) * 180 / math.pi) * dsi
-            self.cosList.append(cos.item())
-            # self.distance += cos.item()
-            # self.distance += (sin+cos).item()
-        list_size = b
-        lower_index = int(list_size * 0)
-        upper_index = int(list_size * 0.15)
-        cos_list, _ = torch.sort(torch.tensor(self.cosList))
-        cos_diff = (
-            cos_list[-upper_index:].mean() - cos_list[lower_index:upper_index].mean()
-        ).item()
-        self.distance = cos_diff
-
-        magic_value = 320
-        """
-            cifar10: 310
-            cifar100: 320
-            "imagenet": 4000
-        """
-        if self.distance > magic_value:
-            return "iabn"  # iabn
-        else:
-            return "iabn"
-        # return "stbn"    
-        # self.degreeList = torch.tensor(self.degreeList)
-
-        # degreeList, _ = torch.sort(self.degreeList)
-
-        # self.distance = (degreeList[-3:].mean()-degreeList[:3].mean()).item()
-        # print(self.distance)
 
 
 def distance(a, b, c, d):
     return math.sqrt((a - c) ** 2 + (b - d) ** 2)
 
-class DynamicBatchNorm(nn.Module):
+class DABN(nn.Module):
     def __init__(self, num_features, k=3.0, eps=1e-5, momentum=0.1, threshold=1, affine=True):
-        super(DynamicBatchNorm, self).__init__()
+        super(DABN, self).__init__()
         
         # Shared parameters
         self.eps = eps
@@ -156,39 +33,29 @@ class DynamicBatchNorm(nn.Module):
         self.source_mu = None
         self.source_sigma2 = None
 
-        # Separate BatchNorm layers for Homo and Heter
+        # Separate BatchNorm layers for Single-domain and Multiple-domain
         self._bn = nn.BatchNorm2d(num_features, eps=eps, momentum=momentum, affine=affine)
         
-        # HomoDynamicBatchNorm-specific components
-        self.homo_prior = nn.Parameter(torch.tensor(0.6))
+        self.prior = nn.Parameter(torch.tensor(0.6))
 
-        self.mode = "homo"  # "homo" for HomoDynamicBatchNorm, "heter" for HeterDynamicBatchNorm
+        self.mode = "single" 
 
     def set_mode(self, mode):
-        """Set the mode to either 'homo' or 'heter'."""
-        if mode not in ["homo", "heter"]:
-            raise ValueError("Mode must be 'homo' or 'heter'")
+        """Set the mode to either 'single' or 'multiple'."""
+        if mode not in ["single", "multiple"]:
+            raise ValueError("Mode must be 'single' or 'multiple'")
         self.mode = mode
-        # if mode == "homo":
-        #     self.homo_prior = nn.Parameter(torch.tensor(0.6))
-        # elif mode == "heter":
-        #     self.homo_prior = nn.Parameter(torch.tensor(0.85))
-        # else:
-        #     raise ValueError("Invalid mode selected")
 
     def forward(self, x):
-        if self.mode == "homo":
-            self.homo_prior = nn.Parameter(torch.tensor(0.6))
-        elif self.mode == "heter":
-            self.homo_prior = nn.Parameter(torch.tensor(0.85))
+        if self.mode == "single":
+            self.prior = nn.Parameter(torch.tensor(0.6))
+        elif self.mode == "multiple":
+            self.prior = nn.Parameter(torch.tensor(0.85))
         else:
             raise ValueError("Invalid mode selected")
         
         b, c, h, w = x.size()
         device = x.device
-        
-        # Clamp the prior
-        # self.homo_prior.data = torch.clamp(self.homo_prior.data, 0, 1)
         
         # Calculate mean and variance
         var, mean = torch.var_mean(x, dim=[0, 2, 3], keepdim=True, unbiased=True)
@@ -196,242 +63,18 @@ class DynamicBatchNorm(nn.Module):
         mean.to(device)
         
         running_mean = (
-            self.homo_prior * self.source_mu.view(1, c, 1, 1).to(device) +
-            (1 - self.homo_prior) * mean
+            self.prior * self.source_mu.view(1, c, 1, 1).to(device) +
+            (1 - self.prior) * mean
         )
         running_var = (
-            self.homo_prior * self.source_sigma2.view(1, c, 1, 1).to(device) +
-            (1 - self.homo_prior) * var
+            self.prior * self.source_sigma2.view(1, c, 1, 1).to(device) +
+            (1 - self.prior) * var
         )
         
-        # Normalize using HomoDynamicBatchNorm
         x_normalized = (x - running_mean) * torch.rsqrt(running_var + self.eps)
         out = self._bn.weight.view(1, -1, 1, 1) * x_normalized + self._bn.bias.view(1, -1, 1, 1)
         return out
 
-
-
-# class DynamicBatchNorm(nn.Module):
-#     def __init__(self, num_features, k=3.0, eps=1e-5, momentum=0.1, threshold=1, affine=True):
-#         super(DynamicBatchNorm, self).__init__()
-        
-#         # Shared parameters
-#         self.eps = eps
-#         self.momentum = momentum
-#         self.k = k
-#         self.threshold = threshold
-#         self.source_mu = None
-#         self.source_sigma2 = None
-
-#         # Separate BatchNorm layers for Homo and Heter
-#         self.homo_bn = nn.BatchNorm2d(num_features, eps=eps, momentum=momentum, affine=affine)
-#         self.heter_bn = nn.BatchNorm2d(num_features, eps=eps, momentum=momentum, affine=affine)
-        
-#         # HomoDynamicBatchNorm-specific components
-#         self.homo_prior = nn.Parameter(torch.tensor(0.6))
-        
-#         # HeterDynamicBatchNorm-specific components
-#         # self.heter_prior = 0.8
-        
-#         # Indicator to select forward method
-#         self.mode = "homo"  # "homo" for HomoDynamicBatchNorm, "heter" for HeterDynamicBatchNorm
-
-#     def set_mode(self, mode):
-#         """Set the mode to either 'homo' or 'heter'."""
-#         if mode not in ["homo", "heter"]:
-#             raise ValueError("Mode must be 'homo' or 'heter'")
-#         self.mode = mode
-
-#     def forward(self, x):
-#         if self.mode == "homo":
-#             return self._forward_homo(x)
-#         elif self.mode == "heter":
-#             return self._forward_heter(x)
-#         else:
-#             raise ValueError("Invalid mode selected")
-
-#     def _forward_homo(self, x):
-#         """HomoDynamicBatchNorm forward method."""
-#         b, c, h, w = x.size()
-#         device = x.device
-        
-#         # Clamp the prior
-#         self.homo_prior.data = torch.clamp(self.homo_prior.data, 0, 1)
-        
-#         # Calculate mean and variance
-#         var, mean = torch.var_mean(x, dim=[0, 2, 3], keepdim=True, unbiased=True)
-#         var.to(device)
-#         mean.to(device)
-        
-#         running_mean = (
-#             self.homo_prior * self.source_mu.view(1, c, 1, 1).to(device) +
-#             (1 - self.homo_prior) * mean
-#         )
-#         running_var = (
-#             self.homo_prior * self.source_sigma2.view(1, c, 1, 1).to(device) +
-#             (1 - self.homo_prior) * var
-#         )
-        
-#         # Normalize using HomoDynamicBatchNorm
-#         x_normalized = (x - running_mean) * torch.rsqrt(running_var + self.eps)
-#         out = self.homo_bn.weight.view(1, -1, 1, 1) * x_normalized + self.homo_bn.bias.view(1, -1, 1, 1)
-#         return out
-
-#     def _forward_heter(self, x):
-#         """HeterDynamicBatchNorm forward method."""
-#         rate = 0.2
-#         rate2 = 1 - rate
-#         b, c, h, w = x.size()
-#         device = x.device
-        
-#         # Calculate mean and variance
-#         sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)  # IN
-#         sigma2_threshold, mu_threshold = torch.var_mean(x, dim=[0, 2, 3], keepdim=True, unbiased=True)
-#         sigma2_b = self.heter_bn.running_var.view(1, c, 1, 1).to(device)
-#         s_sigma2 = (sigma2_threshold + self.eps) * np.sqrt(2 / (h * w - 1))
-        
-#         # Adjustments
-#         adj = self._softshrink(sigma2 - sigma2_b, self.k * s_sigma2)
-#         mu_b = self.heter_bn.running_mean.view(1, c, 1, 1)
-#         s_mu = torch.sqrt((sigma2_threshold + self.eps) / (h * w))
-        
-#         mu_adj = rate * (mu_b + self._softshrink(mu - mu_b, self.k * s_mu)) + rate2 * self.source_mu.view(1, c, 1, 1).to(device)
-#         sigma2_adj = rate * (sigma2_b + self._softshrink(sigma2 - sigma2_b, self.k * s_sigma2)) + rate2 * self.source_sigma2.view(1, c, 1, 1).to(device)
-#         sigma2_adj = F.relu(sigma2_adj)  # non-negative
-        
-#         # Normalize using HeterDynamicBatchNorm
-#         x_normalized = (x - mu_adj) * torch.rsqrt(sigma2_adj + self.eps)
-#         out = self.heter_bn.weight.view(1, -1, 1, 1) * x_normalized + self.heter_bn.bias.view(1, -1, 1, 1)
-#         return out
-
-#     def _softshrink(self, x, lbd):
-#         """Softshrink function used in HeterDynamicBatchNorm."""
-#         x_p = F.relu(x - lbd, inplace=True)
-#         x_n = F.relu(-(x + lbd), inplace=True)
-#         y = x_p - x_n
-#         return y
-class HomoDynamicBatchNorm(nn.Module):
-    def __init__(
-        self, num_features, k=3.0, 
-        eps=1e-5, momentum=0.1, threshold=1, 
-        affine=True, 
-    ):
-        super(HomoDynamicBatchNorm, self).__init__()
-        self.eps = eps
-        self.momentum = momentum
-        self._bn = nn.BatchNorm2d(
-            num_features, eps=eps, momentum=momentum, affine=affine
-        )
-        self.domain_difference_sum = 0
-        self.k = 4
-        self.prior = 0.6
-        self.source_mu = None
-        self.source_sigma2 = None
-            
-    def _softshrink(self, x, lbd):
-        x_p = F.relu(x - lbd, inplace=True)
-        x_n = F.relu(-(x + lbd), inplace=True)
-        y = x_p - x_n
-        return y
-
-    # def forward(self, x):
-    def forward(self, x):
-        # rate = 0.4
-        # rate2 = 1-rate
-        b, c, h, w = x.size()
-        device = x.device  # 获取输入张量的设备
-        
-        sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)  # IN
-        sigma2_b = self._bn.running_var.view(1, c, 1, 1).to(device)  # 移动到相同设备
-        s_sigma2 = (sigma2_b + self.eps) * np.sqrt(2 / (h * w - 1))
-
-        adj = self._softshrink(sigma2 - sigma2_b, self.k * s_sigma2)
-        adj_l2 = torch.linalg.norm(adj.flatten(), ord=2)
-        self.domain_difference_sum += adj_l2.item()
-
-        var, mean = torch.var_mean(x, dim=[0, 2, 3], keepdim=True, unbiased=True)
-        running_mean = (
-            self.prior * self.source_mu.view(1, c, 1, 1).to(device)  # 移动到相同设备
-            + (1 - self.prior) * mean
-        )
-        running_var = (
-            self.prior * self.source_sigma2.view(1, c, 1, 1).to(device)  # 移动到相同设备
-            + (1 - self.prior) * var
-        )
-        x_normalized = (x - running_mean) * torch.rsqrt(running_var + self.eps)
-
-        out = self._bn.weight.view(1, -1, 1, 1).to(device) * x_normalized + self._bn.bias.view(
-            1, -1, 1, 1
-        ).to(device)  # 移动到相同设备
-        return out
-    def get_domain_difference_sum(self):
-        sum = self.domain_difference_sum
-        self.domain_difference_sum = 0
-        return sum
-
-class HeterDynamicBatchNorm(nn.Module):
-    def __init__(
-        self, num_features, k=3.0, eps=1e-5, momentum=0.1, threshold=1, affine=True
-    ):
-        super(HeterDynamicBatchNorm, self).__init__()
-        # Initialize parameters
-        self.eps = eps
-        self.momentum = momentum
-        self._bn = nn.BatchNorm2d(
-            num_features, eps=eps, momentum=momentum, affine=affine
-        )
-        self.domain_difference_sum = 0
-        self.k = 4
-        # self.prior = 0.6
-        self.source_mu = None
-        self.source_sigma2 = None
-
-            
-    def _softshrink(self, x, lbd):
-        x_p = F.relu(x - lbd, inplace=True)
-        x_n = F.relu(-(x + lbd), inplace=True)
-        y = x_p - x_n
-        return y
-
-    # def forward(self, x):
-    def forward(self, x):
-        rate = 0.15
-        rate2 = 1-rate
-        b, c, h, w = x.size()
-        device = x.device  # 获取输入张量的设备
-        
-        sigma2, mu = torch.var_mean(x, dim=[2, 3], keepdim=True, unbiased=True)  # IN
-        sigma2_b = self._bn.running_var.view(1, c, 1, 1).to(device)  # 移动到相同设备
-        s_sigma2 = (sigma2_b + self.eps) * np.sqrt(2 / (h * w - 1))
-
-        adj = self._softshrink(sigma2 - sigma2_b, self.k * s_sigma2)
-        adj_l2 = torch.linalg.norm(adj.flatten(), ord=2)
-        self.domain_difference_sum += adj_l2.item()
-
-
-        mu_b = self._bn.running_mean.view(1, c, 1, 1)
-        s_mu = torch.sqrt((sigma2_b + self.eps) / (h * w))
-        # mu_adj = rate *(mu_b + self._softshrink(mu - mu_b, self.k * s_mu)) + rate2*self.source_mu.view(1, c, 1, 1).to(device)  # 移动到相同设备
-
-        # sigma2_adj = rate*(sigma2_b + self._softshrink(
-        #     sigma2 - sigma2_b, self.k * s_sigma2
-        # )) + rate2*self.source_sigma2.view(1, c, 1, 1).to(device)  # 移动到相同设备
-        mu_adj = rate *(mu_b + self._softshrink(mu - mu_b, self.k * s_mu)) + rate2*self.source_mu.view(1, c, 1, 1).to(device)  # 移动到相同设备
-
-        sigma2_adj = rate*(sigma2_b + self._softshrink(
-            sigma2 - sigma2_b, self.k * s_sigma2
-        )) + rate2*self.source_sigma2.view(1, c, 1, 1).to(device)  # 移动到相同设备
-        # sigma2_adj = F.relu(sigma2_adj)  # non negative
-        x_normalized = (x - mu_adj) * torch.rsqrt(sigma2_adj + self.eps)
-
-        out = self._bn.weight.view(1, -1, 1, 1) * x_normalized + self._bn.bias.view(
-            1, -1, 1, 1
-        ).to(device)  # 移动到相同设备
-        return out
-    def get_domain_difference_sum(self):
-        sum = self.domain_difference_sum
-        self.domain_difference_sum = 0
-        return sum
     
 def define_optimizer(meta_conf, params, lr=1e-3):
     """Set up optimizer for adaptation."""

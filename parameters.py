@@ -23,11 +23,7 @@ def get_args():
     parser.add_argument(
         "--ckpt_path",
         default=
-            # "/home/wdy/Exp/model/resnet50_bn_ssh_waterbirds.pth",
-            "/home/wdy/Exp/model/rn50_bn_cifar100.pth",
-            # "/home/wdy/Exp/model/efficientvit/cifar10.pth",
-            # "/home/wdy/ttab/pretrained/cifar100.pth",
-            # "/home/wdy/Exp/model/vit_cifar/vit_c10/vit_c10_aa_ls.pth",
+            "/path/to/model/efficientvit/m5.pth",
         type=str,
     )
     parser.add_argument("--seed", default=2022, type=int)
@@ -38,9 +34,10 @@ def get_args():
     # parser.add_argument("--model_name", default="resnet50", type=str)
     parser.add_argument("--model_name", default="efficientvit_224", type=str)
     parser.add_argument("--cluster_name", default="FINCH", type=str)
-    # change
     parser.add_argument("--aware_layer", default=1, type=int)
     parser.add_argument("--group_norm_num_groups", default=None, type=int)
+    parser.add_argument("--single", default=0.1, type=float)
+    parser.add_argument("--multiple", default=0.1, type=float)
     parser.add_argument(
         "--model_adaptation_method",
         default="datta",
@@ -63,12 +60,6 @@ def get_args():
         type=str,
     )
     parser.add_argument("--task", default="classification", type=str)
-    # parser.add_argument(
-    #     "--threhold_datta",
-    #     default=10,
-    #     type=int,
-    # )
-    # define the test scenario.
     parser.add_argument("--test_scenario", default=None, type=str)
     """
     cifar10
