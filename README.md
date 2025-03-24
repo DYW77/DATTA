@@ -7,15 +7,15 @@ Chuyang Ye^†^, Dongyan Wei^†^, Zhendong Liu, Yuanyi Pang, Yixi Lin, Qinting 
 
 It's based on the  **[TTAB repository](https://github.com/LINs-lab/ttab)**, which is offically implementation of the paper **[On Pitfalls of Test-time Adaptation](https://arxiv.org/abs/2306.03536)**.
 
-    TL;DR: we propose Domain-Diversity Adaptive Test-Time Adaptation (DATTA), the first approach to handle TTA under dynamic domain shift streams. It is guided by a novel domain-diversity score. DATTA has three key components: 
-    - a domain diversity discriminator to recognize single- and multi-domain patterns, 
-    - domain-diversity adaptive batch normalization to combine source and test-time statistics,
-    - domain-diversity adaptive fine-tuning to resolve gradient conflicts.
+> TL;DR: We propose Domain-Diversity Adaptive Test-Time Adaptation (DATTA), the first approach to handle TTA under dynamic domain shift streams. It is guided by a novel domain-diversity score. DATTA has three key components: 
+> - a domain diversity discriminator to recognize single- and multi-domain patterns, 
+> - domain-diversity adaptive batch normalization to combine source and test-time statistics,
+> - domain-diversity adaptive fine-tuning to resolve gradient conflicts.
 
 <table>
   <tr>
     <td><img src="./figs/overview_of_scenarios.png" width="100%"></td>
-    <td><img src="./figs/overview_of_method.png" width="100%"></td>
+    <td><img src="./figs/overview_of_method.png" width="115%"></td>
   </tr>
 </table>
 
