@@ -2,7 +2,7 @@
 
 This repository is the official implementation of
 
-**[DATTA: Domain Diversity Aware Test-Time Adaptation for Dynamic Domain Shift Stream](https://arxiv.org/abs/2408.08056), ICME, 2025**\
+**[DATTA: Domain Diversity Aware Test-Time Adaptation for Dynamic Domain Shift Stream](https://arxiv.org/abs/2408.08056), ICME(Oral), 2025**\
 Chuyang Ye†, Dongyan Wei†, Zhendong Liu, Yuanyi Pang, Yixi Lin, Qinting Jiang, Jingyan Jiang*, Dongbiao He
 
 It's based on the  **[TTAB repository](https://github.com/LINs-lab/ttab)**, which is offically implementation of the paper **[On Pitfalls of Test-time Adaptation](https://arxiv.org/abs/2306.03536)**.
